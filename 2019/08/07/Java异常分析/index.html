@@ -69,7 +69,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/08/07/Java异常分析/01.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/07/Java异常分析/02.png">
-<meta property="og:updated_time" content="2019-08-07T06:18:41.535Z">
+<meta property="og:updated_time" content="2019-08-07T06:25:23.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常分析">
 <meta name="twitter:description" content="根据个人的学习自己总结了一套有关 Java 基础异常的总结。">
@@ -291,7 +291,7 @@
                 
               
 
-              <time title="创建时间：2019-08-07 13:59:00 / 修改时间：14:18:41" itemprop="dateCreated datePublished" datetime="2019-08-07T13:59:00+08:00">2019-08-07</time>
+              <time title="创建时间：2019-08-07 13:59:00 / 修改时间：14:25:23" itemprop="dateCreated datePublished" datetime="2019-08-07T13:59:00+08:00">2019-08-07</time>
             </span>
           
             
@@ -352,14 +352,16 @@
 <h1 id="Java异常分析"><a href="#Java异常分析" class="headerlink" title="Java异常分析"></a>Java异常分析</h1><h3 id="emsp-Throwable"><a href="#emsp-Throwable" class="headerlink" title="&emsp;Throwable"></a>&emsp;Throwable</h3><p>&emsp;&emsp; Throwable 类是 Java 语言中所有错误或异常的超类。只有当对象是此类（或其子类之一）的实例时，才能通过 Java 虚拟机或者 Java throw 语句抛出。<br>&emsp;&emsp;Thowable 类有两个子类的实例，Error 和 Exception，通常用于指示发生了异常情况。通常，这些实例是在异常情况的上下文中新近创建的，因此包含了相关的信息（比如堆栈跟踪数据）。 </p>
 <h3 id="emsp-Throwable-的两个子类-Error-和-Exception"><a href="#emsp-Throwable-的两个子类-Error-和-Exception" class="headerlink" title="&emsp; Throwable 的两个子类 Error 和 Exception"></a>&emsp; Throwable 的两个子类 Error 和 Exception</h3><p><strong>Error</strong><br>&emsp;&emsp;Error 是 Throwable 的子类，用于指示合理的应用程序不应该试图捕获的严重问题。大多数这样的错误都是异常条件。虽然 ThreadDeath 错误是一个“正规”的条件，但它也是 Error 的子类，因为大多数应用程序都不应该试图捕获它。<br><strong>Exception</strong><br>&emsp;&emsp;Exception 类及其子类是 Throwable 的一种形式，它指出了合理的应用程序想要捕获的条件。<br>Exception 类分为两大类：RuntimeException （运行异常类） 和 Non_RuntimeException （非运行异常类）：</p>
 <ul>
-<li>RuntimeException<br>&emsp;运行时异常都是RuntimeException类及其子类异常，如NullPointerException、IndexOutOfBoundsException等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生。</li>
+<li>RuntimeException</li>
 </ul>
+<p>&emsp;运行时异常都是RuntimeException类及其子类异常，如NullPointerException、IndexOutOfBoundsException等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生。</p>
 <p>&emsp;当出现RuntimeException的时候，我们可以不处理。当出现这样的异常时，总是由虚拟机接管。比如：我们从来没有人去处理过NullPointerException异常，它就是运行时异常，并且这种异常还是最常见的异常之一。 </p>
 <p>&emsp;出现运行时异常后，如果没有捕获处理这个异常（即没有catch），系统会把异常一直往上层抛，一直到最上层，如果是多线程就由Thread.run()抛出，如果是单线程就被main()抛出。抛出之后，如果是线程，这个线程也就退出了。如果是主程序抛出的异常，那么这整个程序也就退出了。运行时异常是Exception的子类，也有一般异常的特点，是可以被catch块处理的。只不过往往我们不对他处理罢了。也就是说，你如果不对运行时异常进行处理，那么出现运行时异常之后，要么是线程中止，要么是主程序终止。 </p>
 <p>&emsp;如果不想终止，则必须捕获所有的运行时异常，决不让这个处理线程退出。队列里面出现异常数据了，正常的处理应该是把异常数据舍弃，然后记录日志。不应该由于异常数据而影响下面对正常数据的处理。</p>
 <ul>
-<li>非运行异常<br>&emsp;非运行时异常是RuntimeException以外的异常，类型上都属于Exception类及其子类。如IOException、SQLException等以及用户自定义的Exception异常。对于这种异常，JAVA编译器强制要求我们必需对出现的这些异常进行catch并处理，否则程序就不能编译通过。所以，面对这种异常不管我们是否愿意，只能自己去写一大堆catch块去处理可能的异常。</li>
+<li>非运行异常</li>
 </ul>
+<p>&emsp;非运行时异常是RuntimeException以外的异常，类型上都属于Exception类及其子类。如IOException、SQLException等以及用户自定义的Exception异常。对于这种异常，JAVA编译器强制要求我们必需对出现的这些异常进行catch并处理，否则程序就不能编译通过。所以，面对这种异常不管我们是否愿意，只能自己去写一大堆catch块去处理可能的异常。</p>
 <h1 id="常见运行时异常"><a href="#常见运行时异常" class="headerlink" title="常见运行时异常"></a>常见运行时异常</h1><ul>
 <li>算术异常类：ArithmeticExecption</li>
 <li>空指针异常类：NullPointerException</li>
@@ -401,9 +403,9 @@
 <li><p>throw：用于抛出一个实际的异常，可以单独作为语句使用，抛出一个具体的异常对象。</p>
 </li>
 <li><p>throws：用在方法签名中，用于声明该方法可能抛出的异常。</p>
-<h1 id="throw与throws关键字的区别"><a href="#throw与throws关键字的区别" class="headerlink" title="throw与throws关键字的区别"></a>throw与throws关键字的区别</h1><p>（1）throw关键字是用于方法体内部，用来抛出一个Throwable类型的异常。如果抛出了检查异常，则还应该在方法头部声明方法可能抛出的异常类型。该 方法的调用者也必须检查处理抛出的异常。如果所有方法都层层上抛获取的异常，最终JVM会进行处理，处理也很简单，就是打印异常消息和堆栈信息。如果抛出 的是Error或RuntimeException，则该方法的调用者可选择处理该异常。</p>
 </li>
 </ul>
+<h1 id="throw与throws关键字的区别"><a href="#throw与throws关键字的区别" class="headerlink" title="throw与throws关键字的区别"></a>throw与throws关键字的区别</h1><p>（1）throw关键字是用于方法体内部，用来抛出一个Throwable类型的异常。如果抛出了检查异常，则还应该在方法头部声明方法可能抛出的异常类型。该 方法的调用者也必须检查处理抛出的异常。如果所有方法都层层上抛获取的异常，最终JVM会进行处理，处理也很简单，就是打印异常消息和堆栈信息。如果抛出 的是Error或RuntimeException，则该方法的调用者可选择处理该异常。</p>
 <p>（2）throws关键字用于方法体外部的方法声明部分，用来声明方法可能会抛出某些异常。仅当抛出了检查异常，该方法的调用者才必须处理或者重新抛出该异常。当方法的调用者无力处理该异常的时候，应该继续抛出，而不是囫囵吞枣一般在catch块中打印一下堆栈信息做个勉强处理。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> i)</span> <span class="keyword">throws</span> IllegalArgumentException</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"参数异常"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
