@@ -69,7 +69,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/08/07/Java异常分析/01.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/07/Java异常分析/02.png">
-<meta property="og:updated_time" content="2019-08-07T06:30:50.887Z">
+<meta property="og:updated_time" content="2019-08-07T06:33:22.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常分析">
 <meta name="twitter:description" content="根据个人的学习自己总结了一套有关 Java 基础异常的总结。">
@@ -291,7 +291,7 @@
                 
               
 
-              <time title="创建时间：2019-08-07 13:59:00 / 修改时间：14:30:50" itemprop="dateCreated datePublished" datetime="2019-08-07T13:59:00+08:00">2019-08-07</time>
+              <time title="创建时间：2019-08-07 13:59:00 / 修改时间：14:33:22" itemprop="dateCreated datePublished" datetime="2019-08-07T13:59:00+08:00">2019-08-07</time>
             </span>
           
             
@@ -434,10 +434,8 @@
 <li><p>情况3:<br>try{ } catch(){return;} finally{} return;<br>  程序先执行try，如果遇到异常执行catch块，<br>  有异常：则执行catch中return之前（包括return语句中的表达式运算）代码，再执行finally语句中全部代码，<br>  最后执行catch块中return. finally之后也就是4处的代码不再执行。<br>  无异常：执行完try再finally再return.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 有异常</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i/<span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// i = 1</span></span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        i +=<span class="number">3</span>;</span><br><span class="line">        System.out.println(i); <span class="comment">// i = 4</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i;   <span class="comment">// 该语句未执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>  无异常的情况和情况1 的执行顺序一样。</p>
 </li>
-</ul>
-<p>无异常的情况和情况1 的执行顺序一样。</p>
-<ul>
 <li><p>情况4:<br>try{ return; }catch(){} finally{return;}<br>  程序执行try块中return之前（包括return语句中的表达式运算）代码；<br>  再执行finally块，因为finally块中有return所以提前退出。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">//该语句未执行</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        i +=<span class="number">3</span>;</span><br><span class="line">        System.out.println(i); <span class="comment">// i = 5</span></span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// i = 5</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
