@@ -149,9 +149,9 @@ public int test(){
 
 * 情况2:
 try{ return; }catch(){} finally{} return;
-          程序执行try块中return之前（包括return语句中的表达式运算）代码；
-         再执行finally块，最后执行try中return;
-         finally块之后的语句return，因为程序在try中已经return所以不再执行。
+    程序执行try块中return之前（包括return语句中的表达式运算）代码；
+    再执行finally块，最后执行try中return;
+    finally块之后的语句return，因为程序在try中已经return所以不再执行。
 ```java
     public int test(){
         int i = 1;
@@ -171,10 +171,10 @@ try{ return; }catch(){} finally{} return;
 
 * 情况3:
 try{ } catch(){return;} finally{} return;
-         程序先执行try，如果遇到异常执行catch块，
-         有异常：则执行catch中return之前（包括return语句中的表达式运算）代码，再执行finally语句中全部代码，
-                     最后执行catch块中return. finally之后也就是4处的代码不再执行。
-         无异常：执行完try再finally再return.
+    程序先执行try，如果遇到异常执行catch块，
+    有异常：则执行catch中return之前（包括return语句中的表达式运算）代码，再执行finally语句中全部代码，
+    最后执行catch块中return. finally之后也就是4处的代码不再执行。
+    无异常：执行完try再finally再return.
 ```java
 /**
  * 有异常
@@ -198,9 +198,8 @@ public int test(){
 
 * 情况4:
 try{ return; }catch(){} finally{return;}
-          程序执行try块中return之前（包括return语句中的表达式运算）代码；
-          再执行finally块，因为finally块中有return所以提前退出。
-
+    程序执行try块中return之前（包括return语句中的表达式运算）代码；
+    再执行finally块，因为finally块中有return所以提前退出。
 ```java
 public int test(){
     int i = 1;
@@ -219,8 +218,8 @@ public int test(){
 
 * 情况5:
 try{} catch(){return;}finally{return;}
-          程序执行catch块中return之前（包括return语句中的表达式运算）代码；
-          再执行finally块，因为finally块中有return所以提前退出。
+    程序执行catch块中return之前（包括return语句中的表达式运算）代码；
+    再执行finally块，因为finally块中有return所以提前退出。
 ```java
 public int test(){
     int i = 1;
@@ -239,10 +238,10 @@ public int test(){
 
 * 情况6:
 try{ return;}catch(){return;} finally{return;}
-          程序执行try块中return之前（包括return语句中的表达式运算）代码；
-          有异常：执行catch块中return之前（包括return语句中的表达式运算）代码；
-                       则再执行finally块，因为finally块中有return所以提前退出。
-          无异常：则再执行finally块，因为finally块中有return所以提前退出。
+    程序执行try块中return之前（包括return语句中的表达式运算）代码；
+    有异常：执行catch块中return之前（包括return语句中的表达式运算）代码；
+            则再执行finally块，因为finally块中有return所以提前退出。
+    无异常：则再执行finally块，因为finally块中有return所以提前退出。
 ```java
 public int test(){
     int i = 1;
