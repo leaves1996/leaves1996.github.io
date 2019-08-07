@@ -162,7 +162,7 @@ package java.util;
  * （2）Iterator只可以向前遍历，而LIstIterator可以双向遍历。
  * （3）ListIterator从Iterator接口继承，然后添加了一些额外的功能，比如添加一个元素、替换一个元素、获取前面或后面元素的索引位置。
 
- ### 11、遍历一个List有哪些不同的方式？
+### 11、遍历一个List有哪些不同的方式？
 
   * 使用普通for循环遍历
   * 使用增强for循环遍历
@@ -179,7 +179,7 @@ package java.util;
 
 &emsp;&emsp;Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受到集合中任何改动的影响。Java.util包中的所有集合类都被设计为fail-fast的，而java.util.concurrent中的集合类都为fail-safe的。Fail-fast迭代器抛出ConcurrentModificationException，而fail-safe迭代器从不抛出ConcurrentModificationException。
 
-### 14、在迭代一个集合的时候，如何避免ConcurrentModificationException？
+### 14、在迭代一个集合的时候，如何避免 `ConcurrentModificationException`？
 
 &emsp;&emsp;在遍历一个集合的时候，我们可以使用并发集合类来避免修改并发异常ConcurrentModificationException，比如使用CopyOnWriteArrayList，而不是ArrayList。
 
