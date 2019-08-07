@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico?v=7.2.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico?v=7.2.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: 'search.xml'
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="根据个人的学习自己总结了一套有关 Java 基础异常的总结。">
+<meta name="keywords" content="Java基础,JavaSE,Exception,异常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java异常分析">
+<meta property="og:url" content="http://yoursite.com/2019/08/07/Java异常分析/index.html">
+<meta property="og:site_name" content="知性人">
+<meta property="og:description" content="根据个人的学习自己总结了一套有关 Java 基础异常的总结。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/08/07/Java异常分析/01.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/07/Java异常分析/02.png">
+<meta property="og:updated_time" content="2019-08-07T06:04:23.200Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java异常分析">
+<meta name="twitter:description" content="根据个人的学习自己总结了一套有关 Java 基础异常的总结。">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/07/Java异常分析/01.png">
+  <link rel="canonical" href="http://yoursite.com/2019/08/07/Java异常分析/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java异常分析 | 知性人</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+  <script type="text/javascript" src="/js/love.js"></script>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">知性人</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">loye_you@163.com</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-search">
+          <a href="javascript:;" class="popup-trigger">
+          
+            <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+    
+
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+
+</div>
+    </header>
+
+    
+
+  <a href="https://github.com/yexiaomo1997" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/Java异常分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="知性人">
+      <meta itemprop="description" content="接受失败，但不选择放弃！！！">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知性人">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Java异常分析
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-07 13:59:00 / 修改时间：14:04:23" itemprop="dateCreated datePublished" datetime="2019-08-07T13:59:00+08:00">2019-08-07</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java基础/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br/>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">7.8k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">7 分钟</span>
+            </span>
+          
+            <div class="post-description">根据个人的学习自己总结了一套有关 Java 基础异常的总结。</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>&emsp;&emsp; 相信各位朋友对异常并不陌生，对它我们真的又喜又悲，成功的解决一个BUG那真是欢天喜地，但是又怕遇见它，今天小编就给大家笼统的介绍一下我们的每天相处的好朋友–异常。</p>
+<h1 id="Java-异常类结构体系图"><a href="#Java-异常类结构体系图" class="headerlink" title="Java 异常类结构体系图"></a>Java 异常类结构体系图</h1><p>既然想要了解异常，那么我们首先要了解一下，异常的结构体系：<br><img src="01.png" alt="01.png"></p>
+<h1 id="Java异常分析"><a href="#Java异常分析" class="headerlink" title="Java异常分析"></a>Java异常分析</h1><h3 id="emsp-Throwable"><a href="#emsp-Throwable" class="headerlink" title="&emsp;Throwable"></a>&emsp;Throwable</h3><p>&emsp;&emsp; Throwable 类是 Java 语言中所有错误或异常的超类。只有当对象是此类（或其子类之一）的实例时，才能通过 Java 虚拟机或者 Java throw 语句抛出。<br>&emsp;&emsp;Thowable 类有两个子类的实例，Error 和 Exception，通常用于指示发生了异常情况。通常，这些实例是在异常情况的上下文中新近创建的，因此包含了相关的信息（比如堆栈跟踪数据）。 </p>
+<h3 id="emsp-Throwable-的两个子类-Error-和-Exception"><a href="#emsp-Throwable-的两个子类-Error-和-Exception" class="headerlink" title="&emsp; Throwable 的两个子类 Error 和 Exception"></a>&emsp; Throwable 的两个子类 Error 和 Exception</h3><p><strong>Error</strong><br>&emsp;&emsp;Error 是 Throwable 的子类，用于指示合理的应用程序不应该试图捕获的严重问题。大多数这样的错误都是异常条件。虽然 ThreadDeath 错误是一个“正规”的条件，但它也是 Error 的子类，因为大多数应用程序都不应该试图捕获它。<br><strong>Exception</strong><br>&emsp;&emsp;Exception 类及其子类是 Throwable 的一种形式，它指出了合理的应用程序想要捕获的条件。<br>Exception 类分为两大类：RuntimeException （运行异常类） 和 Non_RuntimeException （非运行异常类）：</p>
+<blockquote>
+<ul>
+<li>RuntimeException<br>&emsp;运行时异常都是RuntimeException类及其子类异常，如NullPointerException、IndexOutOfBoundsException等，这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生。<br>&emsp;<br>&emsp;当出现RuntimeException的时候，我们可以不处理。当出现这样的异常时，总是由虚拟机接管。比如：我们从来没有人去处理过NullPointerException异常，它就是运行时异常，并且这种异常还是最常见的异常之一。<br>&emsp;<br>&emsp;出现运行时异常后，如果没有捕获处理这个异常（即没有catch），系统会把异常一直往上层抛，一直到最上层，如果是多线程就由Thread.run()抛出，如果是单线程就被main()抛出。抛出之后，如果是线程，这个线程也就退出了。如果是主程序抛出的异常，那么这整个程序也就退出了。运行时异常是Exception的子类，也有一般异常的特点，是可以被catch块处理的。只不过往往我们不对他处理罢了。也就是说，你如果不对运行时异常进行处理，那么出现运行时异常之后，要么是线程中止，要么是主程序终止。<br>&emsp;<br>&emsp;如果不想终止，则必须捕获所有的运行时异常，决不让这个处理线程退出。队列里面出现异常数据了，正常的处理应该是把异常数据舍弃，然后记录日志。不应该由于异常数据而影响下面对正常数据的处理。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>非运行异常<br>&emsp;非运行时异常是RuntimeException以外的异常，类型上都属于Exception类及其子类。如IOException、SQLException等以及用户自定义的Exception异常。对于这种异常，JAVA编译器强制要求我们必需对出现的这些异常进行catch并处理，否则程序就不能编译通过。所以，面对这种异常不管我们是否愿意，只能自己去写一大堆catch块去处理可能的异常。</li>
+</ul>
+</blockquote>
+<h1 id="常见运行时异常"><a href="#常见运行时异常" class="headerlink" title="常见运行时异常"></a>常见运行时异常</h1><blockquote>
+<ul>
+<li>算术异常类：ArithmeticExecption</li>
+<li>空指针异常类：NullPointerException</li>
+<li>类型强制转换异常：ClassCastException</li>
+<li>数组负下标异常：NegativeArrayException</li>
+<li>数组下标越界异常：ArrayIndexOutOfBoundsException</li>
+<li>违背安全原则异常：SecurityException</li>
+<li>字符串转换为数字异常：NumberFormatException</li>
+<li>尝试访问null对象成员：NullPointerException </li>
+<li>欲得到的数据类型与实际输入的类型不匹配：InputMismatchException</li>
+<li>方法接收到非法参数：IllegalArgumentException </li>
+</ul>
+</blockquote>
+<h1 id="常见的编译时异常"><a href="#常见的编译时异常" class="headerlink" title="常见的编译时异常"></a>常见的编译时异常</h1><blockquote>
+<ul>
+<li>不能加载所需的类(常见于多态中向下转型)：ClassNotFoundException </li>
+<li>文件未找到异常：FileNotFoundException</li>
+<li>提供关于数据库访问错误或其他错误信息的异常：SQLException</li>
+<li>当发生某种 I/O 异常时，抛出此异常：IOException</li>
+<li>当数据格式发生错误时，抛出此异常：DataFormatException</li>
+<li>表示解析时出现意外错误抛出此异常：ParseException</li>
+</ul>
+</blockquote>
+<h1 id="异常的捕获和处理"><a href="#异常的捕获和处理" class="headerlink" title="异常的捕获和处理"></a>异常的捕获和处理</h1><p>Java异常的捕获和处理是一个不容易把握的事情，如果处理不当，不但会让程序代码的可读性大大降低，而且导致系统性能低下，甚至引发一些难以发现的错。</p>
+<p>Java异常处理涉及到五个关键字，分别是：try、catch、finally、throw、throws。下面将骤一介绍，通过认识这五个关键字，掌握基本异常处理知识。</p>
+<blockquote>
+<ul>
+<li>try：它里面放置可能引发异常的代码</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>catch：后面对应异常类型和一个代码块，用于表明该catch块用于处理这种类型的代码块，可以有多个catch块。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>finally：主要用于回收在try块里打开的物力资源（如数据库连接、网络连接和磁盘文件），异常机制总是保证finally块总是被执行。只有finally块，执行完成之后，才会回来执行try或者catch块中的return或者throw语句，如果finally中使用了return或者throw等终止方法的语句，则就不会跳回执行，直接停止。</li>
+</ul>
+</blockquote>
+<p>finally 关键字：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Integer <span class="title">test1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的示例：返回的结果为： 2</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Integer <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"try&gt;&gt;&gt;&gt;&gt;&gt;&gt;"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"finally&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的示例，返回的结果为：<br><img src="02.png" alt="02.png"></p>
+<blockquote>
+<ul>
+<li>throw：用于抛出一个实际的异常，可以单独作为语句使用，抛出一个具体的异常对象。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>throws：用在方法签名中，用于声明该方法可能抛出的异常。</li>
+</ul>
+</blockquote>
+<h1 id="throw与throws关键字的区别"><a href="#throw与throws关键字的区别" class="headerlink" title="throw与throws关键字的区别"></a>throw与throws关键字的区别</h1><p>（1）throw关键字是用于方法体内部，用来抛出一个Throwable类型的异常。如果抛出了检查异常，则还应该在方法头部声明方法可能抛出的异常类型。该 方法的调用者也必须检查处理抛出的异常。如果所有方法都层层上抛获取的异常，最终JVM会进行处理，处理也很简单，就是打印异常消息和堆栈信息。如果抛出 的是Error或RuntimeException，则该方法的调用者可选择处理该异常。</p>
+<p>（2）throws关键字用于方法体外部的方法声明部分，用来声明方法可能会抛出某些异常。仅当抛出了检查异常，该方法的调用者才必须处理或者重新抛出该异常。当方法的调用者无力处理该异常的时候，应该继续抛出，而不是囫囵吞枣一般在catch块中打印一下堆栈信息做个勉强处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> i)</span> <span class="keyword">throws</span> IllegalArgumentException</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"参数异常"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>说明：</code>throws IllegalArgumentException 表示：此方法可能抛出 IllegalArgumentException 异常，至于抛不抛还要看方法中是否会捕捉到 IllegalArgumentException 异常。throw new IllegalArgumentException(“参数异常”); 表示 if 语句判断，是否会捕捉到 IllegalArgumentException 异常。</p>
+<blockquote>
+<p><strong>总结如下：</strong></p>
+<ul>
+<li>throws语句用在方法声明后面，用来声明方法可能会抛出某些异常，由该方法的调用者来处理；throw语句用在方法体内，用来抛出一个Throwable类型的异常，由方法体内的语句处理。</li>
+<li>throws主要是声明这个方法会抛出这种类型的异常，使它的调用者知道要捕获这个异常；throw是具体向外抛异常的动作，所以它是抛出一个异常实例。</li>
+<li>throws表示出现异常的一种可能性，并不一定会发生这些异常；throw则是抛出了异常，执行throw则一定抛出了某种异常。</li>
+</ul>
+</blockquote>
+<h1 id="附加："><a href="#附加：" class="headerlink" title="附加："></a>附加：</h1><h2 id="有return的情况下try-catch-finally的执行顺序"><a href="#有return的情况下try-catch-finally的执行顺序" class="headerlink" title="有return的情况下try catch finally的执行顺序"></a>有return的情况下try catch finally的执行顺序</h2><blockquote>
+<p>结论：</p>
+<ul>
+<li>不管有木有出现异常，finally块中代码都会执行；</li>
+<li>当try和catch中有return时，finally仍然会执行；</li>
+<li>finally是在return后面的表达式运算后执行的（此时并没有返回运算后的值，而是先把要返回的值保存起来，管finally中的代码怎么样，返回的值都不会改变，任然是之前保存的值），所以函数返回值是在finally执行前确定的；</li>
+<li>finally中最好不要包含return，否则程序会提前退出，返回值不是try或catch中保存的返回值。</li>
+</ul>
+</blockquote>
+<p><strong>举例：</strong></p>
+<blockquote>
+<ul>
+<li>情况1：<br>try{} catch(){}finally{} return;<br>显然程序按顺序执行。</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(i); <span class="comment">// i = 2</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// i = 2 </span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>情况2:<br>try{ return; }catch(){} finally{} return;<pre><code> 程序执行try块中return之前（包括return语句中的表达式运算）代码；
+再执行finally块，最后执行try中return;
+finally块之后的语句return，因为程序在try中已经return所以不再执行。</code></pre></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// i = 2</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        i +=<span class="number">3</span>;</span><br><span class="line">        System.out.println(i); <span class="comment">// i = 5</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i;   <span class="comment">// 该语句未执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>情况3:<br>try{ } catch(){return;} finally{} return;<pre><code>程序先执行try，如果遇到异常执行catch块，
+有异常：则执行catch中return之前（包括return语句中的表达式运算）代码，再执行finally语句中全部代码，
+            最后执行catch块中return. finally之后也就是4处的代码不再执行。
+无异常：执行完try再finally再return.</code></pre></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 有异常</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> j = i/<span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// i = 1</span></span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        i +=<span class="number">3</span>;</span><br><span class="line">        System.out.println(i); <span class="comment">// i = 4</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i;   <span class="comment">// 该语句未执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>无异常的情况和情况1 的执行顺序一样。</p>
+<blockquote>
+<ul>
+<li>情况4:<br>try{ return; }catch(){} finally{return;}<pre><code>程序执行try块中return之前（包括return语句中的表达式运算）代码；
+再执行finally块，因为finally块中有return所以提前退出。</code></pre></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">//该语句未执行</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        i +=<span class="number">3</span>;</span><br><span class="line">        System.out.println(i); <span class="comment">// i = 5</span></span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// i = 5</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>情况5:<br>try{} catch(){return;}finally{return;}<pre><code>程序执行catch块中return之前（包括return语句中的表达式运算）代码；
+再执行finally块，因为finally块中有return所以提前退出。</code></pre></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// 不管有没有异常该语句都不执行</span></span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        i +=<span class="number">3</span>;</span><br><span class="line">        System.out.println(i); <span class="comment">// i = 5</span></span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// i = 5</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>情况6:<br>try{ return;}catch(){return;} finally{return;}<pre><code>程序执行try块中return之前（包括return语句中的表达式运算）代码；
+有异常：执行catch块中return之前（包括return语句中的表达式运算）代码；
+             则再执行finally块，因为finally块中有return所以提前退出。
+无异常：则再执行finally块，因为finally块中有return所以提前退出。</code></pre></li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">int</span> j = i/<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// 不管有没有异常该语句都不执行</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();    <span class="comment">//有异常的情况执行</span></span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// 不管有没有异常该语句都不执行</span></span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        i +=<span class="number">3</span>;</span><br><span class="line">        System.out.println(i); <span class="comment">// i = 5</span></span><br><span class="line">        <span class="keyword">return</span> i;   <span class="comment">// i = 5</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>任何执行try 或者catch中的return语句之前，都会先执行finally语句，如果finally存在的话。<br>如果finally中有return语句，那么程序就return了，所以finally中的return是一定会被return的</p>
+<h1 id="final-finally-finalize的区别"><a href="#final-finally-finalize的区别" class="headerlink" title="final, finally, finalize的区别"></a>final, finally, finalize的区别</h1><p>finally 是异常处理语句结构的一部分，表示总是执行.<br>finalize 是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，可以覆盖此方法提供垃圾收集时的其他资源回收，例如关闭文件等. JVM不保证此方法总被调用.</p>
+<h4 id="final：修饰符（关键字）"><a href="#final：修饰符（关键字）" class="headerlink" title="final：修饰符（关键字）"></a>final：修饰符（关键字）</h4><p>&emsp;&emsp;如果一个类被声明为final，意味着它不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为 abstract的，又被声明为final的。</p>
+<p>&emsp;&emsp;将变量或方法声明为final，可以保证它们在使用中不被改变。</p>
+<p>&emsp;&emsp;被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。被声明为final的方法也同样只能使用，不能重载</p>
+<h4 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h4><p>&emsp;&emsp;再异常处理时提供 finally 块来执行任何清除操作。如果抛出一个异常，那么相匹配的 catch 子句就会执行，然后控制就会进入 finally 块（如果有的话）。</p>
+<h4 id="finalize：方法名。"><a href="#finalize：方法名。" class="headerlink" title="finalize：方法名。"></a>finalize：方法名。</h4><p>&emsp;&emsp;Java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的。</p>
+<p>&emsp;&emsp;它是在 Object 类中定义的，因此所有的类都继承了它。子类覆盖finalize() 方法以整理系统资源或者执行其他清理工作。finalize() 方法是在垃圾收集器删除对象之前对这个对象调用的。</p>
+
+    </div>
+
+    
+    
+    
+    
+      <div>
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="知性人 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="知性人 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/Java基础/" rel="tag"># Java基础</a>
+          
+            <a href="/tags/JavaSE/" rel="tag"># JavaSE</a>
+          
+            <a href="/tags/Exception/" rel="tag"># Exception</a>
+          
+            <a href="/tags/异常/" rel="tag"># 异常</a>
+          
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="知性人">
+  <p class="site-author-name" itemprop="name">知性人</p>
+  <div class="site-description motion-element" itemprop="description">接受失败，但不选择放弃！！！</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/" title="GitHub &rarr; https://github.com/" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://mail.google.com/mail/ca/u/0/#inbox" title="G-Mail &rarr; https://mail.google.com/mail/ca/u/0/#inbox" rel="noopener" target="_blank"><i class="fa fa-fw fa-Gmail"></i>G-Mail</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://javaboy.org/" title="http://javaboy.org/" rel="noopener" target="_blank">江南一点雨</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://www.ityouknow.com/" title="http://www.ityouknow.com/" rel="noopener" target="_blank">纯洁的微笑</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.lixint.me/" title="https://www.lixint.me/" rel="noopener" target="_blank">Lixint</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/LOYE_YOU" title="https://blog.csdn.net/LOYE_YOU" rel="noopener" target="_blank">知性人的CSDN</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-异常类结构体系图"><span class="nav-number">1.</span> <span class="nav-text">Java 异常类结构体系图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java异常分析"><span class="nav-number">2.</span> <span class="nav-text">Java异常分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#emsp-Throwable"><span class="nav-number">2.0.1.</span> <span class="nav-text"> Throwable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emsp-Throwable-的两个子类-Error-和-Exception"><span class="nav-number">2.0.2.</span> <span class="nav-text">  Throwable 的两个子类 Error 和 Exception</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见运行时异常"><span class="nav-number">3.</span> <span class="nav-text">常见运行时异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的编译时异常"><span class="nav-number">4.</span> <span class="nav-text">常见的编译时异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常的捕获和处理"><span class="nav-number">5.</span> <span class="nav-text">异常的捕获和处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#throw与throws关键字的区别"><span class="nav-number">6.</span> <span class="nav-text">throw与throws关键字的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附加："><span class="nav-number">7.</span> <span class="nav-text">附加：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有return的情况下try-catch-finally的执行顺序"><span class="nav-number">7.1.</span> <span class="nav-text">有return的情况下try catch finally的执行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总结："><span class="nav-number">7.1.0.1.</span> <span class="nav-text">总结：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#final-finally-finalize的区别"><span class="nav-number">8.</span> <span class="nav-text">final, finally, finalize的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#final：修饰符（关键字）"><span class="nav-number">8.0.0.1.</span> <span class="nav-text">final：修饰符（关键字）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finally"><span class="nav-number">8.0.0.2.</span> <span class="nav-text">finally</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finalize：方法名。"><span class="nav-number">8.0.0.3.</span> <span class="nav-text">finalize：方法名。</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">知性人</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">8k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7 分钟</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='128,128,128' opacity='1' zIndex='-2' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.2.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
