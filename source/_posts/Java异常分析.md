@@ -194,7 +194,7 @@ public int test(){
     return i;   // 该语句未执行
 }
 ```
-无异常的情况和情况1 的执行顺序一样。
+    无异常的情况和情况1 的执行顺序一样。
 
 * 情况4:
 try{ return; }catch(){} finally{return;}
