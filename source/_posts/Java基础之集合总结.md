@@ -148,9 +148,15 @@ package java.util;
 
 &emsp;&emsp;而Iterator 是JDK 1.2才添加的接口，它也是为了HashMap、ArrayList等集合提供遍历接口。Iterator是支持fail-fast机制的：当多个线程对同一个集合的内容进行操作时，就可能会产生fail-fast事件。
 
-### 8、为何没有像Iterator.add()这样的方法，向集合中添加元素？
+### 8、Iterator和ListIterator的区别
 
-&emsp;&emsp;语义不明，已知的是，Iterator的协议不能确保迭代的次序。然而要注意，ListIterator没有提供一个add操作，它要确保迭代的顺序。
+ * ListIterator有add()方法，可以向List中添加对象，而Iterator不能。
+
+ * ListIterator和Iterator都有hasNext()和next()方法，可以实现顺序向后遍历，但是ListIterator有hasPrevious()和previous()方法，可以实现逆向（顺序向前）遍历。Iterator就不可以。
+
+ * ListIterator可以定位当前的索引位置，nextIndex()和previousIndex()可以实现。Iterator没有此功能。
+
+ * 都可实现删除对象，但是ListIterator可以实现对象的修改，set()方法可以实现。Iierator仅能遍历，不能修改。
 
 ### 9、为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？
 
@@ -336,3 +342,21 @@ package java.util;
  * （4）总是使用类型安全的泛型，避免在运行时出现ClassCastException。
  * （5）使用JDK提供的不可变类作为Map的key，可以避免自己实现hashCode()和equals()。
  * （6）尽可能使用Collections工具类，或者获取只读、同步或空的集合，而非编写自己的实现。它将会提供代码重用性，它有着更好的稳定性和可维护性。
+
+### 41、什么是CopyOnWriteArrayList，它与ArrayList有何不同？
+
+&emsp;&emsp;CopyOnWriteArrayList是ArrayList的一个线程安全的变体，其中所有可变操作（add、set等等）都是通过对底层数组进行一次新的复制来实现的。相比较于ArrayList它的写操作要慢一些，因为它需要实例的快照。
+
+&emsp;&emsp;CopyOnWriteArrayList中写操作需要大面积复制数组，所以性能肯定很差，但是读操作因为操作的对象和写操作不是同一个对象，读之间也不需要加锁，读和写之间的同步处理只是在写完后通过一个简单的"="将引用指向新的数组对象上来，这个几乎不需要时间，这样读操作就很快很安全，适合在多线程里使用，绝对不会发生ConcurrentModificationException ，因此CopyOnWriteArrayList适合使用在读操作远远大于写操作的场景里，比如缓存。
+
+### 42、迭代器和枚举之间的区别
+
+&emsp;&emsp;如果面试官问这个问题，那么他的意图一定是让你区分Iterator不同于Enumeration的两个方面：
+
+ * Iterator允许移除从底层集合的元素。
+
+ * Iterator的方法名是标准化的。
+
+### 43、什么是快速失败的故障安全迭代器？
+
+&emsp;&emsp;快速失败的Java迭代器可能会引发ConcurrentModifcationException在底层集合迭代过程中被修改。故障安全作为发生在实例中的一个副本迭代是不会抛出任何异常的。快速失败的故障安全范例定义了当遭遇故障时系统是如何反应的。例如，用于失败的快速迭代器ArrayList和用于故障安全的迭代器ConcurrentHashMap。
