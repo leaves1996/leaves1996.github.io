@@ -59,19 +59,19 @@
   };
 </script>
 
-  <meta name="description" content="本文主要是根据 Java 中的集合相关知识点进行部分面试题的总结。">
+  <meta name="description" content="本文主要概述Java基础中的集合框架的知识点总结。">
 <meta name="keywords" content="Java基础,集合,collection">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础之集合总结">
 <meta property="og:url" content="http://yoursite.com/2019/08/07/Java基础之集合总结/index.html">
 <meta property="og:site_name" content="知性人">
-<meta property="og:description" content="本文主要是根据 Java 中的集合相关知识点进行部分面试题的总结。">
+<meta property="og:description" content="本文主要概述Java基础中的集合框架的知识点总结。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/08/07/Java基础之集合总结/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
-<meta property="og:updated_time" content="2019-08-08T01:11:47.542Z">
+<meta property="og:updated_time" content="2019-08-12T01:22:47.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础之集合总结">
-<meta name="twitter:description" content="本文主要是根据 Java 中的集合相关知识点进行部分面试题的总结。">
+<meta name="twitter:description" content="本文主要概述Java基础中的集合框架的知识点总结。">
 <meta name="twitter:image" content="http://yoursite.com/2019/08/07/Java基础之集合总结/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/07/Java基础之集合总结/">
 
@@ -303,7 +303,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-08 09:11:47" itemprop="dateModified" datetime="2019-08-08T09:11:47+08:00">2019-08-08</time>
+                <time title="修改时间：2019-08-12 09:22:47" itemprop="dateModified" datetime="2019-08-12T09:22:47+08:00">2019-08-12</time>
               </span>
             
           
@@ -331,7 +331,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">14k</span>
+              <span title="本文字数">8.1k</span>
             </span>
           
             <span class="post-meta-item">
@@ -341,10 +341,10 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">13 分钟</span>
+              <span title="阅读时长">7 分钟</span>
             </span>
           
-            <div class="post-description">本文主要是根据 Java 中的集合相关知识点进行部分面试题的总结。</div>
+            <div class="post-description">本文主要概述Java基础中的集合框架的知识点总结。</div>
           
 
         </div>
@@ -412,172 +412,240 @@
 </ul>
 </li>
 </ul>
-<h2 id="整体总结"><a href="#整体总结" class="headerlink" title="整体总结"></a>整体总结</h2><h3 id="1、Java集合框架是什么？说出一些集合框架的优点？"><a href="#1、Java集合框架是什么？说出一些集合框架的优点？" class="headerlink" title="1、Java集合框架是什么？说出一些集合框架的优点？"></a>1、Java集合框架是什么？说出一些集合框架的优点？</h3><p>&emsp;&emsp;每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全的情况下使用泛型和并发集合类，Java已经经历了很久。它还包括在Java并发包中，阻塞接口以及它们的实现。集合框架的部分优点如下：</p>
+<h1 id="整体总结"><a href="#整体总结" class="headerlink" title="整体总结"></a>整体总结</h1><h3 id="集合（Collection）"><a href="#集合（Collection）" class="headerlink" title="集合（Collection）"></a>集合（Collection）</h3><p>&emsp;&emsp;Collection 的特点：<br>    - 部分集合是有序的，部分集合是无序的，这里的有序指的是存储有序<br>    - 部分集合是可排序的，部分集合是不可排序<br>    - 部分集合是可重复的，部分集合是不可重复，唯一的</p>
+<h2 id="单列集合"><a href="#单列集合" class="headerlink" title="单列集合"></a>单列集合</h2><h3 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h3><p> List接口<br> 特点:<br> 1.集合是有序的(存储有序)<br> 2.有索引，方便查找和修改<br> 3.List集合可重复<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">elementData[size++] = e;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> <code>结论</code>:无论添加重复还是不重复的元素，结果都是返回添加成功，所以List集合是可重复的<br> 4.允许存储null值</p>
+<h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><ul>
+<li><p>ArrayList集合的特点：<br> 1.有序，有索引<br> 2.元素可以重复<br> 3.可以存储null值<br> 4.随机访问速度快，修改快，增加/插入或者移除/删除的效率慢<br> 5.线程不安全</p>
+</li>
+<li><p>如何去重复？<br> 1.创建一个新集合<br> 2.选择排序思想去重复</p>
+</li>
+<li><p>如何排序?<br>  Collections.sort(list);</p>
+</li>
+<li><p>如何变安全?<br> Collections.synchronizedList(list);</p>
+</li>
+<li><p>遍历的方式（六种）:<br> 1、Object[] toArray()<br> 2、普通for循环<br> 3、增强for循环<br> 4、Iterator<e> iterator()<br> 5、ListIterator<e> listIterator()<br> 6、<t> T[] toArray(T[] a) </t></e></e></p>
+</li>
+<li><p>ListIterator 列表迭代器<br>&emsp;&emsp;ListIterator接口是List特有的迭代器，允许程序员按任一方向遍历列表、迭代期间修改列表，并获得迭代器在列表中的当前位置。</p>
 <ul>
-<li>（1）使用核心集合类降低开发成本，而非实现我们自己的集合类。</li>
-<li>（2）随着使用经过严格测试的集合框架类，代码质量会得到提高。</li>
-<li>（3）通过使用JDK附带的集合类，可以降低代码维护成本。</li>
-<li>（4）复用性和可操作性。</li>
+<li><p>常用方法<br><code>boolean hasNext()</code><br>以正向遍历列表时，如果列表迭代器有多个元素，则返回 true（换句话说，如果next 返回一个元素而不是抛出异常，则返回 true）。 </p>
+<p><code>E next()</code><br>返回列表中的下一个元素。 </p>
+<p><code>boolean hasPrevious()</code><br>如果以逆向遍历列表，列表迭代器有多个元素，则返回 true。 </p>
+<p><code>E previous()</code><br>返回列表中的前一个元素。</p>
+</li>
 </ul>
-<h3 id="2、集合框架中的泛型有什么优点？"><a href="#2、集合框架中的泛型有什么优点？" class="headerlink" title="2、集合框架中的泛型有什么优点？"></a>2、集合框架中的泛型有什么优点？</h3><p>&emsp;&emsp;Java1.5引入了泛型，所有的集合接口和实现都大量地使用它。泛型允许我们为集合提供一个可以容纳的对象类型，因此，如果你添加其它类型的任何元素，它会在编译时报错。这避免了在运行时出现ClassCastException，因为你将会在编译时得到报错信息。泛型也使得代码整洁，我们不需要使用显式转换和instanceOf操作符。它也给运行时带来好处，因为不会产生类型检查的字节码指令。</p>
-<h3 id="3、Java集合框架的基础接口有哪些？"><a href="#3、Java集合框架的基础接口有哪些？" class="headerlink" title="3、Java集合框架的基础接口有哪些？"></a>3、Java集合框架的基础接口有哪些？</h3><p>&emsp;&emsp;Collection为集合层级的根接口。一个集合代表一组对象，这些对象即为它的元素。Java平台不提供这个接口任何直接的实现。</p>
-<p>&emsp;&emsp;Set是一个不能包含重复元素的集合。这个接口对数学集合抽象进行建模，被用来代表集合，就如一副牌。</p>
-<p>&emsp;&emsp;List是一个有序集合，可以包含重复元素。你可以通过它的索引来访问任何元素。List更像长度动态变换的数组。</p>
-<p>&emsp;&emsp;Map是一个将key映射到value的对象.一个Map不能包含重复的key：每个key最多只能映射一个value。</p>
-<p>一些其它的接口有Queue、Dequeue、SortedSet、SortedMap和ListIterator。</p>
-<h3 id="4、为何Collection不从Cloneable和Serializable接口继承？"><a href="#4、为何Collection不从Cloneable和Serializable接口继承？" class="headerlink" title="4、为何Collection不从Cloneable和Serializable接口继承？"></a>4、为何Collection不从Cloneable和Serializable接口继承？</h3><p>&emsp;&emsp;Collection接口指定一组对象，对象即为它的元素。如何维护这些元素由Collection的具体实现决定。例如，一些如List的Collection实现允许重复的元素，而其它的如Set就不允许。很多Collection实现有一个公有的clone方法。然而，把它放到集合的所有实现中也是没有意义的。这是因为Collection是一个抽象表现。重要的是实现。</p>
-<p>&emsp;&emsp;当与具体实现打交道的时候，克隆或序列化的语义和含义才发挥作用。所以，具体实现应该决定如何对它进行克隆或序列化，或它是否可以被克隆或序列化。</p>
-<p>&emsp;&emsp;在所有的实现中授权克隆和序列化，最终导致更少的灵活性和更多的限制。特定的实现应该决定它是否可以被克隆和序列化。</p>
-<h3 id="5、为何Map接口不继承Collection接口？"><a href="#5、为何Map接口不继承Collection接口？" class="headerlink" title="5、为何Map接口不继承Collection接口？"></a>5、为何Map接口不继承Collection接口？</h3><p>&emsp;&emsp;尽管Map接口和它的实现也是集合框架的一部分，但Map不是集合，集合也不是Map。因此，Map继承Collection毫无意义，反之亦然。</p>
-<p>&emsp;&emsp;如果Map继承Collection接口，那么元素去哪儿？Map包含key-value对，它提供抽取key或value列表集合的方法，但是它不适合“一组对象”规范。</p>
-<h3 id="6、Iterator是什么？"><a href="#6、Iterator是什么？" class="headerlink" title="6、Iterator是什么？"></a>6、Iterator是什么？</h3><p>&emsp;&emsp;Iterator接口提供遍历任何Collection的接口。我们可以从一个Collection中使用迭代器方法来获取迭代器实例。迭代器取代了Java集合框架中的Enumeration。迭代器允许调用者在迭代过程中移除元素。</p>
-<h3 id="7、Enumeration和Iterator接口的区别？"><a href="#7、Enumeration和Iterator接口的区别？" class="headerlink" title="7、Enumeration和Iterator接口的区别？"></a>7、Enumeration和Iterator接口的区别？</h3><p>&emsp;&emsp;Enumeration的速度是Iterator的两倍，也使用更少的内存。Enumeration是非常基础的，也满足了基础的需要。但是，与Enumeration相比，Iterator更加安全，因为当一个集合正在被遍历的时候，它会阻止其它线程去修改集合。</p>
-<p>&emsp;&emsp;迭代器取代了Java集合框架中的Enumeration。迭代器允许调用者从集合中移除元素，而Enumeration不能做到。为了使它的功能更加清晰，迭代器方法名已经经过改善。</p>
-<p>源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java.util;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Enumeration</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">boolean</span> <span class="title">hasMoreElements</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">E <span class="title">nextElement</span><span class="params">()</span></span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><p>&emsp;&emsp;该集合类似于ArrayList集合，可以说成老版的ArrayList，该集合在jdk1.0版本时就有了。</p>
+<p>&emsp;&emsp;Vector集合底层数据结构也是数组，增加、删除元素的性能就比较差了，相对于ArrayList是线程安全的、效率低。</p>
+<ul>
+<li>Vector类特有功能<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addElement</span><span class="params">(E obj)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">elementAt</span><span class="params">(<span class="keyword">int</span> index)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Enumeration <span class="title">elements</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 
-<p> (01) 函数接口不同</p>
-<p>&emsp;&emsp;Enumeration 只有2个函数接口。 通过Enumeration，我们只能读取集合的数据，而不能对数据进行修改。 </p>
-<p>&emsp;&emsp;Iterator 只有3个函数接口。 Iterator除了能读取集合的数据之外，也能数据进行删除操作。</p>
-<p> (02) Iterator 支持 fail-fast 机制，而 Enumeration 不支持 </p>
-<p>&emsp;&emsp;Enumeration 是JDK 1.0添加的接口。使用到它的函数包括Vector、Hashtable等类，这些类都是JDK 1.0中加入的，Enumeration存在的目的就是为它们提供遍历接口。Enumeration本身并没有支持同步，而在Vector、Hashtable实现Enumeration时，添加了同步。 </p>
-<p>&emsp;&emsp;而Iterator 是JDK 1.2才添加的接口，它也是为了HashMap、ArrayList等集合提供遍历接口。Iterator是支持fail-fast机制的：当多个线程对同一个集合的内容进行操作时，就可能会产生fail-fast事件。</p>
-<h3 id="8、Iterator和ListIterator的区别"><a href="#8、Iterator和ListIterator的区别" class="headerlink" title="8、Iterator和ListIterator的区别"></a>8、Iterator和ListIterator的区别</h3><ul>
-<li><p>ListIterator有add()方法，可以向List中添加对象，而Iterator不能。</p>
-</li>
-<li><p>ListIterator和Iterator都有hasNext()和next()方法，可以实现顺序向后遍历，但是ListIterator有hasPrevious()和previous()方法，可以实现逆向（顺序向前）遍历。Iterator就不可以。</p>
-</li>
-<li><p>ListIterator可以定位当前的索引位置，nextIndex()和previousIndex()可以实现。Iterator没有此功能。</p>
-</li>
-<li><p>都可实现删除对象，但是ListIterator可以实现对象的修改，set()方法可以实现。Iierator仅能遍历，不能修改。</p>
 </li>
 </ul>
-<h3 id="9、为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？"><a href="#9、为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？" class="headerlink" title="9、为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？"></a>9、为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？</h3><p>&emsp;&emsp;它可以在当前Iterator的顶层实现，但是它用得很少，如果将它加到接口中，每个继承都要去实现它，这没有意义。</p>
-<h3 id="10、Iterater和ListIterator之间有什么区别？"><a href="#10、Iterater和ListIterator之间有什么区别？" class="headerlink" title="10、Iterater和ListIterator之间有什么区别？"></a>10、Iterater和ListIterator之间有什么区别？</h3><ul>
-<li>（1）我们可以使用Iterator来遍历Set和List集合，而ListIterator只能遍历List。</li>
-<li>（2）Iterator只可以向前遍历，而LIstIterator可以双向遍历。</li>
-<li>（3）ListIterator从Iterator接口继承，然后添加了一些额外的功能，比如添加一个元素、替换一个元素、获取前面或后面元素的索引位置。</li>
+<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><ul>
+<li>LinkedList类概述<br> 1、底层数据结构是链表<br> 2、插入和移除性能高，查询效率低。<br> 3、线程不安全，效率高。<br> 4、存储有序<br> 5、可以重复（并且可以存储null值）<br> 6、不可排序</li>
 </ul>
-<h3 id="11、遍历一个List有哪些不同的方式？"><a href="#11、遍历一个List有哪些不同的方式？" class="headerlink" title="11、遍历一个List有哪些不同的方式？"></a>11、遍历一个List有哪些不同的方式？</h3><ul>
-<li>使用普通for循环遍历</li>
-<li>使用增强for循环遍历</li>
-<li>使用iterator迭代器遍历</li>
-<li>使用ListIterator迭代器遍历</li>
-</ul>
-<p>&emsp;&emsp;使用迭代器更加线程安全，因为它可以确保，在当前遍历的集合元素被更改的时候，它会抛出ConcurrentModificationException。</p>
-<h3 id="12、通过迭代器fail-fast属性，你明白了什么？"><a href="#12、通过迭代器fail-fast属性，你明白了什么？" class="headerlink" title="12、通过迭代器fail-fast属性，你明白了什么？"></a>12、通过迭代器fail-fast属性，你明白了什么？</h3><p>&emsp;&emsp;每次我们尝试获取下一个元素的时候，Iterator fail-fast属性检查当前集合结构里的任何改动。如果发现任何改动，它抛出ConcurrentModificationException。Collection中所有Iterator的实现都是按fail-fast来设计的（ConcurrentHashMap和CopyOnWriteArrayList这类并发集合类除外）。</p>
-<h3 id="13、fail-fast与fail-safe有什么区别？"><a href="#13、fail-fast与fail-safe有什么区别？" class="headerlink" title="13、fail-fast与fail-safe有什么区别？"></a>13、fail-fast与fail-safe有什么区别？</h3><p>&emsp;&emsp;Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受到集合中任何改动的影响。Java.util包中的所有集合类都被设计为fail-fast的，而java.util.concurrent中的集合类都为fail-safe的。Fail-fast迭代器抛出ConcurrentModificationException，而fail-safe迭代器从不抛出ConcurrentModificationException。</p>
-<h3 id="14、在迭代一个集合的时候，如何避免-ConcurrentModificationException？"><a href="#14、在迭代一个集合的时候，如何避免-ConcurrentModificationException？" class="headerlink" title="14、在迭代一个集合的时候，如何避免 ConcurrentModificationException？"></a>14、在迭代一个集合的时候，如何避免 <code>ConcurrentModificationException</code>？</h3><p>&emsp;&emsp;在遍历一个集合的时候，我们可以使用并发集合类来避免修改并发异常ConcurrentModificationException，比如使用CopyOnWriteArrayList，而不是ArrayList。</p>
-<h3 id="15、为何Iterator接口没有具体的实现？"><a href="#15、为何Iterator接口没有具体的实现？" class="headerlink" title="15、为何Iterator接口没有具体的实现？"></a>15、为何Iterator接口没有具体的实现？</h3><p>&emsp;&emsp;Iterator接口定义了遍历集合的方法，但它的实现则是集合实现类的责任。每个能够返回用于遍历的Iterator的集合类都有它自己的Iterator实现内部类。</p>
-<p>&emsp;&emsp;这就允许集合类去选择迭代器是fail-fast还是fail-safe的。比如，ArrayList迭代器是fail-fast的，而CopyOnWriteArrayList迭代器是fail-safe的。</p>
-<h3 id="16、UnsupportedOperationException是什么？"><a href="#16、UnsupportedOperationException是什么？" class="headerlink" title="16、UnsupportedOperationException是什么？"></a>16、UnsupportedOperationException是什么？</h3><p>&emsp;&emsp;UnsupportedOperationException是用于表明操作不支持的异常。在JDK类中已被大量运用，在集合框架java.util.Collections.UnmodifiableCollection将会在所有add和remove操作中抛出这个异常。</p>
-<h3 id="17、在Java中，HashMap是如何工作的？"><a href="#17、在Java中，HashMap是如何工作的？" class="headerlink" title="17、在Java中，HashMap是如何工作的？"></a>17、在Java中，HashMap是如何工作的？</h3><p>&emsp;&emsp;HashMap在Map.Entry静态内部类实现中存储key-value对。HashMap使用哈希算法，在put和get方法中，它使用hashCode()和equals()方法。当我们通过传递key-value对调用put方法的时候，HashMap使用Key hashCode()和哈希算法来找出存储key-value对的索引。Entry存储在LinkedList中，所以如果存在entry，它使用equals()方法来检查传递的key是否已经存在，如果存在，它会覆盖value，如果不存在，它会创建一个新的entry然后保存。当我们通过传递key调用get方法时，它再次使用hashCode()来找到数组中的索引，然后使用equals()方法找出正确的Entry，然后返回它的值。下面的图片解释了详细内容。</p>
-<p>&emsp;&emsp;其它关于HashMap比较重要的问题是容量、负荷系数和阀值调整。HashMap默认的初始容量是32，负荷系数是0.75。阀值是为负荷系数乘以容量，无论何时我们尝试添加一个entry，如果map的大小比阀值大的时候，HashMap会对map的内容进行重新哈希，且使用更大的容量。容量总是2的幂，所以如果你知道你需要存储大量的key-value对，比如缓存从数据库里面拉取的数据，使用正确的容量和负荷系数对HashMap进行初始化是个不错的做法。</p>
-<h3 id="18、hashCode-和equals-方法有何重要性？"><a href="#18、hashCode-和equals-方法有何重要性？" class="headerlink" title="18、hashCode()和equals()方法有何重要性？"></a>18、hashCode()和equals()方法有何重要性？</h3><p>&emsp;&emsp;HashMap使用Key对象的hashCode()和equals()方法去决定key-value对的索引。当我们试着从HashMap中获取值的时候，这些方法也会被用到。如果这些方法没有被正确地实现，在这种情况下，两个不同Key也许会产生相同的hashCode()和equals()输出，HashMap将会认为它们是相同的，然后覆盖它们，而非把它们存储到不同的地方。同样的，所有不允许存储重复数据的集合类都使用hashCode()和equals()去查找重复，所以正确实现它们非常重要。equals()和hashCode()的实现应该遵循以下规则：</p>
+<p>&emsp;&emsp;双链表实现了List和Deque以及Queue接口。 实现所有可选列表操作，并允许所有元素（包括null ）。<br>&emsp;&emsp;该集合具有队列、栈、链表的数据特性。可以使用LinkedList实现栈和队列结构。</p>
+<h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4><pre><code>底层数据结构是使用的栈结构，先进后出的形式。
+
+方法:
+     boolean empty()  测试堆栈是否为空。 
+    E peek()  查看堆栈顶部的对象，但不从堆栈中移除它。 
+     E pop()   移除堆栈顶部的对象，并作为此函数的值返回该对象。 
+     E push(E item)  把项压入堆栈顶部。 
+     int search(Object o)   返回对象在堆栈中的位置，以 1 为基数。        
+
+java.util.EmptyStackException
+
+EmptyStackException: 空栈异常
+
+产生原因: 栈里面的数据没有了
+
+解决办法: 在弹栈之前做判断</code></pre><h3 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h3><ul>
+<li><p>Set集合的概述</p>
 <ul>
-<li>（1）如果o1.equals(o2)为 true，那么o1.hashCode() == o2.hashCode()总是为true的。</li>
-<li>（2）如果o1.hashCode() == o2.hashCode()，并不意味着o1.equals(o2)会为true。</li>
-</ul>
-<h3 id="19、我们能否使用任何类作为Map的key？"><a href="#19、我们能否使用任何类作为Map的key？" class="headerlink" title="19、我们能否使用任何类作为Map的key？"></a>19、我们能否使用任何类作为Map的key？</h3><p>我们可以使用任何类作为Map的key，然而在使用它们之前，需要考虑以下几点：</p>
+<li><p>1.Set是一个不包含重复元素的 Collection的另一子接口</p>
+</li>
+<li><p>2.特点:</p>
 <ul>
-<li>（1）如果类重写了equals()方法，它也应该重写hashCode()方法。</li>
-<li>（2）类的所有实例需要遵循与equals()和hashCode()相关的规则。请参考之前提到的这些规则。</li>
-<li>（3）如果一个类没有使用equals()，你不应该在hashCode()中使用它。</li>
-<li>（4）用户自定义key类的最佳实践是使之为不可变的，这样，hashCode()值可以被缓存起来，拥有更好的性能。不可变的类也可以确保hashCode()和equals()在未来不会改变，这样就会解决与可变相关的问题了。</li>
+<li>无序: 没有任何的前后区别.所有的元素没有位置的概念,所有的元素都存储在集合中.无序指的你添加顺序和取出顺序可能不一样.取出顺序的不可预知.</li>
+<li>没有索引: 集合中元素无法通过位置区分,相同元素就无法区分.</li>
+<li>唯一(不能重复):没有位置区分, 相同的元素就无法分别, 所以不能重复.</li>
+<li>可以存储null值，但只能存储一个null值。</li>
 </ul>
-<h3 id="20、Map接口提供了哪些不同的集合视图？"><a href="#20、Map接口提供了哪些不同的集合视图？" class="headerlink" title="20、Map接口提供了哪些不同的集合视图？"></a>20、Map接口提供了哪些不同的集合视图？</h3><ul>
-<li><p>Map接口提供三个集合视图：</p>
+</li>
+<li><p>3.Set的是一个接口, 无法实例化,只能指向HashSet实现类才能研究Set集合中的方法:HastSet: 就是Set的实现类, 底层是使用哈希表存储方法存储Set集合的元素.</p>
+</li>
+<li><p>4.存储特点:</p>
 <ul>
-<li><p>（1）Set keyset()：返回map中包含的所有key的一个Set视图。集合是受map支持的，map的变化会在集合中反映出来，反之亦然。当一个迭代器正在遍历一个集合时，若map被修改了（除迭代器自身的移除操作以外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。</p>
-</li>
-<li><p>（2）Collection values()：返回一个map中包含的所有value的一个Collection视图。这个collection受map支持的，map的变化会在collection中反映出来，反之亦然。当一个迭代器正在遍历一个collection时，若map被修改了（除迭代器自身的移除操作以外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。</p>
-</li>
-<li><p>（3）Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()：返回一个map钟包含的所有映射的一个集合视图。这个集合受map支持的，map的变化会在collection中反映出来，反之亦然。当一个迭代器正在遍历一个集合时，若map被修改了（除迭代器自身的移除操作，以及对迭代器返回的entry进行setValue外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。</p>
+<li>1.相同的元素无法存储进Set集合,相同只能保存一份;</li>
+<li>2.集合本身不保证顺序: 存储的顺序和取出顺序顺序不一致.</li>
+</ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="21、HashMap和Hashtable有何不同？"><a href="#21、HashMap和Hashtable有何不同？" class="headerlink" title="21、HashMap和Hashtable有何不同？"></a>21、HashMap和Hashtable有何不同？</h3><ul>
-<li>（1）HashMap允许key和value为null，而HashTable不允许。</li>
-<li>（2）Hashtable是同步的，而HashMap不是。所以HashMap适合单线程环境，Hashtable适合多线程环境。</li>
-<li>（3）在Java1.4中引入了LinkedHashMap，HashMap的一个子类，假如你想要遍历顺序，你很容易从HashMap转向LinkedHashMap，但是Hashtable不是这样的，它的顺序是不可预知的。</li>
-<li>（4）HashMap提供对key的Set进行遍历，因此它是fail-fast的，但Hashtable提供对key的Enumeration进行遍历，它不支持fail-fast。</li>
-<li>（5）Hashtable被认为是个遗留的类，如果你寻求在迭代的时候修改Map，你应该使用CocurrentHashMap。</li>
+<h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><ul>
+<li>HashSet类概述<br>&emsp;&emsp;此类实现 Set 接口，由哈希表（实际上是一个 HashMap 实例）支持。它不保证 set 的迭代顺序；特别是它不保证该顺序恒久不变。此类允许使用null元素。HashSet保证元素唯一。 </li>
 </ul>
-<h3 id="22、如何决定选用HashMap还是TreeMap？"><a href="#22、如何决定选用HashMap还是TreeMap？" class="headerlink" title="22、如何决定选用HashMap还是TreeMap？"></a>22、如何决定选用HashMap还是TreeMap？</h3><p>&emsp;&emsp;对于在Map中插入、删除和定位元素这类操作，HashMap是最好的选择。然而，假如你需要对一个有序的key集合进行遍历，TreeMap是更好的选择。基于你的collection的大小，也许向HashMap中添加元素会更快，将map换为TreeMap进行有序key的遍历。</p>
-<h3 id="23-ArrayList和Vector有何异同点？"><a href="#23-ArrayList和Vector有何异同点？" class="headerlink" title="23.ArrayList和Vector有何异同点？"></a>23.ArrayList和Vector有何异同点？</h3><ul>
-<li><p>ArrayList和Vector在很多时候都很类似。</p>
+<p>&emsp;&emsp;底层数据结构是哈希表，哈希表依赖于哈希值存储 </p>
+<p>&emsp;&emsp;添加元素时保证元素唯一，本质底层依赖两个方法： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>（1）两者都是基于索引的，内部由一个数组支持。</li>
-<li>（2）两者维护插入的顺序，我们可以根据插入顺序来获取元素。</li>
-<li>（3）ArrayList和Vector的迭代器实现都是fail-fast的。</li>
-<li>（4）ArrayList和Vector两者允许null值，也可以使用索引值对元素进行随机访问。</li>
-</ul>
-</li>
-<li><p>以下是ArrayList和Vector的不同点。</p>
+<li><p>HashSet保证元素唯一的原理</p>
 <ul>
-<li>（1）Vector是同步的，而ArrayList不是。然而，如果你寻求在迭代的时候对列表进行改变，你应该使用CopyOnWriteArrayList。</li>
-<li>（2）ArrayList比Vector快，它因为有同步，不会过载。</li>
-<li>（3）ArrayList更加通用，因为我们可以使用Collections工具类轻易地获取同步列表和只读列表。</li>
+<li>1.某个对象,在即将存储到HashSet集合时候,首先获取obj的hashCode方法值</li>
+<li>2.在集合中与每个元素的哈希值比较, 如果都和obj的哈希值不同, 说明obj在集合中不存在,那么直接添加obj.</li>
+<li>3.在集合中有若干元素的哈希值和obj哈希值相同，但是此时不能说明obj已经存在于集合中了，这时我们需要使用equals判断obj是否和自己哈希值相同元素是否相等.</li>
+<li>4.如果obj和所有相同哈希值一样的元素比较之后返回值都是false.那么就说明obj不存在于集合中,可以将obj添加到集合中.</li>
+<li>5.如果obj和其中某个相同哈希值元素比较的结果为true.那么就说明obj已经存在于集合中. obj就不能向集合中添加.</li>
 </ul>
 </li>
-</ul>
-<h3 id="24、Array和ArrayList有何区别？什么时候更适合用Array？"><a href="#24、Array和ArrayList有何区别？什么时候更适合用Array？" class="headerlink" title="24、Array和ArrayList有何区别？什么时候更适合用Array？"></a>24、Array和ArrayList有何区别？什么时候更适合用Array？</h3><ul>
-<li><p>Array可以容纳基本类型和对象，而ArrayList只能容纳对象。</p>
-</li>
-<li><p>Array是指定大小的，而ArrayList大小是固定的。</p>
-</li>
-<li><p>Array没有提供ArrayList那么多功能，比如addAll、removeAll和iterator等。尽管ArrayList明显是更好的选择，但也有些时候Array比较好用。</p>
+<li><p>自定义类型如何保证HashSet存储时元素的唯一性</p>
 <ul>
-<li>（1）如果列表的大小已经指定，大部分情况下是存储和遍历它们。</li>
-<li>（2）对于遍历基本数据类型，尽管Collections使用自动装箱来减轻编码任务，在指定大小的基本类型的列表上工作也会变得很慢。</li>
-<li>（3）如果你要使用多维数组，使用[][]比List&lt;List&lt;&gt;&gt;更容易。</li>
+<li>1.重写hashCode方法<br>相同对象,一定有相同的哈希值<br>不同对象,尽量有不同哈希值, 为了提供哈希表存储效率.<br>重写都是围绕着对象的属性重写;</li>
+<li>2.重写equals方法:<br>不仅仅比较两个对象地址,还要两个对象属性.</li>
+<li>3.重写操作:<br>使用快捷键: alt+shift+s  h</li>
 </ul>
 </li>
 </ul>
-<h3 id="25、ArrayList和LinkedList有何区别？"><a href="#25、ArrayList和LinkedList有何区别？" class="headerlink" title="25、ArrayList和LinkedList有何区别？"></a>25、ArrayList和LinkedList有何区别？</h3><ul>
-<li><p>ArrayList和LinkedList两者都实现了List接口，但是它们之间有些不同。</p>
+<h4 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h4><ul>
+<li>1.LinkedHashSet是HashSet一个子类, 和HashSet一样都能保证元素的唯一性.</li>
+<li>2.底层存储原理和HashSet不一样.底层使用哈希表+链接列表方法存储数据.<br> 哈希表保证元素的唯一.<br> 链表用来记录元素存储的先后顺序.<br> 链表通过前一个元素,记录后一个元素位置，来维护它有序性.</li>
+<li>3.存储效果:<br> 元素具有可预知迭代顺序,元素添加顺序和取出的顺序一致.</li>
+<li>4.LinkedHashSet的应用场景:<br> 如果你想使用一个集合,既保证元素唯一性,又想保证元素的存储顺序,就使用LinkedHashSet.</li>
+</ul>
+<h4 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h4><p>&emsp;&emsp;基于 TreeMap 的 NavigableSet 实现。使用元素的自然顺序对元素进行排序，或者根据创建 set 时提供的 Comparator 进行排序，具体取决于使用的构造方法。 </p>
 <ul>
-<li>（1）ArrayList是由Array所支持的基于一个索引的数据结构，所以它提供对元素的随机访问，复杂度为O(1)，但LinkedList存储一系列的节点数据，每个节点都与前一个和下一个节点相连接。所以，尽管有使用索引获取元素的方法，内部实现是从起始点开始遍历，遍历到索引的节点然后返回元素，时间复杂度为O(n)，比ArrayList要慢。</li>
-<li>（2）与ArrayList相比，在LinkedList中插入、添加和删除一个元素会更快，因为在一个元素被插入到中间的时候，不会涉及改变数组的大小，或更新索引。</li>
-<li>（3）LinkedList比ArrayList消耗更多的内存，因为LinkedList中的每个节点存储了前后节点的引用。</li>
-</ul>
-</li>
-</ul>
-<h3 id="26、哪些集合类提供对元素的随机访问？"><a href="#26、哪些集合类提供对元素的随机访问？" class="headerlink" title="26、哪些集合类提供对元素的随机访问？"></a>26、哪些集合类提供对元素的随机访问？</h3><p>&emsp;&emsp;ArrayList、HashMap、TreeMap和HashTable类提供对元素的随机访问。</p>
-<h3 id="27、EnumSet是什么？"><a href="#27、EnumSet是什么？" class="headerlink" title="27、EnumSet是什么？"></a>27、EnumSet是什么？</h3><p>&emsp;&emsp;java.util.EnumSet是使用枚举类型的集合实现。当集合创建时，枚举集合中的所有元素必须来自单个指定的枚举类型，可以是显示的或隐示的。EnumSet是不同步的，不允许值为null的元素。它也提供了一些有用的方法，比如copyOf(Collection c)、of(E first,E…rest)和complementOf(EnumSet s)。</p>
-<h3 id="28、哪些集合类是线程安全的？"><a href="#28、哪些集合类是线程安全的？" class="headerlink" title="28、哪些集合类是线程安全的？"></a>28、哪些集合类是线程安全的？</h3><p>&emsp;&emsp;Vector、HashTable、Properties和Stack是同步类，所以它们是线程安全的，可以在多线程环境下使用。Java1.5并发API包括一些集合类，允许迭代时修改，因为它们都工作在集合的克隆上，所以它们在多线程环境中是安全的。</p>
-<h3 id="29、并发集合类是什么？"><a href="#29、并发集合类是什么？" class="headerlink" title="29、并发集合类是什么？"></a>29、并发集合类是什么？</h3><p>&emsp;&emsp;Java1.5并发包（java.util.concurrent）包含线程安全集合类，允许在迭代时修改集合。迭代器被设计为fail-fast的，会抛出ConcurrentModificationException。一部分类为：CopyOnWriteArrayList、 ConcurrentHashMap、CopyOnWriteArraySet。</p>
-<h3 id="30、BlockingQueue是什么？"><a href="#30、BlockingQueue是什么？" class="headerlink" title="30、BlockingQueue是什么？"></a>30、BlockingQueue是什么？</h3><p>&emsp;&emsp;Java.util.concurrent.BlockingQueue是一个队列，在进行检索或移除一个元素的时候，它会等待队列变为非空；当在添加一个元素时，它会等待队列中的可用空间。BlockingQueue接口是Java集合框架的一部分，主要用于实现生产者-消费者模式。我们不需要担心等待生产者有可用的空间，或消费者有可用的对象，因为它都在BlockingQueue的实现类中被处理了。Java提供了集中BlockingQueue的实现，比如ArrayBlockingQueue、LinkedBlockingQueue、PriorityBlockingQueue,、SynchronousQueue等。</p>
-<h3 id="31、队列和栈是什么，列出它们的区别？"><a href="#31、队列和栈是什么，列出它们的区别？" class="headerlink" title="31、队列和栈是什么，列出它们的区别？"></a>31、队列和栈是什么，列出它们的区别？</h3><p>&emsp;&emsp;栈和队列两者都被用来预存储数据。java.util.Queue是一个接口，它的实现类在Java并发包中。队列允许先进先出（FIFO）检索元素，但并非总是这样。Deque接口允许从两端检索元素。栈与队列很相似，但它允许对元素进行后进先出（LIFO）进行检索。</p>
-<p>&emsp;&emsp;Stack是一个扩展自Vector的类，而Queue是一个接口。</p>
-<h3 id="32、Collections类是什么？"><a href="#32、Collections类是什么？" class="headerlink" title="32、Collections类是什么？"></a>32、Collections类是什么？</h3><p>&emsp;&emsp;Java.util.Collections是一个工具类仅包含静态方法，它们操作或返回集合。它包含操作集合的多态算法，返回一个由指定集合支持的新集合和其它一些内容。这个类包含集合框架算法的方法，比如折半搜索、排序、混编和逆序等。</p>
-<h3 id="33、Comparable和Comparator接口是什么？"><a href="#33、Comparable和Comparator接口是什么？" class="headerlink" title="33、Comparable和Comparator接口是什么？"></a>33、Comparable和Comparator接口是什么？</h3><p>&emsp;&emsp;如果我们想使用Array或Collection的排序方法时，需要在自定义类里实现Java提供Comparable接口。Comparable接口有compareTo(T OBJ)方法，它被排序方法所使用。我们应该重写这个方法，如果“this”对象比传递的对象参数更小、相等或更大时，它返回一个负整数、0或正整数。但是，在大多数实际情况下，我们想根据不同参数进行排序。比如，作为一个CEO，我想对雇员基于薪资进行排序，一个HR想基于年龄对他们进行排序。这就是我们需要使用Comparator接口的情景，因为Comparable.compareTo(Object o)方法实现只能基于一个字段进行排序，我们不能根据对象排序的需要选择字段。Comparator接口的compare(Object o1, Object o2)方法的实现需要传递两个对象参数，若第一个参数比第二个小，返回负整数；若第一个等于第二个，返回0；若第一个比第二个大，返回正整数。</p>
-<h3 id="34、Comparable和Comparator接口有何区别？"><a href="#34、Comparable和Comparator接口有何区别？" class="headerlink" title="34、Comparable和Comparator接口有何区别？"></a>34、Comparable和Comparator接口有何区别？</h3><p>&emsp;&emsp;Comparable和Comparator接口被用来对对象集合或者数组进行排序。Comparable接口被用来提供对象的自然排序，我们可以使用它来提供基于单个逻辑的排序。</p>
-<p>&emsp;&emsp;Comparator接口被用来提供不同的排序算法，我们可以选择需要使用的Comparator来对给定的对象集合进行排序。</p>
-<h3 id="35、我们如何对一组对象进行排序？"><a href="#35、我们如何对一组对象进行排序？" class="headerlink" title="35、我们如何对一组对象进行排序？"></a>35、我们如何对一组对象进行排序？</h3><p>&emsp;&emsp;如果我们需要对一个对象数组进行排序，我们可以使用Arrays.sort()方法。如果我们需要排序一个对象列表，我们可以使用Collection.sort()方法。两个类都有用于自然排序（使用Comparable）或基于标准的排序（使用Comparator）的重载方法sort()。Collections内部使用数组排序方法，所有它们两者都有相同的性能，只是Collections需要花时间将列表转换为数组。</p>
-<h3 id="36、当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？"><a href="#36、当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？" class="headerlink" title="36、当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？"></a>36、当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？</h3><p>&emsp;&emsp;在作为参数传递之前，我们可以使用Collections.unmodifiableCollection(Collection c)方法创建一个只读集合，这将确保改变集合的任何操作都会抛出UnsupportedOperationException。</p>
-<h3 id="37、我们如何从给定集合那里创建一个synchronized的集合？"><a href="#37、我们如何从给定集合那里创建一个synchronized的集合？" class="headerlink" title="37、我们如何从给定集合那里创建一个synchronized的集合？"></a>37、我们如何从给定集合那里创建一个synchronized的集合？</h3><p>&emsp;&emsp;我们可以使用Collections.synchronizedCollection(Collection c)根据指定集合来获取一个synchronized（线程安全的）集合。</p>
-<h3 id="38、集合框架里实现的通用算法有哪些？"><a href="#38、集合框架里实现的通用算法有哪些？" class="headerlink" title="38、集合框架里实现的通用算法有哪些？"></a>38、集合框架里实现的通用算法有哪些？</h3><p>&emsp;&emsp;Java集合框架提供常用的算法实现，比如排序和搜索。Collections类包含这些方法实现。大部分算法是操作List的，但一部分对所有类型的集合都是可用的。部分算法有排序、搜索、混编、最大最小值。</p>
-<h3 id="39、大写的O是什么？举几个例子？"><a href="#39、大写的O是什么？举几个例子？" class="headerlink" title="39、大写的O是什么？举几个例子？"></a>39、大写的O是什么？举几个例子？</h3><p>&emsp;&emsp;大写的O描述的是，就数据结构中的一系列元素而言，一个算法的性能。Collection类就是实际的数据结构，我们通常基于时间、内存和性能，使用大写的O来选择集合实现。比如：例子1：ArrayList的get(index i)是一个常量时间操作，它不依赖list中元素的数量。所以它的性能是O(1)。例子2：一个对于数组或列表的线性搜索的性能是O(n)，因为我们需要遍历所有的元素来查找需要的元素。</p>
-<h3 id="40、与Java集合框架相关的有哪些最好的实践？"><a href="#40、与Java集合框架相关的有哪些最好的实践？" class="headerlink" title="40、与Java集合框架相关的有哪些最好的实践？"></a>40、与Java集合框架相关的有哪些最好的实践？</h3><ul>
-<li>（1）根据需要选择正确的集合类型。比如，如果指定了大小，我们会选用Array而非ArrayList。如果我们想根据插入顺序遍历一个Map，我们需要使用TreeMap。如果我们不想重复，我们应该使用Set。</li>
-<li>（2）一些集合类允许指定初始容量，所以如果我们能够估计到存储元素的数量，我们可以使用它，就避免了重新哈希或大小调整。</li>
-<li>（3）基于接口编程，而非基于实现编程，它允许我们后来轻易地改变实现。</li>
-<li>（4）总是使用类型安全的泛型，避免在运行时出现ClassCastException。</li>
-<li>（5）使用JDK提供的不可变类作为Map的key，可以避免自己实现hashCode()和equals()。</li>
-<li>（6）尽可能使用Collections工具类，或者获取只读、同步或空的集合，而非编写自己的实现。它将会提供代码重用性，它有着更好的稳定性和可维护性。</li>
-</ul>
-<h3 id="41、什么是CopyOnWriteArrayList，它与ArrayList有何不同？"><a href="#41、什么是CopyOnWriteArrayList，它与ArrayList有何不同？" class="headerlink" title="41、什么是CopyOnWriteArrayList，它与ArrayList有何不同？"></a>41、什么是CopyOnWriteArrayList，它与ArrayList有何不同？</h3><p>&emsp;&emsp;CopyOnWriteArrayList是ArrayList的一个线程安全的变体，其中所有可变操作（add、set等等）都是通过对底层数组进行一次新的复制来实现的。相比较于ArrayList它的写操作要慢一些，因为它需要实例的快照。</p>
-<p>&emsp;&emsp;CopyOnWriteArrayList中写操作需要大面积复制数组，所以性能肯定很差，但是读操作因为操作的对象和写操作不是同一个对象，读之间也不需要加锁，读和写之间的同步处理只是在写完后通过一个简单的”=”将引用指向新的数组对象上来，这个几乎不需要时间，这样读操作就很快很安全，适合在多线程里使用，绝对不会发生ConcurrentModificationException ，因此CopyOnWriteArrayList适合使用在读操作远远大于写操作的场景里，比如缓存。</p>
-<h3 id="42、迭代器和枚举之间的区别"><a href="#42、迭代器和枚举之间的区别" class="headerlink" title="42、迭代器和枚举之间的区别"></a>42、迭代器和枚举之间的区别</h3><p>&emsp;&emsp;如果面试官问这个问题，那么他的意图一定是让你区分Iterator不同于Enumeration的两个方面：</p>
+<li><p>排序方式完全取决于使用的构造方法。</p>
 <ul>
-<li><p>Iterator允许移除从底层集合的元素。</p>
+<li><p>1、创建TreeSet集合是使用的是无参构造器时，Comparator为null ，则底层使用的是自然排序法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">TreeSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(<span class="keyword">new</span> TreeMap&lt;E,Object&gt;());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">TreeMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    comparator = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Iterator的方法名是标准化的。</p>
+<li><p>2、创建TreeSet集合时使用的是有参构造器时，Comparator不为null，则底层使用的时比较器排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">TreeSet</span><span class="params">(Comparator&lt;? <span class="keyword">super</span> E&gt; comparator)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(<span class="keyword">new</span> TreeMap&lt;&gt;(comparator));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">TreeMap</span><span class="params">(Comparator&lt;? <span class="keyword">super</span> K&gt; comparator)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.comparator = comparator;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<h3 id="43、什么是快速失败的故障安全迭代器？"><a href="#43、什么是快速失败的故障安全迭代器？" class="headerlink" title="43、什么是快速失败的故障安全迭代器？"></a>43、什么是快速失败的故障安全迭代器？</h3><p>&emsp;&emsp;快速失败的Java迭代器可能会引发ConcurrentModifcationException在底层集合迭代过程中被修改。故障安全作为发生在实例中的一个副本迭代是不会抛出任何异常的。快速失败的故障安全范例定义了当遭遇故障时系统是如何反应的。例如，用于失败的快速迭代器ArrayList和用于故障安全的迭代器ConcurrentHashMap。</p>
+</li>
+</ul>
+<p>&emsp;&emsp;TreeSet保证元素的排序和唯一性的:底层数据结构是红黑树(自平衡的二叉树)</p>
+<p>&emsp;&emsp;一般情况下大部分系统类都重写了Comparable接口，而我们自定义的类如果要使用TreeSet集合时，并且使用自然排序法时，该类必须实现Comparable接口并实现该接口中的方法自定义自己的排序规则。</p>
+<p>&emsp;&emsp;<code>注意</code>：如果我们同时实现了自然排序和比较器排序，那么比较器排序优先于自然排序。我们在开发中一般使用比较器排序，并且使用匿名内部类的方式实现。</p>
+<h2 id="双列集合"><a href="#双列集合" class="headerlink" title="双列集合"></a>双列集合</h2><h3 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h3><p>&emsp;&emsp;Map是双列集合的顶层接口</p>
+<ul>
+<li><p>Map集合的特点:</p>
+<ul>
+<li><p>key(键值): 在map中唯一,不可重复</p>
+</li>
+<li><p>value(值): 在map中不要求唯一, 可以多个key值对应相同value值.  </p>
+</li>
+<li><p>key和value: 就称之为键值对</p>
+</li>
+<li><p>每个key值只能对应一个value值.</p>
+</li>
+</ul>
+</li>
+<li><p>Map和Collection区别</p>
+<ul>
+<li>1.Map是双列集合, Collection是单列集合</li>
+<li>2.Map的键值唯一的, Collection下Set接口实现类存储元素是唯一的</li>
+<li>3.Map集合所有操作和算法都是针对于key值有效.Set集合下所有操作和算法针对于元素有效.原因是Set的底层就是Map.</li>
+</ul>
+</li>
+</ul>
+<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>&emsp;&emsp;基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）</p>
+<p>&emsp;&emsp;此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
+<ul>
+<li>特点：<ul>
+<li>键无序，唯一，类似于Set集合</li>
+<li>值有序，可重复，类似于List</li>
+<li>底层数据结构是哈希表，保证键唯一</li>
+<li>允许键为null，值为null</li>
+</ul>
+</li>
+</ul>
+<p>&emsp;&emsp;HashMap存储自定义类型作为key时,无法保证元素的唯一性. 原因是HashMap的底层是使用的是哈希算法来保证元素的唯一性。</p>
+<ul>
+<li><p>如何保证自定类型作为key时唯一: 重写equals和hashCode方法.</p>
+</li>
+<li><p>说明: HashMap保证key值唯一性的原理和HashSet保证元素唯一的原理一样.</p>
+</li>
+<li><p>HashMap和HashSet的关系:</p>
+<ul>
+<li>1.HashSet是由HashMap实现的, HashSet就是HashMap的key值那一列;</li>
+<li>2.HashSet的内部隐藏了HashMap的value值那一列. HashSet没有提供操作value值那一列方法.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h4><p>&emsp;&emsp;此类实现一个哈希表，该哈希表将键映射到相应的值。任何非 null 对象都可以用作键或值</p>
+<ul>
+<li><p>特点：<br> 不允许null键和null值<br> 线程安全，效率低</p>
+</li>
+<li><p>面试题：HashMap和Hashtable的区别<br> HashMap是不安全的不同步的效率高的  允许null键和null值<br> Hashtable是安全的同步的效率低的 不允许null键和null值<br> 底层都是哈希表结构</p>
+</li>
+</ul>
+<h4 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h4><p>&emsp;&emsp;LinkedHashMap 是 HashMap 接口的一个子类</p>
+<ul>
+<li>特点：<br>键有序，唯一，<br>值有序，可重复，类似于List<br>底层数据结构是哈希表和链表，哈希表保证键唯一，链表保证键有序</li>
+</ul>
+<h4 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h4><p>&emsp;&emsp;基于红黑树（Red-Black tree）的 NavigableMap 实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator 进行排序，具体取决于使用的构造方法。</p>
+<ul>
+<li>特点：<br> 键可排序，唯一，<br> 值有序，可重复，类似于List<br> 底层数据结构是自平衡的二叉树，可排序<br> 排序方式类似于TreeSet，分为自然排序和比较器排序，具体取决于使用的构造方法</li>
+</ul>
+<h4 id="WeakHashMap"><a href="#WeakHashMap" class="headerlink" title="WeakHashMap"></a>WeakHashMap</h4><p>&emsp;&emsp;以弱键 实现的基于哈希表的 Map。在 WeakHashMap 中，当某个键不再正常使用时，将自动移除其条目。更精确地说，对于一个给定的键，其映射的存在并不阻止垃圾回收器对该键的丢弃，这就使该键成为可终止的，被终止，然后被回收。丢弃某个键时，其条目从映射中有效地移除，因此，该类的行为与其他的 Map 实现有所不同。</p>
+<h2 id="Iterator接口"><a href="#Iterator接口" class="headerlink" title="Iterator接口"></a>Iterator接口</h2><p>&emsp;&emsp;对 collection 进行迭代的迭代器。迭代器取代了 Java Collections Framework 中的 Enumeration，迭代器依赖于集合而存在。</p>
+<ul>
+<li><p>常用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">       如果仍有元素可以迭代，则返回 <span class="keyword">true</span>。 </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"> E <span class="title">next</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">       返回迭代的下一个元素。 </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">注意： </span></span><br><span class="line"><span class="function">       抛出： NoSuchElementException - 没有元素可以迭代。 </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">       返回迭代的当前元素。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>迭代器原理：<br> 在获取迭代器的时候，会创建一个集合的副本，同时创建一个指针指向迭代器集合的起始位置。</p>
+</li>
+</ul>
+<h2 id="HashMap和Hashtable的区别"><a href="#HashMap和Hashtable的区别" class="headerlink" title="HashMap和Hashtable的区别"></a>HashMap和Hashtable的区别</h2><ul>
+<li><p>1、HashMap是Hashtable的轻量级实现（非线程安全的实现），他们都完成了Map接口，主要区别在于HashMap允许空（null）键值（key）,由于非线程安全，效率上可能高于Hashtable。</p>
+</li>
+<li><p>2、HashMap允许将null作为一个entry的key或者value，而Hashtable不允许。</p>
+</li>
+<li><p>3、HashMap把Hashtable的contains方法去掉了，改成containsvalue和containsKey。因为contains方法容易让人引起误解。</p>
+</li>
+<li><p>4、Hashtable继承自Dictionary类,jdk1.0时出现的，而HashMap是Java1.2引进的Map interface的一个实现。</p>
+</li>
+<li><p>5、最大的不同是，Hashtable的方法是Synchronize的，而HashMap不是，在多个线程访问Hashtable时，不需要自己为它的方法实现同步，而HashMap 就必须为之提供外同步。 </p>
+</li>
+<li><p>6、Hashtable和HashMap采用的hash/rehash算法都大概一样，所以性能不会有很大的差异。</p>
+</li>
+<li><p>相同点：都实现Map接口，都是KEY-VALUE，所用的算法差不多</p>
+</li>
+<li><p>不同点：</p>
+<ul>
+<li>HashMap:允许将null作为一个entry的key或者value，线程不安全，效率高一些</li>
+<li>Hashtable:不允许将null作为一个entry的key或者value，线程安全，效率低一些</li>
+</ul>
+</li>
+</ul>
+<h2 id="请说出集合框架中线程安全与不安全的类"><a href="#请说出集合框架中线程安全与不安全的类" class="headerlink" title="请说出集合框架中线程安全与不安全的类"></a>请说出集合框架中线程安全与不安全的类</h2><ul>
+<li><p>集合框架中的类</p>
+<ul>
+<li><p>ArrayList 线程不安全</p>
+</li>
+<li><p>Vector 线程安全</p>
+</li>
+<li><p>HashMap 线程不安全</p>
+</li>
+<li><p>Hashtable 线程安全</p>
+</li>
+</ul>
+</li>
+<li><p>不是集合中的类</p>
+<ul>
+<li>StringBuffer 线程安全的</li>
+<li>StringBuilder 线程不安全的</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -700,7 +768,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -746,7 +814,11 @@
         
           
         
-        <span class="site-state-item-count">7</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -815,7 +887,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#集合"><span class="nav-number">1.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集合和数组"><span class="nav-number">1.1.</span> <span class="nav-text">集合和数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合框架层次关系"><span class="nav-number">1.2.</span> <span class="nav-text">集合框架层次关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合家族的体系介绍"><span class="nav-number">1.3.</span> <span class="nav-text">集合家族的体系介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整体总结"><span class="nav-number">1.4.</span> <span class="nav-text">整体总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Java集合框架是什么？说出一些集合框架的优点？"><span class="nav-number">1.4.1.</span> <span class="nav-text">1、Java集合框架是什么？说出一些集合框架的优点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、集合框架中的泛型有什么优点？"><span class="nav-number">1.4.2.</span> <span class="nav-text">2、集合框架中的泛型有什么优点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Java集合框架的基础接口有哪些？"><span class="nav-number">1.4.3.</span> <span class="nav-text">3、Java集合框架的基础接口有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、为何Collection不从Cloneable和Serializable接口继承？"><span class="nav-number">1.4.4.</span> <span class="nav-text">4、为何Collection不从Cloneable和Serializable接口继承？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、为何Map接口不继承Collection接口？"><span class="nav-number">1.4.5.</span> <span class="nav-text">5、为何Map接口不继承Collection接口？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、Iterator是什么？"><span class="nav-number">1.4.6.</span> <span class="nav-text">6、Iterator是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、Enumeration和Iterator接口的区别？"><span class="nav-number">1.4.7.</span> <span class="nav-text">7、Enumeration和Iterator接口的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、Iterator和ListIterator的区别"><span class="nav-number">1.4.8.</span> <span class="nav-text">8、Iterator和ListIterator的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？"><span class="nav-number">1.4.9.</span> <span class="nav-text">9、为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、Iterater和ListIterator之间有什么区别？"><span class="nav-number">1.4.10.</span> <span class="nav-text">10、Iterater和ListIterator之间有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11、遍历一个List有哪些不同的方式？"><span class="nav-number">1.4.11.</span> <span class="nav-text">11、遍历一个List有哪些不同的方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12、通过迭代器fail-fast属性，你明白了什么？"><span class="nav-number">1.4.12.</span> <span class="nav-text">12、通过迭代器fail-fast属性，你明白了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13、fail-fast与fail-safe有什么区别？"><span class="nav-number">1.4.13.</span> <span class="nav-text">13、fail-fast与fail-safe有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14、在迭代一个集合的时候，如何避免-ConcurrentModificationException？"><span class="nav-number">1.4.14.</span> <span class="nav-text">14、在迭代一个集合的时候，如何避免 ConcurrentModificationException？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15、为何Iterator接口没有具体的实现？"><span class="nav-number">1.4.15.</span> <span class="nav-text">15、为何Iterator接口没有具体的实现？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16、UnsupportedOperationException是什么？"><span class="nav-number">1.4.16.</span> <span class="nav-text">16、UnsupportedOperationException是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17、在Java中，HashMap是如何工作的？"><span class="nav-number">1.4.17.</span> <span class="nav-text">17、在Java中，HashMap是如何工作的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18、hashCode-和equals-方法有何重要性？"><span class="nav-number">1.4.18.</span> <span class="nav-text">18、hashCode()和equals()方法有何重要性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19、我们能否使用任何类作为Map的key？"><span class="nav-number">1.4.19.</span> <span class="nav-text">19、我们能否使用任何类作为Map的key？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20、Map接口提供了哪些不同的集合视图？"><span class="nav-number">1.4.20.</span> <span class="nav-text">20、Map接口提供了哪些不同的集合视图？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21、HashMap和Hashtable有何不同？"><span class="nav-number">1.4.21.</span> <span class="nav-text">21、HashMap和Hashtable有何不同？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22、如何决定选用HashMap还是TreeMap？"><span class="nav-number">1.4.22.</span> <span class="nav-text">22、如何决定选用HashMap还是TreeMap？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-ArrayList和Vector有何异同点？"><span class="nav-number">1.4.23.</span> <span class="nav-text">23.ArrayList和Vector有何异同点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24、Array和ArrayList有何区别？什么时候更适合用Array？"><span class="nav-number">1.4.24.</span> <span class="nav-text">24、Array和ArrayList有何区别？什么时候更适合用Array？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25、ArrayList和LinkedList有何区别？"><span class="nav-number">1.4.25.</span> <span class="nav-text">25、ArrayList和LinkedList有何区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26、哪些集合类提供对元素的随机访问？"><span class="nav-number">1.4.26.</span> <span class="nav-text">26、哪些集合类提供对元素的随机访问？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27、EnumSet是什么？"><span class="nav-number">1.4.27.</span> <span class="nav-text">27、EnumSet是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28、哪些集合类是线程安全的？"><span class="nav-number">1.4.28.</span> <span class="nav-text">28、哪些集合类是线程安全的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29、并发集合类是什么？"><span class="nav-number">1.4.29.</span> <span class="nav-text">29、并发集合类是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30、BlockingQueue是什么？"><span class="nav-number">1.4.30.</span> <span class="nav-text">30、BlockingQueue是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31、队列和栈是什么，列出它们的区别？"><span class="nav-number">1.4.31.</span> <span class="nav-text">31、队列和栈是什么，列出它们的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32、Collections类是什么？"><span class="nav-number">1.4.32.</span> <span class="nav-text">32、Collections类是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33、Comparable和Comparator接口是什么？"><span class="nav-number">1.4.33.</span> <span class="nav-text">33、Comparable和Comparator接口是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34、Comparable和Comparator接口有何区别？"><span class="nav-number">1.4.34.</span> <span class="nav-text">34、Comparable和Comparator接口有何区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35、我们如何对一组对象进行排序？"><span class="nav-number">1.4.35.</span> <span class="nav-text">35、我们如何对一组对象进行排序？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36、当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？"><span class="nav-number">1.4.36.</span> <span class="nav-text">36、当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37、我们如何从给定集合那里创建一个synchronized的集合？"><span class="nav-number">1.4.37.</span> <span class="nav-text">37、我们如何从给定集合那里创建一个synchronized的集合？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#38、集合框架里实现的通用算法有哪些？"><span class="nav-number">1.4.38.</span> <span class="nav-text">38、集合框架里实现的通用算法有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#39、大写的O是什么？举几个例子？"><span class="nav-number">1.4.39.</span> <span class="nav-text">39、大写的O是什么？举几个例子？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#40、与Java集合框架相关的有哪些最好的实践？"><span class="nav-number">1.4.40.</span> <span class="nav-text">40、与Java集合框架相关的有哪些最好的实践？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#41、什么是CopyOnWriteArrayList，它与ArrayList有何不同？"><span class="nav-number">1.4.41.</span> <span class="nav-text">41、什么是CopyOnWriteArrayList，它与ArrayList有何不同？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#42、迭代器和枚举之间的区别"><span class="nav-number">1.4.42.</span> <span class="nav-text">42、迭代器和枚举之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#43、什么是快速失败的故障安全迭代器？"><span class="nav-number">1.4.43.</span> <span class="nav-text">43、什么是快速失败的故障安全迭代器？</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#集合"><span class="nav-number">1.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集合和数组"><span class="nav-number">1.1.</span> <span class="nav-text">集合和数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合框架层次关系"><span class="nav-number">1.2.</span> <span class="nav-text">集合框架层次关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合家族的体系介绍"><span class="nav-number">1.3.</span> <span class="nav-text">集合家族的体系介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整体总结"><span class="nav-number">2.</span> <span class="nav-text">整体总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集合（Collection）"><span class="nav-number">2.0.1.</span> <span class="nav-text">集合（Collection）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单列集合"><span class="nav-number">2.1.</span> <span class="nav-text">单列集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List接口"><span class="nav-number">2.1.1.</span> <span class="nav-text">List接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stack"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">Stack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set接口"><span class="nav-number">2.1.2.</span> <span class="nav-text">Set接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">LinkedHashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeSet"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">TreeSet</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双列集合"><span class="nav-number">2.2.</span> <span class="nav-text">双列集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Map接口"><span class="nav-number">2.2.1.</span> <span class="nav-text">Map接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hashtable"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">Hashtable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">LinkedHashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeMap"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">TreeMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WeakHashMap"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">WeakHashMap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterator接口"><span class="nav-number">2.3.</span> <span class="nav-text">Iterator接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap和Hashtable的区别"><span class="nav-number">2.4.</span> <span class="nav-text">HashMap和Hashtable的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请说出集合框架中线程安全与不安全的类"><span class="nav-number">2.5.</span> <span class="nav-text">请说出集合框架中线程安全与不安全的类</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -842,12 +914,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">31k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">22 分钟</span>
+    <span title="站点阅读时长">28 分钟</span>
 </div>
 
         
