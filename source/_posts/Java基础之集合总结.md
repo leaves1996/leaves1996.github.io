@@ -73,27 +73,28 @@ sticky:
 
 ### 集合（Collection）
 &emsp;&emsp;Collection 的特点：
-    - 部分集合是有序的，部分集合是无序的，这里的有序指的是存储有序
-    - 部分集合是可排序的，部分集合是不可排序
-    - 部分集合是可重复的，部分集合是不可重复，唯一的
+- 部分集合是有序的，部分集合是无序的，这里的有序指的是存储有序
+- 部分集合是可排序的，部分集合是不可排序
+- 部分集合是可重复的，部分集合是不可重复，唯一的
 
 ## 单列集合
 
 ### List接口
- List接口
- 特点: 
- 1.集合是有序的(存储有序)
- 2.有索引，方便查找和修改
- 3.List集合可重复
- ```java
- public boolean add(E e) {
+List接口
+ - 特点: 
+  - 1.集合是有序的(存储有序)
+  - 2.有索引，方便查找和修改
+  - 3.List集合可重复
+
+  ```java
+  public boolean add(E e) {
 	ensureCapacityInternal(size + 1);  // Increments modCount!!
 	elementData[size++] = e;
 	return true;
- }
- ```
- `结论`:无论添加重复还是不重复的元素，结果都是返回添加成功，所以List集合是可重复的
- 4.允许存储null值
+  }
+  ```
+  `结论`:无论添加重复还是不重复的元素，结果都是返回添加成功，所以List集合是可重复的
+  - 4.允许存储null值
 
 #### ArrayList
  - ArrayList集合的特点：
@@ -166,11 +167,14 @@ sticky:
 	底层数据结构是使用的栈结构，先进后出的形式。
 
 	方法:
- 		boolean empty()  测试堆栈是否为空。 
-		E peek()  查看堆栈顶部的对象，但不从堆栈中移除它。 
-	 	E pop()   移除堆栈顶部的对象，并作为此函数的值返回该对象。 
-	 	E push(E item)  把项压入堆栈顶部。 
-	 	int search(Object o)   返回对象在堆栈中的位置，以 1 为基数。        
+
+    ```java
+    boolean empty()  测试堆栈是否为空。 
+    E peek()  查看堆栈顶部的对象，但不从堆栈中移除它。 
+    E pop()   移除堆栈顶部的对象，并作为此函数的值返回该对象。 
+    E push(E item)  把项压入堆栈顶部。 
+    int search(Object o)   返回对象在堆栈中的位置，以 1 为基数。        
+    ```
 
 	java.util.EmptyStackException
 
@@ -204,12 +208,13 @@ sticky:
 
 &emsp;&emsp;底层数据结构是哈希表，哈希表依赖于哈希值存储 
 
-&emsp;&emsp;添加元素时保证元素唯一，本质底层依赖两个方法： 
-```java
-int hashCode() 
+&emsp;&emsp;添加元素时保证元素唯一，本质底层依赖两个方法:
 
-boolean equals(Object obj)
-```
+    ```java
+    int hashCode() 
+
+    boolean equals(Object obj)
+    ```
 
  - HashSet保证元素唯一的原理
   - 1.某个对象,在即将存储到HashSet集合时候,首先获取obj的hashCode方法值
