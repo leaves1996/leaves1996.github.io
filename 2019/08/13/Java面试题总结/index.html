@@ -67,7 +67,7 @@
 <meta property="og:site_name" content="知性人">
 <meta property="og:description" content="本文主要总结的是Java面试题总结。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-13T08:27:39.532Z">
+<meta property="og:updated_time" content="2019-08-13T08:48:14.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java面试题总结">
 <meta name="twitter:description" content="本文主要总结的是Java面试题总结。">
@@ -288,7 +288,7 @@
                 
               
 
-              <time title="创建时间：2019-08-13 14:51:19 / 修改时间：16:27:39" itemprop="dateCreated datePublished" datetime="2019-08-13T14:51:19+08:00">2019-08-13</time>
+              <time title="创建时间：2019-08-13 14:51:19 / 修改时间：16:48:14" itemprop="dateCreated datePublished" datetime="2019-08-13T14:51:19+08:00">2019-08-13</time>
             </span>
           
             
@@ -367,7 +367,45 @@
 <li>Super（）：在子类访问父类的成员和行为,必须受类继承规则的约束</li>
 <li>而this他代表当前对象,当然所有的资源都可以访问.<br>&emsp;&emsp;在构造函数中,如果第一行没有写super(),编译器会自动插入.但是如果父类没有不带参数的构造函数,或这个函数被私有化了(用private修饰).此时你必须加入对父类的实例化构造.而this就没有这个要求,因为它本身就进行实例化的构造.<br>&emsp;&emsp;而在方法中super和this使用的方法就差不多了.只不过super 要考虑是否能访问其父类的资源.</li>
 </ul>
-<h3 id="3-权限修饰符"><a href="#3-权限修饰符" class="headerlink" title="3.权限修饰符"></a>3.权限修饰符</h3><p>访问权限修饰符|本类|同包下(普通类，子类)|不同包的子类|不同包的普通类<br>|:———:|:———:|:———:|<br>public|√|√|√|√<br>protected|√|√|√|×<br>default|√|√|×|×<br>private|√|×|×|× </p>
+<h3 id="3-权限修饰符"><a href="#3-权限修饰符" class="headerlink" title="3.权限修饰符"></a>3.权限修饰符</h3><table>
+<thead>
+<tr>
+<th align="center">访问权限修饰符</th>
+<th align="center">本类</th>
+<th align="center">同包下(普通类，子类)</th>
+<th align="center">不同包的子类</th>
+<th align="center">不同包的普通类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td align="center">protected</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="center">default</td>
+<td align="center">√</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+<tr>
+<td align="center">private</td>
+<td align="center">√</td>
+<td align="center">×</td>
+<td align="center">×</td>
+<td align="center">×</td>
+</tr>
+</tbody></table>
 <ul>
 <li>Public:不同包、同一包、类内都可用</li>
 <li>Private：类内</li>
