@@ -11,9 +11,6 @@ categories: Java基础
 description: 本文主要概述Java基础中的线程相关知识点总结。
 sticky:
 ---
-
-@[TOC](线程面试题总结)
-
 ## 什么是线程？
 
 &emsp;&emsp;线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位，可以使用多线程对进行运算提速。
@@ -153,12 +150,18 @@ java.lang.IllegalArgumentException
 ## 什么情况下导致线程阻塞？
 
 &emsp;&emsp;阻塞指的是暂停一个线程的执行以等待某个条件发生（如某资源就绪），学过操作系统的同学对它一定已经很熟悉了。Java 提供了大量方法来支持阻塞，下面让我们逐一分析。
-|方法|说明|
-|:----:|:----|
-|sleep()|&emsp;&emsp;sleep() 允许 指定以毫秒为单位的一段时间作为参数，它使得线程在指定的时间内进入阻塞状态，不能得到CPU 时间，指定的时间一过，线程重新进入可执行状态。 <br>&emsp;&emsp;典型地，sleep() 被用在等待某个资源就绪的情形：测试发现条件不满足后，让线程阻塞一段时间后重新测试，直到条件满足为止|
-|suspend() 和 resume()|&emsp;&emsp;两个方法配套使用，suspend()使得线程进入阻塞状态，并且不会自动恢复，必须其对应d的resume() 被调用，才能使得线程重新进入可执行状态。<br>&emsp;&emsp;典型地，suspend() 和 resume() 被用在等待另一个线程产生的结果的情形：测试发现结果还没有产生后，让线程阻塞，另一个线程产生了结果后，调用 resume() 使其恢复。|
-|yield()|&emsp;&emsp;yield() 使当前线程放弃当前已经分得的CPU 时间，但不使当前线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。<br>&emsp;&emsp;调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程|
-|wait() 和 notify()|&emsp;&emsp;两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用.|
+
+ * sleep() 
+    &emsp;&emsp;sleep() 允许 指定以毫秒为单位的一段时间作为参数，它使得线程在指定的时间内进入阻塞状态，不能得到CPU 时间，指定的时间一过，线程重新进入可执行状态。 
+    &emsp;&emsp;典型地，sleep() 被用在等待某个资源就绪的情形：测试发现条件不满足后，让线程阻塞一段时间后重新测试，直到条件满足为止
+ * suspend() 和 resume()
+    &emsp;&emsp;两个方法配套使用，suspend()使得线程进入阻塞状态，并且不会自动恢复，必须其对应d的resume() 被调用，才能使得线程重新进入可执行状态。
+    &emsp;&emsp;典型地，suspend() 和 resume() 被用在等待另一个线程产生的结果的情形：测试发现结果还没有产生后，让线程阻塞，另一个线程产生了结果后，调用 resume() 使其恢复。
+ * yield()
+    &emsp;&emsp;yield() 使当前线程放弃当前已经分得的CPU 时间，但不使当前线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。
+    &emsp;&emsp;调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程
+ * wait() 和 notify()
+    &emsp;&emsp;两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用.
 
 ## sleep() 和 wait() 有什么区别
 
@@ -399,11 +402,11 @@ public class DeadLock {
 
 ## 怎么防止死锁？
 
-	1.	尽量使用 tryLock(long  timeout,  TimeUnit  unit) 的方法 （ReentrantLock、ReentrantReadWriteLock），设置超时时间，超时可以退出防止死锁。(Lock锁中就使用了这种方式)
-	2.	尽量使用 Java.util.concurrent 并发类代替自己手写锁。
-	3.	尽量降低锁的使用粒度，尽量不要几个功能用同一把锁。
-	4.	尽量减少同步代码块。
-	5.	银行家算法
+ 1.尽量使用 tryLock(long  timeout,  TimeUnit  unit) 的方法 （ReentrantLock、ReentrantReadWriteLock），设置超时时间，超时可以退出防止死锁。(Lock锁中就使用了这种方式)
+ 2.尽量使用 Java.util.concurrent 并发类代替自己手写锁。
+ 3.尽量降低锁的使用粒度，尽量不要几个功能用同一把锁。
+ 4.尽量减少同步代码块。
+ 5.银行家算法
 
 ## ThreadLocal 是什么？ 有哪些使用场景？
 
@@ -437,11 +440,11 @@ public class DeadLock {
 
 ## synchronized 和 Lock 有什么区别？
 
-	1.  synchronized 是 java 内置的关键字，Lock 是个接口
-	2.	synchronized 无法判断是否获取锁的状态，Lock 可以判断是否获取到锁.
-	3.	synchronized 不需要手动获取锁和释放锁，使用简单，发生异常会自动释放锁，不会造成死锁；而Lock需要手动加锁和释放锁，如果使用不当，没有 unLock() 去释放锁就会造成死锁。
-	4.	synchronized 可重入(同一个类中两个同步方法,获取到锁后不用每次都去获取),不可中断,非公平;Lock可中断可公平.
-	5. 	synchronized 获得锁的线程阻塞,其他线程都会无限等待,Lock不会
+ 1.synchronized 是 java 内置的关键字，Lock 是个接口
+ 2.synchronized 无法判断是否获取锁的状态，Lock 可以判断是否获取到锁.
+ 3.synchronized 不需要手动获取锁和释放锁，使用简单，发生异常会自动释放锁，不会造成死锁；而Lock需要手动加锁和释放锁，如果使用不当，没有 unLock() 去释放锁就会造成死锁。
+ 4.synchronized 可重入(同一个类中两个同步方法,获取到锁后不用每次都去获取),不可中断,非公平;Lock可中断可公平.
+ 5.synchronized 获得锁的线程阻塞,其他线程都会无限等待,Lock不会
 
 ## synchronized 和 ReentrantLock 区别是什么？
 
