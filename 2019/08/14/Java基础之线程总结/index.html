@@ -69,7 +69,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/08/14/Java基础之线程总结/%E5%B9%B6%E8%A1%8C%E5%92%8C%E5%B9%B6%E5%8F%91.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/14/Java基础之线程总结/%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
-<meta property="og:updated_time" content="2019-08-14T05:25:21.727Z">
+<meta property="og:updated_time" content="2019-08-14T05:34:51.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础之线程总结">
 <meta name="twitter:description" content="本文主要概述Java基础中的线程相关知识点总结。">
@@ -291,7 +291,7 @@
                 
               
 
-              <time title="创建时间：2019-08-14 09:57:26 / 修改时间：13:25:21" itemprop="dateCreated datePublished" datetime="2019-08-14T09:57:26+08:00">2019-08-14</time>
+              <time title="创建时间：2019-08-14 09:57:26 / 修改时间：13:34:51" itemprop="dateCreated datePublished" datetime="2019-08-14T09:57:26+08:00">2019-08-14</time>
             </span>
           
             
@@ -347,8 +347,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>@<a href="线程面试题总结">TOC</a></p>
-<h2 id="什么是线程？"><a href="#什么是线程？" class="headerlink" title="什么是线程？"></a>什么是线程？</h2><p>&emsp;&emsp;线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位，可以使用多线程对进行运算提速。</p>
+        <h2 id="什么是线程？"><a href="#什么是线程？" class="headerlink" title="什么是线程？"></a>什么是线程？</h2><p>&emsp;&emsp;线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位，可以使用多线程对进行运算提速。</p>
 <p>比如，如果一个线程完成一个任务要100毫秒，那么用十个线程完成改任务只需10毫秒</p>
 <h2 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h2><ul>
 <li>进程是程序运行和资源分配的基本单位</li>
@@ -425,7 +424,13 @@
 <li>TIMED_WAITING 等待指定的时间重新被唤醒的状态</li>
 <li>TERMINATED 执行完成</li>
 </ul>
-<h2 id="什么情况下导致线程阻塞？"><a href="#什么情况下导致线程阻塞？" class="headerlink" title="什么情况下导致线程阻塞？"></a>什么情况下导致线程阻塞？</h2><p>&emsp;&emsp;阻塞指的是暂停一个线程的执行以等待某个条件发生（如某资源就绪），学过操作系统的同学对它一定已经很熟悉了。Java 提供了大量方法来支持阻塞，下面让我们逐一分析。<br>|方法|说明|<br>|:—-:|:—-|<br>|sleep()|&emsp;&emsp;sleep() 允许 指定以毫秒为单位的一段时间作为参数，它使得线程在指定的时间内进入阻塞状态，不能得到CPU 时间，指定的时间一过，线程重新进入可执行状态。 <br>&emsp;&emsp;典型地，sleep() 被用在等待某个资源就绪的情形：测试发现条件不满足后，让线程阻塞一段时间后重新测试，直到条件满足为止|<br>|suspend() 和 resume()|&emsp;&emsp;两个方法配套使用，suspend()使得线程进入阻塞状态，并且不会自动恢复，必须其对应d的resume() 被调用，才能使得线程重新进入可执行状态。<br>&emsp;&emsp;典型地，suspend() 和 resume() 被用在等待另一个线程产生的结果的情形：测试发现结果还没有产生后，让线程阻塞，另一个线程产生了结果后，调用 resume() 使其恢复。|<br>|yield()|&emsp;&emsp;yield() 使当前线程放弃当前已经分得的CPU 时间，但不使当前线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。<br>&emsp;&emsp;调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程|<br>|wait() 和 notify()|&emsp;&emsp;两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用.|</p>
+<h2 id="什么情况下导致线程阻塞？"><a href="#什么情况下导致线程阻塞？" class="headerlink" title="什么情况下导致线程阻塞？"></a>什么情况下导致线程阻塞？</h2><p>&emsp;&emsp;阻塞指的是暂停一个线程的执行以等待某个条件发生（如某资源就绪），学过操作系统的同学对它一定已经很熟悉了。Java 提供了大量方法来支持阻塞，下面让我们逐一分析。</p>
+<ul>
+<li>sleep()<br> &emsp;&emsp;sleep() 允许 指定以毫秒为单位的一段时间作为参数，它使得线程在指定的时间内进入阻塞状态，不能得到CPU 时间，指定的时间一过，线程重新进入可执行状态。<br> &emsp;&emsp;典型地，sleep() 被用在等待某个资源就绪的情形：测试发现条件不满足后，让线程阻塞一段时间后重新测试，直到条件满足为止</li>
+<li>suspend() 和 resume()<br> &emsp;&emsp;两个方法配套使用，suspend()使得线程进入阻塞状态，并且不会自动恢复，必须其对应d的resume() 被调用，才能使得线程重新进入可执行状态。<br> &emsp;&emsp;典型地，suspend() 和 resume() 被用在等待另一个线程产生的结果的情形：测试发现结果还没有产生后，让线程阻塞，另一个线程产生了结果后，调用 resume() 使其恢复。</li>
+<li>yield()<br> &emsp;&emsp;yield() 使当前线程放弃当前已经分得的CPU 时间，但不使当前线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。<br> &emsp;&emsp;调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程</li>
+<li>wait() 和 notify()<br> &emsp;&emsp;两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用.</li>
+</ul>
 <h2 id="sleep-和-wait-有什么区别"><a href="#sleep-和-wait-有什么区别" class="headerlink" title="sleep() 和 wait() 有什么区别"></a>sleep() 和 wait() 有什么区别</h2><ul>
 <li>所在的类不同：sleep() 来自 Thread，wait() 来自 Object。调用sleep()方法的过程中，线程不会释放对象锁。而 调用 wait 方法线程会释放对象锁</li>
 <li>释放锁：sleep() 不释放锁；wait() 释放锁。</li>
@@ -506,11 +511,8 @@
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代码示例二：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLock</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String A = <span class="string">"A"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String B = <span class="string">"B"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(<span class="string">"a"</span>)&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (A) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">" == A"</span>);</span><br><span class="line">                    <span class="keyword">synchronized</span> (B) &#123;</span><br><span class="line">                        System.out.println(Thread.currentThread().getName() + <span class="string">" == B"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(<span class="string">"b"</span>)&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (B) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">" == B"</span>);</span><br><span class="line">                    <span class="keyword">synchronized</span> (A) &#123;</span><br><span class="line">                        System.out.println(Thread.currentThread().getName() + <span class="string">" == A"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="怎么防止死锁？"><a href="#怎么防止死锁？" class="headerlink" title="怎么防止死锁？"></a>怎么防止死锁？</h2><pre><code>1.    尽量使用 tryLock(long  timeout,  TimeUnit  unit) 的方法 （ReentrantLock、ReentrantReadWriteLock），设置超时时间，超时可以退出防止死锁。(Lock锁中就使用了这种方式)
-2.    尽量使用 Java.util.concurrent 并发类代替自己手写锁。
-3.    尽量降低锁的使用粒度，尽量不要几个功能用同一把锁。
-4.    尽量减少同步代码块。
-5.    银行家算法</code></pre><h2 id="ThreadLocal-是什么？-有哪些使用场景？"><a href="#ThreadLocal-是什么？-有哪些使用场景？" class="headerlink" title="ThreadLocal 是什么？ 有哪些使用场景？"></a>ThreadLocal 是什么？ 有哪些使用场景？</h2><p>&emsp;&emsp;ThreadLocal 为每个使用该变量的线程提供独立的变量副本，所以每个线程都可以独立地改变自己的副本，而不会影响到其它线程所对应的副本。</p>
+<h2 id="怎么防止死锁？"><a href="#怎么防止死锁？" class="headerlink" title="怎么防止死锁？"></a>怎么防止死锁？</h2><p> 1.尽量使用 tryLock(long  timeout,  TimeUnit  unit) 的方法 （ReentrantLock、ReentrantReadWriteLock），设置超时时间，超时可以退出防止死锁。(Lock锁中就使用了这种方式)<br> 2.尽量使用 Java.util.concurrent 并发类代替自己手写锁。<br> 3.尽量降低锁的使用粒度，尽量不要几个功能用同一把锁。<br> 4.尽量减少同步代码块。<br> 5.银行家算法</p>
+<h2 id="ThreadLocal-是什么？-有哪些使用场景？"><a href="#ThreadLocal-是什么？-有哪些使用场景？" class="headerlink" title="ThreadLocal 是什么？ 有哪些使用场景？"></a>ThreadLocal 是什么？ 有哪些使用场景？</h2><p>&emsp;&emsp;ThreadLocal 为每个使用该变量的线程提供独立的变量副本，所以每个线程都可以独立地改变自己的副本，而不会影响到其它线程所对应的副本。</p>
 <ul>
 <li>ThreadLocal 的使用场景：<br>1、数据库连接<br>2、session 管理<br>3、spring 声明式事务管理</li>
 </ul>
@@ -529,11 +531,8 @@
 <li>volatile 不会造成线程的阻塞；synchronized 可能会造成线程的阻塞。</li>
 <li>volatile 标记的变量不会被编译器优化；synchronized 标记的变量可以被编译器优化。</li>
 </ul>
-<h2 id="synchronized-和-Lock-有什么区别？"><a href="#synchronized-和-Lock-有什么区别？" class="headerlink" title="synchronized 和 Lock 有什么区别？"></a>synchronized 和 Lock 有什么区别？</h2><pre><code>1.  synchronized 是 java 内置的关键字，Lock 是个接口
-2.    synchronized 无法判断是否获取锁的状态，Lock 可以判断是否获取到锁.
-3.    synchronized 不需要手动获取锁和释放锁，使用简单，发生异常会自动释放锁，不会造成死锁；而Lock需要手动加锁和释放锁，如果使用不当，没有 unLock() 去释放锁就会造成死锁。
-4.    synchronized 可重入(同一个类中两个同步方法,获取到锁后不用每次都去获取),不可中断,非公平;Lock可中断可公平.
-5.     synchronized 获得锁的线程阻塞,其他线程都会无限等待,Lock不会</code></pre><h2 id="synchronized-和-ReentrantLock-区别是什么？"><a href="#synchronized-和-ReentrantLock-区别是什么？" class="headerlink" title="synchronized 和 ReentrantLock 区别是什么？"></a>synchronized 和 ReentrantLock 区别是什么？</h2><p>synchronized 早期的实现比较低效，对比 ReentrantLock，大多数场景性能都相差较大，但是在Java6 中对synchronized 进行了非常多的改进。</p>
+<h2 id="synchronized-和-Lock-有什么区别？"><a href="#synchronized-和-Lock-有什么区别？" class="headerlink" title="synchronized 和 Lock 有什么区别？"></a>synchronized 和 Lock 有什么区别？</h2><p> 1.synchronized 是 java 内置的关键字，Lock 是个接口<br> 2.synchronized 无法判断是否获取锁的状态，Lock 可以判断是否获取到锁.<br> 3.synchronized 不需要手动获取锁和释放锁，使用简单，发生异常会自动释放锁，不会造成死锁；而Lock需要手动加锁和释放锁，如果使用不当，没有 unLock() 去释放锁就会造成死锁。<br> 4.synchronized 可重入(同一个类中两个同步方法,获取到锁后不用每次都去获取),不可中断,非公平;Lock可中断可公平.<br> 5.synchronized 获得锁的线程阻塞,其他线程都会无限等待,Lock不会</p>
+<h2 id="synchronized-和-ReentrantLock-区别是什么？"><a href="#synchronized-和-ReentrantLock-区别是什么？" class="headerlink" title="synchronized 和 ReentrantLock 区别是什么？"></a>synchronized 和 ReentrantLock 区别是什么？</h2><p>synchronized 早期的实现比较低效，对比 ReentrantLock，大多数场景性能都相差较大，但是在Java6 中对synchronized 进行了非常多的改进。</p>
 <ul>
 <li>1.synchronized遇到异常不catch,锁会自动释放；ReentrantLock 使用起来比较灵活，但是必须需要手动释放锁。</li>
 <li>2.synchronized是非公平锁,ReentrantLock可以实现公平锁.</li>
