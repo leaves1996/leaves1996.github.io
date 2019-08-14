@@ -69,7 +69,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/08/14/Java基础之线程总结/%E5%B9%B6%E8%A1%8C%E5%92%8C%E5%B9%B6%E5%8F%91.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/14/Java基础之线程总结/%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
-<meta property="og:updated_time" content="2019-08-14T02:06:04.116Z">
+<meta property="og:updated_time" content="2019-08-14T05:25:21.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础之线程总结">
 <meta name="twitter:description" content="本文主要概述Java基础中的线程相关知识点总结。">
@@ -291,7 +291,7 @@
                 
               
 
-              <time title="创建时间：2019-08-14 09:57:26 / 修改时间：10:06:04" itemprop="dateCreated datePublished" datetime="2019-08-14T09:57:26+08:00">2019-08-14</time>
+              <time title="创建时间：2019-08-14 09:57:26 / 修改时间：13:25:21" itemprop="dateCreated datePublished" datetime="2019-08-14T09:57:26+08:00">2019-08-14</time>
             </span>
           
             
@@ -393,19 +393,15 @@
 <p>执行结果：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread类的匿名内部类子类，重写run方法。。。。。</span><br></pre></td></tr></table></figure>
 
-<h2 id="Runnable-和-Callable-有什么区别？"><a href="#Runnable-和-Callable-有什么区别？" class="headerlink" title="Runnable 和 Callable 有什么区别？"></a>Runnable 和 Callable 有什么区别？</h2><blockquote>
-<ul>
+<h2 id="Runnable-和-Callable-有什么区别？"><a href="#Runnable-和-Callable-有什么区别？" class="headerlink" title="Runnable 和 Callable 有什么区别？"></a>Runnable 和 Callable 有什么区别？</h2><ul>
 <li>Runnable接口中的run()方法的返回值是void，它做的事情只是纯粹地去执行run()方法中的代码而已；</li>
 <li>Callable接口中的call()方法是有返回值的，是一个泛型，和Future、FutureTask配合可以用来获取异步执行的结果。</li>
 </ul>
-</blockquote>
-<h2 id="Thread类中的start-和run-方法有什么区别"><a href="#Thread类中的start-和run-方法有什么区别" class="headerlink" title="Thread类中的start()和run()方法有什么区别?"></a>Thread类中的start()和run()方法有什么区别?</h2><blockquote>
-<ul>
+<h2 id="Thread类中的start-和run-方法有什么区别"><a href="#Thread类中的start-和run-方法有什么区别" class="headerlink" title="Thread类中的start()和run()方法有什么区别?"></a>Thread类中的start()和run()方法有什么区别?</h2><ul>
 <li>start()方法被用来启动新创建的线程，而且start()内部调用了run()方法，这和直接调用run()方法的效果不一样。</li>
 <li>run() 方法用于执行线程的运行时代码。如果对象调用run() 方法，是普通方法色调用，并非线程的启动。</li>
 <li>run() 可以重复调用。而 start() 只能调用一次，如果再次调用会抛异常。</li>
 </ul>
-</blockquote>
 <h2 id="java中用到的线程调度算法是什么"><a href="#java中用到的线程调度算法是什么" class="headerlink" title="java中用到的线程调度算法是什么"></a>java中用到的线程调度算法是什么</h2><p><strong>抢占式调度模型</strong><br>&emsp;&emsp;优先让优先级高的线程使用 CPU，如果线程的优先级相同，那么会随机选择一个，优先级高的线程获取的 CPU 时间片相对多一些。 </p>
 <p>设置和获取线程的优先级</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getPriority</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setPriority</span><span class="params">(<span class="keyword">int</span> newPriority)</span></span></span><br></pre></td></tr></table></figure>
@@ -421,7 +417,6 @@
 <p><strong>线程不安全</strong><br>线程不安全：就是不提供数据访问保护，有可能出现多个线程先后更改数据造成所得到的数据是脏数据。</p>
 <h2 id="java中的-操作符线程安全么"><a href="#java中的-操作符线程安全么" class="headerlink" title="java中的++操作符线程安全么?"></a>java中的++操作符线程安全么?</h2><p>不是线程安全的操作。它涉及到多个指令，如读取变量值，增加，然后存储回内存，这个过程可能会出现多个线程交差</p>
 <h2 id="线程有哪些状态？"><a href="#线程有哪些状态？" class="headerlink" title="线程有哪些状态？"></a>线程有哪些状态？</h2><p>线程的状态：</p>
-<blockquote>
 <ul>
 <li>NEW 尚未启动</li>
 <li>RUNNABLE 正在执行中</li>
@@ -430,22 +425,17 @@
 <li>TIMED_WAITING 等待指定的时间重新被唤醒的状态</li>
 <li>TERMINATED 执行完成</li>
 </ul>
-</blockquote>
-<h2 id="什么情况下导致线程阻塞？"><a href="#什么情况下导致线程阻塞？" class="headerlink" title="什么情况下导致线程阻塞？"></a>什么情况下导致线程阻塞？</h2><p>&emsp;&emsp;阻塞指的是暂停一个线程的执行以等待某个条件发生（如某资源就绪），学过操作系统的同学对它一定已经很熟悉了。Java 提供了大量方法来支持阻塞，下面让我们逐一分析。<br>|方法|说明|<br>|:—-:|:—-|<br>sleep()|&emsp;&emsp;sleep() 允许 指定以毫秒为单位的一段时间作为参数，它使得线程在指定的时间内进入阻塞状态，不能得到CPU 时间，指定的时间一过，线程重新进入可执行状态。 <br>&emsp;&emsp;典型地，sleep() 被用在等待某个资源就绪的情形：测试发现条件不满足后，让线程阻塞一段时间后重新测试，直到条件满足为止<br>suspend() 和 resume()|&emsp;&emsp;两个方法配套使用，suspend()使得线程进入阻塞状态，并且不会自动恢复，必须其对应d的resume() 被调用，才能使得线程重新进入可执行状态。<br>&emsp;&emsp;典型地，suspend() 和 resume() 被用在等待另一个线程产生的结果的情形：测试发现结果还没有产生后，让线程阻塞，另一个线程产生了结果后，调用 resume() 使其恢复。<br>yield()|&emsp;&emsp;yield() 使当前线程放弃当前已经分得的CPU 时间，但不使当前线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。<br>&emsp;&emsp;调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程<br>wait() 和 notify()|&emsp;&emsp;两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用.</p>
-<h2 id="sleep-和-wait-有什么区别"><a href="#sleep-和-wait-有什么区别" class="headerlink" title="sleep() 和 wait() 有什么区别"></a>sleep() 和 wait() 有什么区别</h2><blockquote>
-<ul>
+<h2 id="什么情况下导致线程阻塞？"><a href="#什么情况下导致线程阻塞？" class="headerlink" title="什么情况下导致线程阻塞？"></a>什么情况下导致线程阻塞？</h2><p>&emsp;&emsp;阻塞指的是暂停一个线程的执行以等待某个条件发生（如某资源就绪），学过操作系统的同学对它一定已经很熟悉了。Java 提供了大量方法来支持阻塞，下面让我们逐一分析。<br>|方法|说明|<br>|:—-:|:—-|<br>|sleep()|&emsp;&emsp;sleep() 允许 指定以毫秒为单位的一段时间作为参数，它使得线程在指定的时间内进入阻塞状态，不能得到CPU 时间，指定的时间一过，线程重新进入可执行状态。 <br>&emsp;&emsp;典型地，sleep() 被用在等待某个资源就绪的情形：测试发现条件不满足后，让线程阻塞一段时间后重新测试，直到条件满足为止|<br>|suspend() 和 resume()|&emsp;&emsp;两个方法配套使用，suspend()使得线程进入阻塞状态，并且不会自动恢复，必须其对应d的resume() 被调用，才能使得线程重新进入可执行状态。<br>&emsp;&emsp;典型地，suspend() 和 resume() 被用在等待另一个线程产生的结果的情形：测试发现结果还没有产生后，让线程阻塞，另一个线程产生了结果后，调用 resume() 使其恢复。|<br>|yield()|&emsp;&emsp;yield() 使当前线程放弃当前已经分得的CPU 时间，但不使当前线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。<br>&emsp;&emsp;调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程|<br>|wait() 和 notify()|&emsp;&emsp;两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用.|</p>
+<h2 id="sleep-和-wait-有什么区别"><a href="#sleep-和-wait-有什么区别" class="headerlink" title="sleep() 和 wait() 有什么区别"></a>sleep() 和 wait() 有什么区别</h2><ul>
 <li>所在的类不同：sleep() 来自 Thread，wait() 来自 Object。调用sleep()方法的过程中，线程不会释放对象锁。而 调用 wait 方法线程会释放对象锁</li>
 <li>释放锁：sleep() 不释放锁；wait() 释放锁。</li>
 <li>用法不同：sleep(milliseconds)需要指定一个睡眠时间，sleep() 时间到了会自动恢复；wait() 可以使用 notify() 、notifyAll()直接唤醒。</li>
 <li>sleep()睡眠后不出让系统资源，wait让其他线程可以占用CPU</li>
 </ul>
-</blockquote>
-<h2 id="stop和interrupt的区别"><a href="#stop和interrupt的区别" class="headerlink" title="stop和interrupt的区别"></a>stop和interrupt的区别</h2><blockquote>
-<ul>
+<h2 id="stop和interrupt的区别"><a href="#stop和interrupt的区别" class="headerlink" title="stop和interrupt的区别"></a>stop和interrupt的区别</h2><ul>
 <li>stop会直接将线程生命结束</li>
 <li>interrupt会给对应的线程抛出一个异常，那么对应的线程可以通过InterruptedException来捕获这个异常，并且做出相应的异常处理</li>
 </ul>
-</blockquote>
 <h2 id="什么是线程加入"><a href="#什么是线程加入" class="headerlink" title="什么是线程加入"></a>什么是线程加入</h2><p>线程加入：主要是在开启某一个线程后，立即执行该方法，那么该线程会在执行完毕后其它线程才能抢占 CPU 的使用权。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">join</span><span class="params">()</span> 	优先让线程执行完毕</span></span><br></pre></td></tr></table></figure>
 
@@ -460,26 +450,26 @@
 
 <p><code>注意:</code><br>a.锁必须是同一把锁<br>b.锁对象可以是任意对象<br>c.如果是同步方法，那么锁对象是this,当前对象作锁</p>
 <p>方式三：利用Lock锁<br>void lock()  获取锁。<br>void unlock()   试图释放此锁。</p>
-<h2 id="notify-和-notifyAll-有什么区别"><a href="#notify-和-notifyAll-有什么区别" class="headerlink" title="notify() 和 notifyAll() 有什么区别"></a>notify() 和 notifyAll() 有什么区别</h2><blockquote>
-<ul>
+<h2 id="notify-和-notifyAll-有什么区别"><a href="#notify-和-notifyAll-有什么区别" class="headerlink" title="notify() 和 notifyAll() 有什么区别"></a>notify() 和 notifyAll() 有什么区别</h2><ul>
 <li>notifyAll() 会唤醒所有的线程，notify() 只会唤醒一个线程。</li>
 <li>notifyAll() 调用后，会将全部线程由等待池移到锁池，然后参与锁的竞争，竞争成功则继续执行，如果不成功则留在锁池等待锁被释放后再次参与竞争。而 notify() 只会唤醒一个线程，具体唤醒哪一个线程由虚拟机控制。</li>
 </ul>
-</blockquote>
-<h2 id="产生死锁的条件"><a href="#产生死锁的条件" class="headerlink" title="产生死锁的条件"></a>产生死锁的条件</h2><p>1.互斥条件：一个资源每次只能被一个进程使用。<br>2.请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。<br>3.不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。<br>4.循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</p>
+<h2 id="产生死锁的条件"><a href="#产生死锁的条件" class="headerlink" title="产生死锁的条件"></a>产生死锁的条件</h2><ul>
+<li>1.互斥条件：一个资源每次只能被一个进程使用。</li>
+<li>2.请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>3.不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。</li>
+<li>4.循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</li>
+</ul>
 <h2 id="为什么wait-nofity和nofityAll这些方法不放在Thread类当中"><a href="#为什么wait-nofity和nofityAll这些方法不放在Thread类当中" class="headerlink" title="为什么wait,nofity和nofityAll这些方法不放在Thread类当中"></a>为什么wait,nofity和nofityAll这些方法不放在Thread类当中</h2><p>&emsp;&emsp;一个很明显的原因是JAVA提供的锁是对象级的而不是线程级的，每个对象都有锁，通过线程获得。如果线程需要等待某些锁那么调用对象中的wait()方法就有意义了。如果wait()方法定义在Thread类中，线程正在等待的是哪个锁就不明显了。简单的说，由于wait，notify和notifyAll都是锁级别的操作，所以把他们定义在Object类中因为锁属于对象。</p>
-<h2 id="怎么唤醒一个阻塞的线程"><a href="#怎么唤醒一个阻塞的线程" class="headerlink" title="怎么唤醒一个阻塞的线程"></a>怎么唤醒一个阻塞的线程</h2><blockquote>
-<ul>
+<h2 id="怎么唤醒一个阻塞的线程"><a href="#怎么唤醒一个阻塞的线程" class="headerlink" title="怎么唤醒一个阻塞的线程"></a>怎么唤醒一个阻塞的线程</h2><ul>
 <li>如果线程是因为调用了wait()、sleep()或者join()方法而导致的阻塞，可以中断线程，并且通过抛出InterruptedException来唤醒它；</li>
 <li>如果线程遇到了IO阻塞，无能为力，因为IO是操作系统实现的，Java代码并没有办法直接接触到操作系统。</li>
 </ul>
-</blockquote>
 <h2 id="什么是Executors框架？"><a href="#什么是Executors框架？" class="headerlink" title="什么是Executors框架？"></a>什么是Executors框架？</h2><p>Executor框架同java.util.concurrent.Executor 接口在Java 5中被引入。</p>
 <p>Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。</p>
 <p>无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。</p>
-<p>利用Executors框架可以非常方便的创建一个线程池，</p>
+<p>利用Executors框架可以非常方便的创建一个线程池.</p>
 <h2 id="创建线程池有哪几种方式？"><a href="#创建线程池有哪几种方式？" class="headerlink" title="创建线程池有哪几种方式？"></a>创建线程池有哪几种方式？</h2><p> 创建线程池的方式有七种，其中最核心的是最后一种：</p>
-<blockquote>
 <ul>
 <li><code>newSingleThreadExecutor()</code> ： 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行，最多会有一个任务处于活动状态，并且不允许使用者改动线程池实例，因此可以避免其改变线程数目。</li>
 <li><code>newCachedThreadPool()</code> ：它是一种用来处理大量短时间工作任务的线程池，具有如下几个鲜明的特点：<br>&emsp;&emsp;1、它会试图缓存线程并重用，当无缓存线程可用时，就会创建新的工作线程；<br>&emsp;&emsp;2、如果线程闲置的时间超过 60 秒，则被终止并移出缓存；<br>&emsp;&emsp;3、长时间闲置时，这种线程池，不会消耗什么资源。其内部使用 SynchronousQueue 作为工作队列。</li>
@@ -489,10 +479,8 @@
 <li><code>newWorkStealingPool(int  parallelism)</code> ：这是一个经常被人忽略的线程池，Java8 才加入这个创建方法，其内部会构建 ForkJoinPool，利用 Work-Stealing 算法，并进行地处理任务，不保证处理顺序。</li>
 <li><code>ThreadPoolExecutor()</code> ：是最原始的线程池创建，上面的 1-3 创建方式都是对 ThreadPoolExecutor() 的封装。</li>
 </ul>
-</blockquote>
 <h2 id="为什么要使用线程池"><a href="#为什么要使用线程池" class="headerlink" title="为什么要使用线程池"></a>为什么要使用线程池</h2><p>避免频繁地创建和销毁线程，达到线程对象的重用。另外，使用线程池还可以根据项目灵活地控制并发的数目。</p>
 <h2 id="什么是阻塞队列？"><a href="#什么是阻塞队列？" class="headerlink" title="什么是阻塞队列？"></a>什么是阻塞队列？</h2><p>JDK7提供了7个阻塞队列。（也属于并发容器）</p>
-<blockquote>
 <ul>
 <li>ArrayBlockingQueue ：一个由数组结构组成的有界阻塞队列。</li>
 <li>LinkedBlockingQueue ：一个由链表结构组成的有界阻塞队列。</li>
@@ -502,15 +490,12 @@
 <li>LinkedTransferQueue：一个由链表结构组成的无界阻塞队列。</li>
 <li>LinkedBlockingDeque：一个由链表结构组成的双向阻塞队列。</li>
 </ul>
-</blockquote>
 <h2 id="线程池中-submit-和-execute-方法有什么区别？"><a href="#线程池中-submit-和-execute-方法有什么区别？" class="headerlink" title="线程池中 submit() 和 execute() 方法有什么区别？"></a>线程池中 submit() 和 execute() 方法有什么区别？</h2><p>submit() : 可以执行 Runnable 和 Callable 类型的任务。<br>execute() ：只能执行 Runnable 类型的任务。</p>
-<h2 id="在-Java-程序中怎么保证多线程的运行安全？"><a href="#在-Java-程序中怎么保证多线程的运行安全？" class="headerlink" title="在 Java 程序中怎么保证多线程的运行安全？"></a>在 Java 程序中怎么保证多线程的运行安全？</h2><blockquote>
-<ul>
+<h2 id="在-Java-程序中怎么保证多线程的运行安全？"><a href="#在-Java-程序中怎么保证多线程的运行安全？" class="headerlink" title="在 Java 程序中怎么保证多线程的运行安全？"></a>在 Java 程序中怎么保证多线程的运行安全？</h2><ul>
 <li>方法一： 使用安全类，比如 Java.util.concurrent 下的类。</li>
 <li>方法二： 使用自动锁 synchronized。</li>
 <li>方法三： 使用手动锁。</li>
 </ul>
-</blockquote>
 <p>手动锁 Java 示例代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">lock.lock();</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	System.out.println(<span class="string">"获取锁"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">	<span class="comment">//<span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	System.out.println(<span class="string">"释放锁"</span>)；</span><br><span class="line">	lock.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -526,73 +511,53 @@
 3.    尽量降低锁的使用粒度，尽量不要几个功能用同一把锁。
 4.    尽量减少同步代码块。
 5.    银行家算法</code></pre><h2 id="ThreadLocal-是什么？-有哪些使用场景？"><a href="#ThreadLocal-是什么？-有哪些使用场景？" class="headerlink" title="ThreadLocal 是什么？ 有哪些使用场景？"></a>ThreadLocal 是什么？ 有哪些使用场景？</h2><p>&emsp;&emsp;ThreadLocal 为每个使用该变量的线程提供独立的变量副本，所以每个线程都可以独立地改变自己的副本，而不会影响到其它线程所对应的副本。</p>
-<blockquote>
 <ul>
 <li>ThreadLocal 的使用场景：<br>1、数据库连接<br>2、session 管理<br>3、spring 声明式事务管理</li>
 </ul>
-</blockquote>
 <h2 id="说一下-synchronized-底层实现原理？"><a href="#说一下-synchronized-底层实现原理？" class="headerlink" title="说一下 synchronized 底层实现原理？"></a>说一下 synchronized 底层实现原理？</h2><p>&emsp;&emsp;synchronized 是由一对 monitorenter/monitorexit 指令实现的，monitor 对象是同步的基本实现单元。 在 Java6 之前，monitor 的实现完全是依靠操作系统内部的互斥锁，因为需要进行用户态到内核态的切换，所以同步操作是一个无差别的重量级操作，性能也很低。但在 Java6 的时候，Java 虚拟机 对此进行了大刀阔斧地改进，提供了三种不同的 monitor 实现，也就是常说的三种不同的锁： 偏向锁 （Biased Locking）、轻量级锁和重量级锁，大大改进了其性能。</p>
-<h2 id="Java当中有哪几种锁"><a href="#Java当中有哪几种锁" class="headerlink" title="Java当中有哪几种锁"></a>Java当中有哪几种锁</h2><blockquote>
-<ul>
-<li>自旋锁: 自旋锁在JDK1.6之后就默认开启了。基于之前的观察，共享数据的锁定状态只会持续很短的时间，为了这一小段时间而去挂起和恢复线程有点浪费，所以这里就做了一个处理，让后面请求锁的那个线程在稍等一会，但是不放弃处理器的执行时间，看看持有锁的线程能否快速释放。为了让线程等待，所以需要让线程执行一个忙循环也就是自旋操作。在jdk6之后，引入了自适应的自旋锁，也就是等待的时间不再固定了，而是由上一次在同一个锁上的自旋时间及锁的拥有者状态来决定</li>
+<h2 id="Java当中有哪几种锁"><a href="#Java当中有哪几种锁" class="headerlink" title="Java当中有哪几种锁"></a>Java当中有哪几种锁</h2><ul>
+<li><p>自旋锁: 自旋锁在JDK1.6之后就默认开启了。基于之前的观察，共享数据的锁定状态只会持续很短的时间，为了这一小段时间而去挂起和恢复线程有点浪费，所以这里就做了一个处理，让后面请求锁的那个线程在稍等一会，但是不放弃处理器的执行时间，看看持有锁的线程能否快速释放。为了让线程等待，所以需要让线程执行一个忙循环也就是自旋操作。在jdk6之后，引入了自适应的自旋锁，也就是等待的时间不再固定了，而是由上一次在同一个锁上的自旋时间及锁的拥有者状态来决定</p>
+</li>
+<li><p>偏向锁: 在JDK1.之后引入的一项锁优化，目的是消除数据在无竞争情况下的同步原语。进一步提升程序的运行性能。 偏向锁就是偏心的偏，意思是这个锁会偏向第一个获得他的线程，如果接下来的执行过程中，改锁没有被其他线程获取，则持有偏向锁的线程将永远不需要再进行同步。偏向锁可以提高带有同步但无竞争的程序性能，也就是说他并不一定总是对程序运行有利，如果程序中大多数的锁都是被多个不同的线程访问，那偏向模式就是多余的，在具体问题具体分析的前提下，可以考虑是否使用偏向锁。</p>
+</li>
+<li><p>轻量级锁: 为了减少获得锁和释放锁所带来的性能消耗，引入了“偏向锁”和“轻量级锁”，所以在Java SE1.6里锁一共有四种状态，无锁状态，偏向锁状态，轻量级锁状态和重量级锁状态，它会随着竞争情况逐渐升级。锁可以升级但不能降级，意味着偏向锁升级成轻量级锁后不能降级成偏向锁</p>
+</li>
 </ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>偏向锁: 在JDK1.之后引入的一项锁优化，目的是消除数据在无竞争情况下的同步原语。进一步提升程序的运行性能。 偏向锁就是偏心的偏，意思是这个锁会偏向第一个获得他的线程，如果接下来的执行过程中，改锁没有被其他线程获取，则持有偏向锁的线程将永远不需要再进行同步。偏向锁可以提高带有同步但无竞争的程序性能，也就是说他并不一定总是对程序运行有利，如果程序中大多数的锁都是被多个不同的线程访问，那偏向模式就是多余的，在具体问题具体分析的前提下，可以考虑是否使用偏向锁。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>轻量级锁: 为了减少获得锁和释放锁所带来的性能消耗，引入了“偏向锁”和“轻量级锁”，所以在Java SE1.6里锁一共有四种状态，无锁状态，偏向锁状态，轻量级锁状态和重量级锁状态，它会随着竞争情况逐渐升级。锁可以升级但不能降级，意味着偏向锁升级成轻量级锁后不能降级成偏向锁</li>
-</ul>
-</blockquote>
-<h2 id="synchronized-和-volatile-的区别是什么？"><a href="#synchronized-和-volatile-的区别是什么？" class="headerlink" title="synchronized 和 volatile 的区别是什么？"></a>synchronized 和 volatile 的区别是什么？</h2><blockquote>
-<ul>
+<h2 id="synchronized-和-volatile-的区别是什么？"><a href="#synchronized-和-volatile-的区别是什么？" class="headerlink" title="synchronized 和 volatile 的区别是什么？"></a>synchronized 和 volatile 的区别是什么？</h2><ul>
 <li>volatile修饰的变量,jvm每次都从主内run读取,不会从工作内存读取；<br>&emsp;而synchronized是锁住当前变量,同一时刻只有一个线程能访问当前变量；<br>&emsp;volatile只是作用于变量,synchronized可以用在变量，方法，类，代码段中</li>
 <li>valatile仅能实现变量修改的可见性,无法保证原子性；synchronized可以实现变量修改的可见性和原子性。</li>
 <li>volatile 不会造成线程的阻塞；synchronized 可能会造成线程的阻塞。</li>
 <li>volatile 标记的变量不会被编译器优化；synchronized 标记的变量可以被编译器优化。</li>
 </ul>
-</blockquote>
 <h2 id="synchronized-和-Lock-有什么区别？"><a href="#synchronized-和-Lock-有什么区别？" class="headerlink" title="synchronized 和 Lock 有什么区别？"></a>synchronized 和 Lock 有什么区别？</h2><pre><code>1.  synchronized 是 java 内置的关键字，Lock 是个接口
 2.    synchronized 无法判断是否获取锁的状态，Lock 可以判断是否获取到锁.
 3.    synchronized 不需要手动获取锁和释放锁，使用简单，发生异常会自动释放锁，不会造成死锁；而Lock需要手动加锁和释放锁，如果使用不当，没有 unLock() 去释放锁就会造成死锁。
 4.    synchronized 可重入(同一个类中两个同步方法,获取到锁后不用每次都去获取),不可中断,非公平;Lock可中断可公平.
 5.     synchronized 获得锁的线程阻塞,其他线程都会无限等待,Lock不会</code></pre><h2 id="synchronized-和-ReentrantLock-区别是什么？"><a href="#synchronized-和-ReentrantLock-区别是什么？" class="headerlink" title="synchronized 和 ReentrantLock 区别是什么？"></a>synchronized 和 ReentrantLock 区别是什么？</h2><p>synchronized 早期的实现比较低效，对比 ReentrantLock，大多数场景性能都相差较大，但是在Java6 中对synchronized 进行了非常多的改进。</p>
-<blockquote>
 <ul>
 <li>1.synchronized遇到异常不catch,锁会自动释放；ReentrantLock 使用起来比较灵活，但是必须需要手动释放锁。</li>
 <li>2.synchronized是非公平锁,ReentrantLock可以实现公平锁.</li>
 <li>3.前者无法获取锁的状态,后者可以,tryLock()方法可以返回是否获得了锁.</li>
 <li>4.ReentrantLock可以精确唤醒线程,Synchronized要么随机唤醒一个,要么全部唤醒.</li>
 </ul>
-</blockquote>
-<h2 id="说一下-atomic-的原理？"><a href="#说一下-atomic-的原理？" class="headerlink" title="说一下 atomic 的原理？"></a>说一下 atomic 的原理？</h2><blockquote>
-<ul>
+<h2 id="说一下-atomic-的原理？"><a href="#说一下-atomic-的原理？" class="headerlink" title="说一下 atomic 的原理？"></a>说一下 atomic 的原理？</h2><ul>
 <li>atomic包中的类可以实现多线程环境下的变量操作,底层是调用CPU的CAS指令来进实现线程安全的。</li>
 <li>atomic 主要利用 CAS（Compare And Wwap）乐观锁和 volatile 和 native 方法来保证原子操作，通过自旋保证当次修改的最终修改成功，通过降低锁粒度（多段锁）增加并发性能。</li>
 <li>CAS相对于其他锁，不会进行内核态操作，有着一些性能的提升。但同时引入自旋，当锁竞争较大的时候，自旋次数会增多。cpu资源会消耗很高。<br>换句话说，CAS+自旋适合使用在低并发有同步数据的应用场景。</li>
 </ul>
-</blockquote>
-<h2 id="什么是CAS"><a href="#什么是CAS" class="headerlink" title="什么是CAS"></a>什么是CAS</h2><p>CAS，全称为Compare and Swap，即比较-替换。假设有三个操作数：内存值V、旧的预期值A、要修改的值B，当且仅当预期值A和内存值V相同时，才会将内存值修改为B并返回true，否则什么都不做并返回false。当然CAS一定要volatile变量配合，这样才能保证每次拿到的变量是主内存中最新的那个值，否则旧的预期值A对某条线程来说，永远是一个不会变的值A，只要某次CAS操作失败，永远都不可能成功</p>
-<h2 id="ConcurrentHashMap的并发度是什么"><a href="#ConcurrentHashMap的并发度是什么" class="headerlink" title="ConcurrentHashMap的并发度是什么?"></a>ConcurrentHashMap的并发度是什么?</h2><p>ConcurrentHashMap的并发度就是segment的大小，默认为16，这意味着最多同时可以有16条线程操作ConcurrentHashMap，这也是ConcurrentHashMap对Hashtable的最大优势，任何情况下，Hashtable能同时有两条线程获取Hashtable中的数据吗？</p>
+<h2 id="什么是CAS"><a href="#什么是CAS" class="headerlink" title="什么是CAS"></a>什么是CAS</h2><p>&emsp;&emsp;CAS，全称为Compare and Swap，即比较-替换。假设有三个操作数：内存值V、旧的预期值A、要修改的值B，当且仅当预期值A和内存值V相同时，才会将内存值修改为B并返回true，否则什么都不做并返回false。当然CAS一定要volatile变量配合，这样才能保证每次拿到的变量是主内存中最新的那个值，否则旧的预期值A对某条线程来说，永远是一个不会变的值A，只要某次CAS操作失败，永远都不可能成功</p>
+<h2 id="ConcurrentHashMap的并发度是什么"><a href="#ConcurrentHashMap的并发度是什么" class="headerlink" title="ConcurrentHashMap的并发度是什么?"></a>ConcurrentHashMap的并发度是什么?</h2><p>&emsp;&emsp;ConcurrentHashMap的并发度就是segment的大小，默认为16，这意味着最多同时可以有16条线程操作ConcurrentHashMap，这也是ConcurrentHashMap对Hashtable的最大优势，任何情况下，Hashtable能同时有两条线程获取Hashtable中的数据吗？</p>
 <h2 id="ConcurrentHashMap的工作原理"><a href="#ConcurrentHashMap的工作原理" class="headerlink" title="ConcurrentHashMap的工作原理"></a>ConcurrentHashMap的工作原理</h2><p>ConcurrentHashMap在jdk 1.6和jdk 1.8实现原理是不同的：<br><strong>jdk 1.6：</strong></p>
-<blockquote>
 <ul>
 <li>ConcurrentHashMap是线程安全的，但是与Hashtablea相比，实现线程安全的方式不同。Hashtable是通过对hash表结构进行锁定，是阻塞式的，当一个线程占有这个锁时，其他线程必须阻塞等待其释放。</li>
 <li>ConcurrentHashMap是采用分离锁的方式，它并没有对整个hash表进行锁定，而是局部锁定，也就是说当一个线程占有这个局部锁时，不影响其他线程对hash表其他地方的访问。</li>
 <li>具体实现:ConcurrentHashMap内部有一个Segment</li>
 </ul>
-</blockquote>
 <p><strong>jdk 1.8：</strong></p>
-<blockquote>
 <ul>
 <li>在jdk 8中，ConcurrentHashMap不再使用Segment分离锁，而是采用一种乐观锁CAS算法来实现同步问题，但其底层还是“数组+链表-&gt;红黑树”的实现。</li>
 </ul>
-</blockquote>
-<h2 id="你有哪些多线程开发良好的实践"><a href="#你有哪些多线程开发良好的实践" class="headerlink" title="你有哪些多线程开发良好的实践?"></a>你有哪些多线程开发良好的实践?</h2><blockquote>
-<ul>
+<h2 id="你有哪些多线程开发良好的实践"><a href="#你有哪些多线程开发良好的实践" class="headerlink" title="你有哪些多线程开发良好的实践?"></a>你有哪些多线程开发良好的实践?</h2><ul>
 <li>给线程命名</li>
 <li>最小化同步范围</li>
 <li>优先使用volatile</li>
@@ -600,22 +565,16 @@
 <li>优先使用并发容器而非同步容器.</li>
 <li>考虑使用线程池</li>
 </ul>
-</blockquote>
-<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><blockquote>
-<ul>
+<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><ul>
 <li>新建状态：创建一个线程对象  Thread t = new Thread();</li>
 <li>就绪状态（可运行状态）：线程对象创建后，其它线程调用了该对象的 start() 方法。 该状态的线程位于可运行线程池中，变得可运行（具备执行资格，没有执行权），等待获取CPU的使用权。</li>
 <li>运行状态：线程被分配到了CPU的时间片，执行程序代码。（具备执行资格，具备执行权）</li>
-<li>阻塞状态：阻塞状态是线程因为某种原因放弃CPU的使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。<blockquote>
-<p>阻塞状态分三种：</p>
-<blockquote>
-<p>等待阻塞：运行的线程执行wait() 方法，JVM 会把该线程放入等待池中。<br>同步阻塞：运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM 会把该线程放入到锁池中。<br>其它阻塞：运行的线程执行 sleep() 或者 join() 方法，或者发出了 IO 请求，JVM 会把该线程设置为阻塞状态。当 sleep() 状态超时，join() 等待线程终止或者超时，或者 IO 处理完毕时，线程重新转入就绪状态。</p>
-</blockquote>
-</blockquote>
+<li>阻塞状态：阻塞状态是线程因为某种原因放弃CPU的使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。<ul>
+<li>阻塞状态分三种：<br>等待阻塞：运行的线程执行wait() 方法，JVM 会把该线程放入等待池中。<br>同步阻塞：运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM 会把该线程放入到锁池中。<br>其它阻塞：运行的线程执行 sleep() 或者 join() 方法，或者发出了 IO 请求，JVM 会把该线程设置为阻塞状态。当 sleep() 状态超时，join() 等待线程终止或者超时，或者 IO 处理完毕时，线程重新转入就绪状态。</li>
+</ul>
 </li>
 <li>死亡状态：当 main 方法结束、线程执行完了、调用stop 方法、或者因异常退出run() 方法，该线程结束生命周期，线程对象成为垃圾对象，等待垃圾回收器回收。</li>
 </ul>
-</blockquote>
 <p>如下图分析：<br><img src="%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt="线程生命周期.png"></p>
 
     </div>
