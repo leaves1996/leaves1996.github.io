@@ -75,7 +75,7 @@ myfor:for(int i = 0; i < 100; i++){
 &emsp;&emsp;方法二，代码示例：
 ```java
 boolean flag = true;
-for(int i = 0; i < 100; i++){
+for(int i = 0; i < 100 && flag; i++){
     for(int j = 0; j < 100; j++){
         System.out.println(j);
         if(j == 50){
