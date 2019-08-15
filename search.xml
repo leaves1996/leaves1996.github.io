@@ -21,9 +21,9 @@
         <category>Java面试题</category>
       </categories>
       <tags>
-        <tag>面试题</tag>
-        <tag>JavaSE</tag>
         <tag>Java基础</tag>
+        <tag>JavaSE</tag>
+        <tag>面试题</tag>
       </tags>
   </entry>
   <entry>
@@ -34,8 +34,8 @@
         <category>Java基础</category>
       </categories>
       <tags>
-        <tag>面试题</tag>
         <tag>Java基础</tag>
+        <tag>面试题</tag>
         <tag>Collection</tag>
       </tags>
   </entry>
@@ -47,8 +47,8 @@
         <category>Java基础</category>
       </categories>
       <tags>
-        <tag>JavaSE</tag>
         <tag>Java基础</tag>
+        <tag>JavaSE</tag>
         <tag>递归</tag>
       </tags>
   </entry>
@@ -73,8 +73,8 @@
         <category>Java基础</category>
       </categories>
       <tags>
-        <tag>JavaSE</tag>
         <tag>Java基础</tag>
+        <tag>JavaSE</tag>
         <tag>Exception</tag>
         <tag>异常</tag>
       </tags>
