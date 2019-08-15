@@ -11,6 +11,8 @@ categories: Java面试题
 description: 本文主要总结的是Java面试题总结。
 sticky:
 password: zmf
+abstract: Welcome to my blog, enter password to read.
+message: Welcome to my blog, enter password to read.
 ---
 # Java面向对象
 

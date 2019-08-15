@@ -106,3 +106,7 @@ search:
 # 文章末尾添加“本文结束”标记
 passage_end_tag:
   enabled: true
+
+# Security 文章加密插件开启
+encrypt:
+  enable: true
