@@ -69,7 +69,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/08/15/Java程序是如何执行的/Java%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/15/Java程序是如何执行的/Java%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%862.png">
-<meta property="og:updated_time" content="2019-08-15T08:26:14.800Z">
+<meta property="og:updated_time" content="2019-08-15T08:32:03.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第 1-1 节：Java 程序是如何执行的？">
 <meta name="twitter:description" content="了解任何一门语言的精髓都是先俯览其全貌，从宏观的视角把握全局，然后再深入每个知识点逐个击破，这样就可以深入而快速的掌握一项技能。同样学习 Java 也是如此，本节就让我们先从整体来看一下 Java 中的精髓。">
@@ -291,7 +291,7 @@
                 
               
 
-              <time title="创建时间：2019-08-15 16:10:24 / 修改时间：16:26:14" itemprop="dateCreated datePublished" datetime="2019-08-15T16:10:24+08:00">2019-08-15</time>
+              <time title="创建时间：2019-08-15 16:10:24 / 修改时间：16:32:03" itemprop="dateCreated datePublished" datetime="2019-08-15T16:10:24+08:00">2019-08-15</time>
             </span>
           
             
@@ -393,15 +393,11 @@
 <ul>
 <li><p>基于采样的热点判定<br>&emsp;&emsp;主要是虚拟机会周期性的检查各个线程的栈顶，若某个或某些方法经常出现在栈顶，那这个方法就是“热点方法”。这种判定方式的优点是实现简单；缺点是很难精确一个方法的热度，容易受到线程阻塞或外界因素的影响。</p>
 </li>
-<li><p>基于计数器的热点判定<br>&emsp;&emsp;主要就是虚拟机给每一个方法甚至代码块建立了一个计数器，统计方法的执行次数，超过一定的阀值则标记为此方法为热点方法。</p>
+<li><p>基于计数器的热点判定<br>&emsp;&emsp;主要就是虚拟机给每一个方法甚至代码块建立了一个计数器，统计方法的执行次数，超过一定的阀值则标记为此方法为热点方法。<br>&emsp;&emsp;Hotspot 虚拟机使用的基于计数器的热点探测方法。它使用了两类计数器：方法调用计数器和回边计数器，当到达一定的阀值是就会触发 JIT 编译。<br>&emsp;&emsp;方法调用计数器：在 client 模式下的阀值是 1500 次，Server 是 10000 次，可以通过虚拟机参数： -XX:CompileThreshold=N 对其进行设置。但是JVM还存在热度衰减，时间段内调用方法的次数较少，计数器就减小。<br>&emsp;&emsp;回边计数器：主要统计的是方法中循环体代码执行的次数。<br>&emsp;&emsp;由上面的知识我们可以看出，要想做到对 Java 了如之中，必须要好好学习 Java 虚拟机，那除了 Java 虚拟机外，还有哪些知识是面试必考，也是 Java 工程师必须掌握的知识呢？</p>
 </li>
 </ul>
 </li>
 </ul>
-<p>&emsp;&emsp;Hotspot 虚拟机使用的基于计数器的热点探测方法。它使用了两类计数器：方法调用计数器和回边计数器，当到达一定的阀值是就会触发 JIT 编译。</p>
-<p>&emsp;&emsp;方法调用计数器：在 client 模式下的阀值是 1500 次，Server 是 10000 次，可以通过虚拟机参数： -XX:CompileThreshold=N 对其进行设置。但是JVM还存在热度衰减，时间段内调用方法的次数较少，计数器就减小。</p>
-<p>&emsp;&emsp;回边计数器：主要统计的是方法中循环体代码执行的次数。</p>
-<p>&emsp;&emsp;由上面的知识我们可以看出，要想做到对 Java 了如之中，必须要好好学习 Java 虚拟机，那除了 Java 虚拟机外，还有哪些知识是面试必考，也是 Java 工程师必须掌握的知识呢？</p>
 <ol>
 <li>Java 基础中的核心内容</li>
 </ol>
@@ -444,11 +440,11 @@
 <li>执行性能好，运行效率高；</li>
 <li>提供大量的 API 扩展，语言强大；</li>
 <li>有多线程支持，增加了响应和实时交互的能力；</li>
-<li>安全性好，自带验证机制，确保程序的可靠性和安全性。<ol start="2">
+<li>安全性好，自带验证机制，确保程序的可靠性和安全性。</li>
+</ul>
+<ol start="2">
 <li>Java 跨平台实现的原理是什么？</li>
 </ol>
-</li>
-</ul>
 <p>答：要了解 Java 跨平台实现原理之前，必须先要了解 Java 的执行过程，Java 的执行过程如下：<br><img src="Java%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%862.png" alt="Java运行原理2.png"></p>
 <p>&emsp;&emsp;Java 执行流程：Java 源代码（.java）-&gt; 编译 -&gt; Java 字节码（.class） -&gt;通过 JVM（Java 虚拟机）运行 Java 程序。每种类型的服务器都会运行一个 JVM，Java 程序只需要生成 JVM 可以执行的代码即可，JVM 底层屏蔽了不同服务器类型之间的差异，从而可以在不同类型的服务器上运行一套 Java 程序。</p>
 <ol start="3">
@@ -458,8 +454,9 @@
 <ul>
 <li>JDK：Java Development Kit（Java 开发工具包）的简称，提供了 Java 的开发环境和运行环境；</li>
 <li>JRE：Java Runtime Environment（Java 运行环境）的简称，为 Java 的运行提供了所需环境；</li>
-<li>JVM：Java Virtual Machine（Java虚拟机）的简称，是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的，简单来说就是所有的 Java 程序都是运行在 JVM（Java 虚拟机）上的。<br>&emsp;&emsp;总体来说，JDK 提供了一整套的 Java 运行和开发环境，通常使用对象为 Java 的开发者，当然 JDK 也包含了 JRE；而 JRE 为 Java 运行的最小运行单元，一般安装在 Java 服务器上，所以 JDK 和 JRE 可以从用途上进行理解和区分。JVM 不同于 JDK 和 JRE，JVM 是 Java 程序运行的载体，Java 程序只有通过 JVM 才能正常的运行。</li>
+<li>JVM：Java Virtual Machine（Java虚拟机）的简称，是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的，简单来说就是所有的 Java 程序都是运行在 JVM（Java 虚拟机）上的。</li>
 </ul>
+<p>&emsp;&emsp;总体来说，JDK 提供了一整套的 Java 运行和开发环境，通常使用对象为 Java 的开发者，当然 JDK 也包含了 JRE；而 JRE 为 Java 运行的最小运行单元，一般安装在 Java 服务器上，所以 JDK 和 JRE 可以从用途上进行理解和区分。JVM 不同于 JDK 和 JRE，JVM 是 Java 程序运行的载体，Java 程序只有通过 JVM 才能正常的运行。</p>
 <ol start="4">
 <li>Java 中如何获取明天此刻的时间？</li>
 </ol>
@@ -483,10 +480,11 @@
 <p>答：Java 中跳出多重嵌套循环的两种方式。</p>
 <ul>
 <li>方法一：定义一个标号，使用 break 加标号的方式</li>
-<li>方法二：使用全局变量终止循环<br>方法一，示例代码：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">myfor:<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">100</span>; j++) &#123;</span><br><span class="line">        System.out.println(<span class="string">"J:"</span> + j);</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="comment">// 跳出多重循环</span></span><br><span class="line">            <span class="keyword">break</span> myfor;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>方法二：使用全局变量终止循环</li>
 </ul>
+<p>方法一，示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">myfor:<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">100</span>; j++) &#123;</span><br><span class="line">        System.out.println(<span class="string">"J:"</span> + j);</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="comment">// 跳出多重循环</span></span><br><span class="line">            <span class="keyword">break</span> myfor;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>方法二，示例代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span> &amp;&amp; flag; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">100</span>; j++) &#123;</span><br><span class="line">        System.out.println(<span class="string">"J:"</span> + j);</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="comment">// 跳出多重循环</span></span><br><span class="line">            flag = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
