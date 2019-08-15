@@ -11,6 +11,8 @@ categories:
  - 前言：Java面试全解析大纲
 description: 本文主要介绍我们后面的Java面试全解析的内容大纲。
 password: yexiaomo
+abstract: 欢迎来到我的博客，输入密码阅读！
+message: 欢迎来到我的博客，输入密码阅读！
 sticky:
 ---
 本课程分为七大部分，共计 37 讲，约 10 万字。
