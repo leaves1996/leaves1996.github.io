@@ -59,6 +59,21 @@
   };
 </script>
 
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://leaves1996.github.io/"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
   <meta name="description" content="接受失败，但不选择放弃！！！">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="website">
@@ -431,7 +446,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-14 21:08:36" itemprop="dateModified" datetime="2019-08-14T21:08:36+08:00">2019-08-14</time>
+                <time title="修改时间：2019-08-15 08:35:43" itemprop="dateModified" datetime="2019-08-15T08:35:43+08:00">2019-08-15</time>
               </span>
             
           

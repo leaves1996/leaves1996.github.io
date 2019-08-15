@@ -59,6 +59,21 @@
   };
 </script>
 
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://leaves1996.github.io/"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
   <meta name="description" content="接受失败，但不选择放弃！！！">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="website">
