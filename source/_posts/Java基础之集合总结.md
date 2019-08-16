@@ -387,6 +387,21 @@ void remove()
   - HashMap:允许将null作为一个entry的key或者value，线程不安全，效率高一些
   - Hashtable:不允许将null作为一个entry的key或者value，线程安全，效率低一些
 
+## HashMap 和 LinkedHashMap 的区别
+
+ * **HashMap**
+  * HashMap 是一个最常用的Map，它根据键的HashCode 值存储数据，根据键可以直接获取它的值，具有很快的访问速度。遍历时，取得数据的顺序是完全随机的。
+
+  * HashMap最多只允许一条记录的键为Null；允许多条记录的值为 Null。
+  * HashMap不支持线程的同步（即任一时刻可以有多个线程同时写HashMap），可能会导致数据的不一致。如果需要同步，可以用 Collections的synchronizedMap方法使HashMap具有同步的能力，或者使用ConcurrentHashMap。
+
+ * Hashtable与 HashMap类似，它继承自Dictionary类。
+  * 不同的是：Hashtable不允许记录的键或者值为空；它支持线程的同步（即任一时刻只有一个线程能写Hashtable），因此也导致了 Hashtable在写入时会比较慢。
+
+ * **LinkedHashMap**
+  * 保存插入顺序：LinkedHashMap保存了记录的插入顺序，在用Iterator遍历LinkedHashMap时，先得到的记录肯定是先插入的。也可以在构造时带参数，按照应用次数排序。
+  * 速度慢：在遍历的时候会比HashMap慢，不过有种情况例外：当HashMap容量很大，实际数据较少时，遍历起来可能会比LinkedHashMap慢。因为LinkedHashMap的遍历速度只和实际数据有关，和容量无关，而HashMap的遍历速度和他的容量有关。
+
 ## 请说出集合框架中线程安全与不安全的类
  - 集合框架中的类
   - ArrayList 线程不安全
