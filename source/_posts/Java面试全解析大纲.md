@@ -10,7 +10,7 @@ categories:
  - Java面试全解析
  - 前言：Java面试全解析大纲
 description: 本文主要介绍我们后面的Java面试全解析的内容大纲。
-sticky:
+sticky: true
 ---
 本系Java面试全解析内容主要分为七大部分 共计 37 篇文章，约 10 万字。
 
