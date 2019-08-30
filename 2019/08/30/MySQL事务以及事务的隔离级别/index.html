@@ -60,19 +60,33 @@
 </script>
 
   <meta name="description" content="本文小编主要介绍一下MySQL中的事务以及相关事务的隔离级别总结，希望能帮到大家。">
-<meta name="keywords" content="MySQL,MySQL事务,MySQL隔离级别">
+<meta name="keywords" content="MySQL事务,MySQL隔离级别,MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL事务以及事务的隔离级别">
 <meta property="og:url" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/index.html">
 <meta property="og:site_name" content="知性人">
 <meta property="og:description" content="本文小编主要介绍一下MySQL中的事务以及相关事务的隔离级别总结，希望能帮到大家。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/02.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/01.png">
-<meta property="og:updated_time" content="2019-08-30T11:00:53.893Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/03.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/04.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/05.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/06.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/07.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/08.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/09.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/14.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/15.png">
+<meta property="og:updated_time" content="2019-08-30T15:13:36.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL事务以及事务的隔离级别">
 <meta name="twitter:description" content="本文小编主要介绍一下MySQL中的事务以及相关事务的隔离级别总结，希望能帮到大家。">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/01.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/02.png">
   <link rel="canonical" href="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/">
 
 
@@ -290,7 +304,7 @@
                 
               
 
-              <time title="创建时间：2019-08-30 16:14:49 / 修改时间：19:00:53" itemprop="dateCreated datePublished" datetime="2019-08-30T16:14:49+08:00">2019-08-30</time>
+              <time title="创建时间：2019-08-30 16:14:49 / 修改时间：23:13:36" itemprop="dateCreated datePublished" datetime="2019-08-30T16:14:49+08:00">2019-08-30</time>
             </span>
           
             
@@ -321,7 +335,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.4k</span>
+              <span title="本文字数">3.1k</span>
             </span>
           
             <span class="post-meta-item">
@@ -331,7 +345,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">3 分钟</span>
             </span>
           
             <div class="post-description">本文小编主要介绍一下MySQL中的事务以及相关事务的隔离级别总结，希望能帮到大家。</div>
@@ -349,11 +363,12 @@
         <h1 id="事务概述："><a href="#事务概述：" class="headerlink" title="事务概述："></a>事务概述：</h1><p>&emsp;&emsp;事务是由单独单元的一个或多个SQL语句组成，在这个单元中，每个MySQL语句是相互依赖的。而整个单独单元作为一个不可分割的整体，如果单元中某条SQL语句一旦执行失败或产生错误，那么整个单元将会回滚。所有受影响的数据将返回到事务开始以前的状态；如果单元中的所有SQL语句均执行成功，则事务被顺利执行。</p>
 <h1 id="MySQL中的存储引擎"><a href="#MySQL中的存储引擎" class="headerlink" title="MySQL中的存储引擎"></a>MySQL中的存储引擎</h1><p>&emsp;&emsp;提到了事务，我们就先说说MySQL中的存储引擎。在MySQL中的数据用各种不同的技术存储在文件（或内存）中。</p>
 <ul>
-<li>查询MySQL中支持的存储引擎,通过如下命令：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">engines</span>;</span><br></pre></td></tr></table></figure>
+<li><p>查询MySQL中支持的存储引擎,通过如下命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">engines</span>;</span><br></pre></td></tr></table></figure>
 
+<p><img src="02.png" alt="02.png"><br>&emsp;&emsp;在MySQL中用的最多的存储引擎有：InnoDB、Myisam、Memory等。其中 InnoDB 支持事务，而 Myisam、Memory等不支持事务。</p>
 </li>
 </ul>
-<p>&emsp;&emsp;在MySQL中用的最多的存储引擎有：InnoDB、Myisam、Memory等。其中 InnoDB 支持事务，而 Myisam、Memory等不支持事务。</p>
 <h1 id="事务的特点："><a href="#事务的特点：" class="headerlink" title="事务的特点："></a>事务的特点：</h1><ul>
 <li>事务的ACID(acid)属性<ul>
 <li>原子性（Atomicity）<br>&emsp;&emsp;原子性是指事务是一个不可分割的工作单位，事务中的操作要么都发生，要么都不发生。</li>
@@ -392,6 +407,81 @@
 <p>结果：<br><img src="01.png" alt="01.png"></p>
 </li>
 </ul>
+<h1 id="MySQL数据库隔离级别区别演示"><a href="#MySQL数据库隔离级别区别演示" class="headerlink" title="MySQL数据库隔离级别区别演示"></a>MySQL数据库隔离级别区别演示</h1><h2 id="read-uncommitted-读取未提交内容-情况演示"><a href="#read-uncommitted-读取未提交内容-情况演示" class="headerlink" title="read uncommitted (读取未提交内容) 情况演示"></a>read uncommitted (读取未提交内容) 情况演示</h2><ul>
+<li><p>首先我们使用 <code>select @@tx_siolation</code> 命令进行MySQL数据的隔离级别查看：</p>
+<p><img src="03.png" alt="03.png"></p>
+</li>
+<li><p>然后我们设置MySQL的隔离级别为: <code>read uncommitted</code> （读取未提交内容）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">session</span> <span class="keyword">transaction</span> <span class="keyword">isolation</span> <span class="keyword">level</span> <span class="keyword">read</span> committed;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p> <img src="04.png" alt="04.png"></p>
+<ul>
+<li><p>前面我们已经设置了隔离级别为 <code>read uncommitted</code>,下面小编就给大家演示一下在该隔离级别的情况下会出现什么情况：</p>
+<ul>
+<li>1、首先，小编的<code>test</code>数据库中有一个<code>user</code>表，我们使用如下命令对 <code>test</code> 数据库中的<code>user</code>表进行操作：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="keyword">test</span>;     <span class="comment"># 该命令提示我们要使用`test`数据库</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span>;   <span class="comment">#我们对`user`表格数据进行查询</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="05.png" alt="05.png"></p>
+<ul>
+<li>2、然后我们会发现查询的数据中文出现了乱码情况，解决如下：<br>使用如下命令：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">names</span> gbk;    <span class="comment"># 设置编码格式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span>;   <span class="comment">#我们对`user`表格数据再次进行查询</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="06.png" alt="06.png"></p>
+<ul>
+<li><p>3、然后我们在新开一个窗口，同样设置隔离级别为 <code>read uncommitted</code>，然后再开启一个事务，为了区分两个事务，小编给两个窗口设置了不同的颜色。</p>
+</li>
+<li><p><code>注意：</code> 这里，我们的第一个事务修改了数据，还未提交，这时我们在另外一个事务中对数据进行查询，结果发现查询的数据是已经修改过的数据，这就出现了<code>脏读</code>现象。<br><img src="07.png" alt="07.png"></p>
+</li>
+<li><p>4、这时我们在第一个事务进行数据回滚，然后我们在另外一个事务中再次查询数据，结果发现我们在同一个事务中查询的数据不一致，这就是我们所说的<code>不可重复读</code>和<code>幻读</code>现象。</p>
+</li>
+</ul>
+<p><img src="08.png" alt="08.png"></p>
+</li>
+<li><p><strong>read uncommitted (读取未提交内容) 总结：</strong> 该隔离级别是为最低级别，任何情况都无法保证，会出现<code>脏读</code>、<code>不可重复读</code>和<code>幻读</code>现象。</p>
+</li>
+</ul>
+<h2 id="read-committed-读已提交-情况演示"><a href="#read-committed-读已提交-情况演示" class="headerlink" title="read committed (读已提交) 情况演示"></a>read committed (读已提交) 情况演示</h2><ul>
+<li><p>这里小编对于查看隔离级别，以及隔离级别的设置不作详细介绍了，小编就一笔带过了，我们主要演示该隔离级别会出现什么情况。</p>
+</li>
+<li><p>1、首先我们先在两个窗口设置隔离级别为 <code>read committed</code> ,然后分别开启一个事务：</p>
+<p><img src="09.png" alt="09.png"></p>
+</li>
+<li><p>这里我们在第一个事务中修改了数据，单并没有提交，我们在另外一个事务中进行数据的查询，确实还未修改之前的数据，这里该隔离级别避免了 <code>脏读</code> 的情况。</p>
+</li>
+<li><p>2、下面，我们对事务进行事务提交，我们在另外一个事务中再次查询数据，看看会发生什么？</p>
+<p><img src="10.png" alt="10.png"></p>
+</li>
+<li><p>根据上面的图示，我们发现我们再次查询数据时，在同一事务中出现了两次查询数据不同的现象，这就是我们所说的 <code>不可重复读</code> 和 <code>幻读</code> 的现象。</p>
+</li>
+<li><p><strong>read committed (读取已提交) 总结：</strong> 该隔离级别可避免脏读的发生，但是会出现<code>不可重复读</code>和<code>幻读</code>现象。</p>
+</li>
+</ul>
+<h2 id="repeatable-read（可重复读）情况演示"><a href="#repeatable-read（可重复读）情况演示" class="headerlink" title="repeatable read（可重复读）情况演示"></a>repeatable read（可重复读）情况演示</h2><ul>
+<li><p>1、同样，我们先在两个窗口设置隔离级别为 <code>repeatable read</code> ,然后分别开启事务：</p>
+<p><img src="11.png" alt="11.png"></p>
+</li>
+<li><p>根据上图，我们发现，该隔离级别避免了 <code>脏读</code> 和 <code>不可重复读</code> 的现象，至于<code>幻读</code>现象，请看下面的演示：</p>
+</li>
+<li><p>2、同样，我们一个窗口开启一个事务，然后另外一个窗口开启一个事务，并且添加一条数据并提交事务，然后我们在另外一个事务中修改所有的数据，我们会发现受影响数据多出一条，我们本来只有两条数据，怎么就突然多出来一条数据呢？很疑惑，这就是我们所说的<code>幻读</code>现象。</p>
+<p><img src="12.png" alt="12.png"></p>
+</li>
+<li><p>根据上面的介绍，我们了解了该隔离级别是不能避免 <code>幻读</code> 现象。</p>
+</li>
+</ul>
+<h2 id="Serializable-串行化-情况演示"><a href="#Serializable-串行化-情况演示" class="headerlink" title="Serializable (串行化) 情况演示"></a>Serializable (串行化) 情况演示</h2><ul>
+<li><p>针对该隔离情况我们这里就只演示是否避免 <code>幻读</code> 的情况：<br><img src="13.png" alt="13.png"></p>
+</li>
+<li><p>根据上面的图示，我们知道两个事务同时操作同一个数据源时，会出现阻塞状态，如果长时间未反应，会出现响应超时，操作失败！！！<br><img src="14.png" alt="14.png"></p>
+</li>
+<li><p>如果我们在另外一个事务提交后，再次操作的话，就不会出现阻塞状态。<br><img src="15.png" alt="15.png"></p>
+</li>
+</ul>
+<p>本文小编对于MySQL事务以及事务的隔离级别的介绍完毕，希望能给各位带来帮助。</p>
 
     </div>
 
@@ -438,11 +528,11 @@
           
         
         <div class="post-tags">
-            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
-          
             <a href="/tags/MySQL事务/" rel="tag"># MySQL事务</a>
           
             <a href="/tags/MySQL隔离级别/" rel="tag"># MySQL隔离级别</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
           
         </div>
         <div class="post-nav">
@@ -643,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事务概述："><span class="nav-number">1.</span> <span class="nav-text">事务概述：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL中的存储引擎"><span class="nav-number">2.</span> <span class="nav-text">MySQL中的存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务的特点："><span class="nav-number">3.</span> <span class="nav-text">事务的特点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL事务的分类"><span class="nav-number">4.</span> <span class="nav-text">MySQL事务的分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务的创建"><span class="nav-number">5.</span> <span class="nav-text">事务的创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库的隔离级别"><span class="nav-number">6.</span> <span class="nav-text">数据库的隔离级别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事务概述："><span class="nav-number">1.</span> <span class="nav-text">事务概述：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL中的存储引擎"><span class="nav-number">2.</span> <span class="nav-text">MySQL中的存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务的特点："><span class="nav-number">3.</span> <span class="nav-text">事务的特点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL事务的分类"><span class="nav-number">4.</span> <span class="nav-text">MySQL事务的分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务的创建"><span class="nav-number">5.</span> <span class="nav-text">事务的创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库的隔离级别"><span class="nav-number">6.</span> <span class="nav-text">数据库的隔离级别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL数据库隔离级别区别演示"><span class="nav-number">7.</span> <span class="nav-text">MySQL数据库隔离级别区别演示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#read-uncommitted-读取未提交内容-情况演示"><span class="nav-number">7.1.</span> <span class="nav-text">read uncommitted (读取未提交内容) 情况演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read-committed-读已提交-情况演示"><span class="nav-number">7.2.</span> <span class="nav-text">read committed (读已提交) 情况演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#repeatable-read（可重复读）情况演示"><span class="nav-number">7.3.</span> <span class="nav-text">repeatable read（可重复读）情况演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Serializable-串行化-情况演示"><span class="nav-number">7.4.</span> <span class="nav-text">Serializable (串行化) 情况演示</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -670,12 +760,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">104k</span>
+    <span title="站点总字数">106k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:34</span>
+    <span title="站点阅读时长">1:36</span>
 </div>
 
         
