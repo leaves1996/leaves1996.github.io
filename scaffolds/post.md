@@ -12,8 +12,8 @@ comments: true
 #密码
 password: 
 # 密码提示语！
-abstract: 欢迎来到我的博客，输入密码阅读！
-message: 欢迎来到我的博客，输入密码阅读！
+abstract: 欲读此文，请输入口令！！！
+message: 欲读此文，请输入口令！！！
 # 置顶
 sticky: 
 ---

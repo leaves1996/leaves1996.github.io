@@ -10,7 +10,7 @@ tags:
  - Java面试题
 categories:
  - Java面试全解析
- - 第二部：各种类和克隆
+ - 第二部分：各种类和克隆
 description: 本章节主要是对Java基础中的类与Object的分析介绍以及相关的面试题。
 password: yexiaomo
 sticky:
