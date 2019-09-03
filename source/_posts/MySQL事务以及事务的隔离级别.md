@@ -165,6 +165,18 @@ sticky:
  - 如果我们在另外一个事务提交后，再次操作的话，就不会出现阻塞状态。
  ![15.png](15.png)
 
+## 注意：
+ - 上面小编设置事务隔离级别是使用的 `session` 的方式，也就是有效于当前会话，关闭该会话，该MySQL的隔离级别还是默认的。
+ - 我们还可以使用 `global` 的方式，设置该MySQL数据的隔离级别为永久性。
+ 
+ ```sql
+ -- 设置一次性会话事务隔离级别
+ set session transaction isolation level read uncommitted;
+
+ -- 设置永久性事务隔离级别
+ set global transaction isolation level read uncommitted;
+ ```
+
 本文小编对于MySQL事务以及事务的隔离级别的介绍完毕，希望能给各位带来帮助。
 
 
