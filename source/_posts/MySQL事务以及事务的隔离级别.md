@@ -45,13 +45,17 @@ sticky:
 
  - 步骤1：开启事务
  ```sql
- set autocommit = 0;
+ set autocommit = 0;    -- 关闭MySQL的自动提交为手动提交。
  start transaction;
  ```
+ - **注意：** 其中`set autocommit`我们可以先根据此命令：`show variables like '%autocommit%'` 是否开启，如果开启了我们就关闭（设置该属性值为0），如若已经关闭我们可以不操作，我们也可以不查询，不管是否开启，直接设置为关闭也可以。
+ 
  - 步骤2：编写事务中的sql语句（select、insert、update、delete）
+ ```sql
  语句1；
  语句2；
  ...
+ ```
 
  - 步骤3：结束事务
  ```sql
