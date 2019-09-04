@@ -82,7 +82,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/13.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/14.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/30/MySQL事务以及事务的隔离级别/15.png">
-<meta property="og:updated_time" content="2019-09-03T02:47:24.703Z">
+<meta property="og:updated_time" content="2019-09-04T00:58:31.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL事务以及事务的隔离级别">
 <meta name="twitter:description" content="本文小编主要介绍一下MySQL中的事务以及相关事务的隔离级别总结，希望能帮到大家。">
@@ -317,7 +317,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-03 10:47:24" itemprop="dateModified" datetime="2019-09-03T10:47:24+08:00">2019-09-03</time>
+                <time title="修改时间：2019-09-04 08:58:31" itemprop="dateModified" datetime="2019-09-04T08:58:31+08:00">2019-09-04</time>
               </span>
             
           
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">3.3k</span>
+              <span title="本文字数">3.5k</span>
             </span>
           
             <span class="post-meta-item">
@@ -394,9 +394,12 @@
 </ul>
 <h1 id="事务的创建"><a href="#事务的创建" class="headerlink" title="事务的创建"></a>事务的创建</h1><ul>
 <li><p>步骤1：开启事务</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> autocommit = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> autocommit = <span class="number">0</span>;    <span class="comment">-- 关闭MySQL的自动提交为手动提交。</span></span><br><span class="line"><span class="keyword">start</span> <span class="keyword">transaction</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>步骤2：编写事务中的sql语句（select、insert、update、delete）<br>语句1；<br>语句2；<br>…</p>
+<li><p><strong>注意：</strong> 其中<code>set autocommit</code>我们可以先根据此命令：<code>show variables like &#39;%autocommit%&#39;</code> 是否开启，如果开启了我们就关闭（设置该属性值为0），如若已经关闭我们可以不操作，我们也可以不查询，不管是否开启，直接设置为关闭也可以。</p>
+</li>
+<li><p>步骤2：编写事务中的sql语句（select、insert、update、delete）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语句1；</span><br><span class="line">语句2；</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>步骤3：结束事务</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">commit</span>; <span class="comment">--提交事务</span></span><br><span class="line"><span class="keyword">rollback</span>; <span class="comment">--回滚事务</span></span><br></pre></td></tr></table></figure>
