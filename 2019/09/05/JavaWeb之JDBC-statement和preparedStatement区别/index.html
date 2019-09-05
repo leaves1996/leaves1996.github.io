@@ -59,19 +59,19 @@
   };
 </script>
 
-  <meta name="description" content="本文小编主要介绍MySQL中的事务隔离级别的详解。">
-<meta name="keywords" content="MySQL事务,MySQL隔离级别,MySQL">
+  <meta name="description" content="本文小编就说说jdbc中statement和preparedStatement的区别。">
+<meta name="keywords" content="Java面试,Java基础,JDBC,statement,preparedStatement">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL事务隔离级别">
-<meta property="og:url" content="http://yoursite.com/2019/08/30/MySQL事务隔离级别/index.html">
+<meta property="og:title" content="statement和preparedStatement区别">
+<meta property="og:url" content="http://yoursite.com/2019/09/05/JavaWeb之JDBC-statement和preparedStatement区别/index.html">
 <meta property="og:site_name" content="知性人">
-<meta property="og:description" content="本文小编主要介绍MySQL中的事务隔离级别的详解。">
+<meta property="og:description" content="本文小编就说说jdbc中statement和preparedStatement的区别。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-30T15:14:37.477Z">
+<meta property="og:updated_time" content="2019-09-05T07:51:34.745Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL事务隔离级别">
-<meta name="twitter:description" content="本文小编主要介绍MySQL中的事务隔离级别的详解。">
-  <link rel="canonical" href="http://yoursite.com/2019/08/30/MySQL事务隔离级别/">
+<meta name="twitter:title" content="statement和preparedStatement区别">
+<meta name="twitter:description" content="本文小编就说说jdbc中statement和preparedStatement的区别。">
+  <link rel="canonical" href="http://yoursite.com/2019/09/05/JavaWeb之JDBC-statement和preparedStatement区别/">
 
 
 <script id="page.configurations">
@@ -80,7 +80,7 @@
   };
 </script>
 
-  <title>MySQL事务隔离级别 | 知性人</title>
+  <title>statement和preparedStatement区别 | 知性人</title>
   
 
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/30/MySQL事务隔离级别/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/05/JavaWeb之JDBC-statement和preparedStatement区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="知性人">
@@ -268,7 +268,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">MySQL事务隔离级别
+          <h1 class="post-title" itemprop="name headline">statement和preparedStatement区别
 
               
             
@@ -288,7 +288,7 @@
                 
               
 
-              <time title="创建时间：2019-08-30 17:39:43 / 修改时间：23:14:37" itemprop="dateCreated datePublished" datetime="2019-08-30T17:39:43+08:00">2019-08-30</time>
+              <time title="创建时间：2019-09-05 15:13:03 / 修改时间：15:51:34" itemprop="dateCreated datePublished" datetime="2019-09-05T15:13:03+08:00">2019-09-05</time>
             </span>
           
             
@@ -303,7 +303,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java基础/" itemprop="url" rel="index"><span itemprop="name">Java基础</span></a></span>
 
                 
                 
@@ -319,7 +319,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">2.8k</span>
+              <span title="本文字数">1.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -329,10 +329,10 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">3 分钟</span>
+              <span title="阅读时长">2 分钟</span>
             </span>
           
-            <div class="post-description">本文小编主要介绍MySQL中的事务隔离级别的详解。</div>
+            <div class="post-description">本文小编就说说jdbc中statement和preparedStatement的区别。</div>
           
 
         </div>
@@ -344,75 +344,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="四类隔离级别"><a href="#四类隔离级别" class="headerlink" title="四类隔离级别"></a>四类隔离级别</h1><p>&emsp;&emsp;SQL标准定义了4类隔离级别，包括了一些具体规则，用来限定事务内外的哪些改变是可见的，哪些是不可见的。低级别的隔离级一般支持更高的并发处理，并拥有更低的系统开销。</p>
-<h3 id="Read-Uncommitted（读取未提交内容）"><a href="#Read-Uncommitted（读取未提交内容）" class="headerlink" title="Read Uncommitted（读取未提交内容）"></a>Read Uncommitted（读取未提交内容）</h3><ul>
-<li>在该隔离级别，所有事务都可以看到其他未提交事务的执行结果。本隔离级别很少用于实际应用，因为它的性能也不比其他级别好多少。读取未提交的数据，也被称之为脏读（Dirty Read）。</li>
+        <h3 id="1-性能区别"><a href="#1-性能区别" class="headerlink" title="1.性能区别"></a>1.性能区别</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据连接对象获取statement对象</span></span><br><span class="line">Statement statement = conn.createStatement();</span><br><span class="line"><span class="comment">//根据连接对象获取preparedStatement对象</span></span><br><span class="line">PreparedStatement preStatement = conn.prepareStatement(sql);</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;执行的时候: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过statement对象执行</span></span><br><span class="line">ResultSet rSet = statement.executeQuery(sql);</span><br><span class="line"><span class="comment">//通过preparedStatement对象执行</span></span><br><span class="line">ResultSet pSet = preStatement.executeQuery();</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;由上可以看出，<code>PreparedStatement</code>有预编译的过程，已经绑定sql，之后无论执行多少遍，都不会再去进行编译，而 <code>statement</code> 不同，如果执行多少遍，则相应的就要编译多少遍sql，所以从这点看，<code>preStatement</code> 的效率会比 <code>Statement</code> 要高一些</p>
+<h3 id="2-代码的可读性和可维护性"><a href="#2-代码的可读性和可维护性" class="headerlink" title="2.代码的可读性和可维护性"></a>2.代码的可读性和可维护性</h3><p>&emsp;&emsp;虽然用 <code>PreparedStatement</code> 来代替 <code>Statement</code> 会使代码多出几行,但这样的代码无论从可读性还是可维护性上来说.都比直接用Statement的代码高很多档次:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//stmt是Statement对象实例</span></span><br><span class="line">stmt.executeUpdate(<span class="string">"insert into tb_name (col1,col2,col2,col4) values ('"</span>+var1+<span class="string">"','"</span>+var2+<span class="string">"',"</span>+var3+<span class="string">",'"</span>+var4+<span class="string">"')"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//prestmt是 PreparedStatement 对象实例</span></span><br><span class="line">perstmt = con.prepareStatement(<span class="string">"insert into tb_name (col1,col2,col2,col4) values (?,?,?,?)"</span>);</span><br><span class="line">perstmt.setString(<span class="number">1</span>,var1);</span><br><span class="line">perstmt.setString(<span class="number">2</span>,var2);</span><br><span class="line">perstmt.setString(<span class="number">3</span>,var3);</span><br><span class="line">perstmt.setString(<span class="number">4</span>,var4);</span><br><span class="line">perstmt.executeUpdate();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-安全性问题"><a href="#3-安全性问题" class="headerlink" title="3.安全性问题"></a>3.安全性问题</h3><p>&emsp;&emsp;即使到目前为止,仍有一些人连基本的恶义SQL语法都不知道.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String sql = "select * from tb_name where name= '"+varname+"' and passwd='"+varpasswd+"'";</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;如果我们把[‘ or ‘1’ = ‘1]作为varpasswd传入进来.用户名随意,看看会成为什么?</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_name where name = '随意' and passwd = '' or '1' = '1';</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;因为’1’=’1’肯定成立,所以可以任何通过验证.更有甚者把[;drop table tb_name;]作为varpasswd传入进来,则:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb_name where name= 'zhangsan' and passwd = '123' ; trop table tb_name;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;有些数据库是不会让你成功的,但也有很多数据库就可以使这些语句得到执行.</p>
+<h3 id="4-继承关系"><a href="#4-继承关系" class="headerlink" title="4.继承关系"></a>4.继承关系</h3><ul>
+<li>作为 <code>Statement</code> 的子类，<code>PreparedStatement</code> 继承了 <code>Statement</code> 的所有功能，</li>
+<li><code>Statement</code>对象能做的操作 <code>Preparedstatement</code> 都能做，<code>Preparedstatement</code> 能做的 <code>Statement</code> 不一定能做</li>
 </ul>
-<p><strong>举例：</strong></p>
-<p>&emsp;&emsp;公司发工资了，把50000元打到我的账号上，但是该事务并未提交，而我正好去查看账户，发现工资已经到账，是50000元整，非常高兴。可是不幸的是，领导发现发给的工资金额不对，是2000元，于是迅速回滚了事务，修改金额后，将事务提交，最后我实际的工资只有2000元，空欢喜一场。</p>
-<p>&emsp;&emsp;脏读是两个并发的事务，“事务A：领导发工资”、“事务B：我查询工资账户”，事务B读取了事务A尚未提交的数据。</p>
-<p>&emsp;&emsp;当隔离级别设置为Read uncommitted时，就可能出现脏读，如何避免脏读，请看下一个隔离级别。</p>
-<h3 id="Read-Committed（读取提交内容）"><a href="#Read-Committed（读取提交内容）" class="headerlink" title="Read Committed（读取提交内容）"></a>Read Committed（读取提交内容）</h3><ul>
-<li>这是大多数数据库系统的默认隔离级别（但不是MySQL默认的）。它满足了隔离的简单定义：一个事务只能看见已经提交事务所做的改变。这种隔离级别 也支持所谓的不可重复读（Nonrepeatable Read），因为同一事务的其他实例在该实例处理其间可能会有新的commit，所以同一select可能返回不同结果。</li>
+<h3 id="5、批处理时的区别："><a href="#5、批处理时的区别：" class="headerlink" title="5、批处理时的区别："></a>5、批处理时的区别：</h3><ul>
+<li><strong>Statement：</strong>批处理可以处理不同的sql语句，静态sql</li>
+<li><strong>preparedStatement：</strong>批处理只能处理同一个sql语句，动态sql。</li>
 </ul>
-<p><strong>举例：</strong><br>&emsp;&emsp;我拿着工资卡去消费，系统读取到卡里确实有2000元，而此时老婆也正好在网上转账，把工资卡的2000元转到她账户，并在我之前提交了事务，当我扣款时，系统检查到工资卡已经没有钱，扣款失败，十分纳闷，明明卡里有钱，为何……</p>
-<p>&emsp;&emsp;不可重复读是两个并发的事务，“事务A：消费”、“事务B：老婆网上转账”，事务A事先读取了数据，事务B紧接了更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了改变。</p>
-<p>&emsp;&emsp;当隔离级别设置为Read committed时，避免了脏读，但是可能会造成不可重复读。</p>
-<h3 id="Repeatable-Read（可重读）"><a href="#Repeatable-Read（可重读）" class="headerlink" title="Repeatable Read（可重读）"></a>Repeatable Read（可重读）</h3><ul>
-<li>这是MySQL的默认事务隔离级别，它确保同一事务的多个实例在并发读取数据时，会看到同样的数据行。不过理论上，这会导致另一个棘手的问题：幻读 （Phantom Read）。简单的说，幻读指当用户读取某一范围的数据行时，另一个事务又在该范围内插入了新行，当用户再读取该范围的数据行时，会发现有新的“幻影” 行。InnoDB和Falcon存储引擎通过多版本并发控制（MVCC，Multiversion Concurrency Control）机制解决了该问题。</li>
-</ul>
-<p><strong>举例：</strong><br>&emsp;&emsp;当隔离级别设置为Repeatable read时，可以避免不可重复读。当我拿着工资卡去消费时，一旦系统开始读取工资卡信息（即事务开始），我老婆就不可能对该记录进行修改，也就是不能在此时转账。</p>
-<p>&emsp;&emsp;虽然Repeatable read避免了不可重复读，但还有可能出现幻读。例如：老婆工作在银行部门，她时常通过银行内部系统查看我的信用卡消费记录。有一天，她正查询到我当月信用卡的总消费金额（select sum(amount) from transaction where month = 本月）为80元，而我此时正好在外面吃完大餐后在收银台买单，消费1000元，即新增了一条1000元的消费记录（insert transaction … ），并提交了事务，随后老婆将我的当月信用卡消费的明细打印到A4纸上，却发现消费总额为1080元，老婆很诧异，以为出现了幻觉，幻读就这样产生了。</p>
-<h3 id="Serializable（可串行化）"><a href="#Serializable（可串行化）" class="headerlink" title="Serializable（可串行化）"></a>Serializable（可串行化）</h3><ul>
-<li>这是最高的隔离级别，它通过强制事务排序，使之不可能相互冲突，从而解决幻读问题。简言之，它是在每个读的数据行上加上共享锁。在这个级别，可能导致大量的超时现象和锁竞争。</li>
-</ul>
-<h1 id="隔离级别与一致性"><a href="#隔离级别与一致性" class="headerlink" title="隔离级别与一致性"></a>隔离级别与一致性</h1><p>&emsp;&emsp;这四种隔离级别采取不同的锁类型来实现，若读取的是同一个数据的话，就容易发生问题。例如：</p>
-<p>&emsp;&emsp; <strong><code>脏读(Drity Read)</code></strong>：某个事务已更新一份数据，另一个事务在此时读取了同一份数据，由于某些原因，前一个RollBack了操作，则后一个事务所读取的数据就会是不正确的。</p>
-<p>&emsp;&emsp;  <strong><code>不可重复读(Non-repeatable read)</code></strong>：在一个事务的两次查询之中数据不一致，这可能是两次查询过程中间插入了一个事务更新的原有的数据。</p>
-<p>&emsp;&emsp; <strong><code>幻读(Phantom Read)</code></strong>：在一个事务的两次查询中数据笔数不一致，例如有一个事务查询了几列(Row)数据，而另一个事务却在此时插入了新的几列数据，先前的事务在接下来的查询中，就会发现有几列数据是它先前所没有的。</p>
-<p>在MySQL中，实现了这四种隔离级别，分别有可能产生问题如下所示：</p>
-<table>
-<thead>
-<tr>
-<th align="center">隔离级别</th>
-<th align="center">脏读</th>
-<th align="center">不可重复读</th>
-<th align="center">幻读</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">读未提交（Read Uncommitted）</td>
-<td align="center">√</td>
-<td align="center">√</td>
-<td align="center">√</td>
-</tr>
-<tr>
-<td align="center">读已提交（Read Committed）</td>
-<td align="center">×</td>
-<td align="center">√</td>
-<td align="center">√</td>
-</tr>
-<tr>
-<td align="center">可重复读（Repeatable Read）</td>
-<td align="center">×</td>
-<td align="center">×</td>
-<td align="center">√</td>
-</tr>
-<tr>
-<td align="center">可串行化（Serializable）</td>
-<td align="center">×</td>
-<td align="center">×</td>
-<td align="center">×</td>
-</tr>
-</tbody></table>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ul>
-<li><h5 id="Serializable-串行化-：可避免脏读、不可重复读、幻读的发生。"><a href="#Serializable-串行化-：可避免脏读、不可重复读、幻读的发生。" class="headerlink" title="Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。"></a>Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。</h5></li>
-<li><h5 id="Repeatable-read-可重复读-：可避免脏读、不可重复读的发生。"><a href="#Repeatable-read-可重复读-：可避免脏读、不可重复读的发生。" class="headerlink" title="Repeatable read (可重复读)：可避免脏读、不可重复读的发生。"></a>Repeatable read (可重复读)：可避免脏读、不可重复读的发生。</h5></li>
-<li><h5 id="Read-committed-读已提交-：可避免脏读的发生。"><a href="#Read-committed-读已提交-：可避免脏读的发生。" class="headerlink" title="Read committed (读已提交)：可避免脏读的发生。"></a>Read committed (读已提交)：可避免脏读的发生。</h5></li>
-<li><h5 id="Read-uncommitted-读未提交-：最低级别，任何情况都无法保证。"><a href="#Read-uncommitted-读未提交-：最低级别，任何情况都无法保证。" class="headerlink" title="Read uncommitted (读未提交)：最低级别，任何情况都无法保证。"></a>Read uncommitted (读未提交)：最低级别，任何情况都无法保证。</h5></li>
-</ul>
-<p>&emsp;&emsp;以上四种隔离级别最高的是Serializable级别，最低的是Read uncommitted级别，级别越高，执行效率就越低。像Serializable这样的级别，就是以锁表的方式(类似于Java多线程中的锁)使得其他的线程只能在锁外等待，所以平时选用何种隔离级别应该根据实际情况。在MySQL数据库中默认的隔离级别为Repeatable read (可重复读)。</p>
-<p>&emsp;&emsp;在MySQL数据库中，支持上面四种隔离级别，默认的为Repeatable read (可重复读)；而在Oracle数据库中，只支持Serializable (串行化)级别和Read committed (读已提交)这两种级别，其中默认的为Read committed级别。</p>
 
     </div>
 
@@ -459,17 +417,21 @@
           
         
         <div class="post-tags">
-            <a href="/tags/MySQL事务/" rel="tag"># MySQL事务</a>
+            <a href="/tags/Java面试/" rel="tag"># Java面试</a>
           
-            <a href="/tags/MySQL隔离级别/" rel="tag"># MySQL隔离级别</a>
+            <a href="/tags/Java基础/" rel="tag"># Java基础</a>
           
-            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+            <a href="/tags/JDBC/" rel="tag"># JDBC</a>
+          
+            <a href="/tags/statement/" rel="tag"># statement</a>
+          
+            <a href="/tags/preparedStatement/" rel="tag"># preparedStatement</a>
           
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2019/08/30/MySQL事务以及事务的隔离级别/" rel="next" title="MySQL事务以及事务的隔离级别">
-                <i class="fa fa-chevron-left"></i> MySQL事务以及事务的隔离级别
+              <a href="/2019/09/05/3-2节-集合详解（下）/" rel="next" title="第 3-2 节：集合详解（下）（已加密）">
+                <i class="fa fa-chevron-left"></i> 第 3-2 节：集合详解（下）（已加密）
               </a>
             
           </div>
@@ -477,10 +439,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2019/09/03/1-7节-数组和排序算法/" rel="prev" title="第 1-7 节：数组和排序算法（已加密）">
-                第 1-7 节：数组和排序算法（已加密） <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -676,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#四类隔离级别"><span class="nav-number">1.</span> <span class="nav-text">四类隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Read-Uncommitted（读取未提交内容）"><span class="nav-number">1.0.1.</span> <span class="nav-text">Read Uncommitted（读取未提交内容）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Read-Committed（读取提交内容）"><span class="nav-number">1.0.2.</span> <span class="nav-text">Read Committed（读取提交内容）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repeatable-Read（可重读）"><span class="nav-number">1.0.3.</span> <span class="nav-text">Repeatable Read（可重读）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serializable（可串行化）"><span class="nav-number">1.0.4.</span> <span class="nav-text">Serializable（可串行化）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隔离级别与一致性"><span class="nav-number">2.</span> <span class="nav-text">隔离级别与一致性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结："><span class="nav-number">3.</span> <span class="nav-text">总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Serializable-串行化-：可避免脏读、不可重复读、幻读的发生。"><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Repeatable-read-可重复读-：可避免脏读、不可重复读的发生。"><span class="nav-number">3.0.0.0.2.</span> <span class="nav-text">Repeatable read (可重复读)：可避免脏读、不可重复读的发生。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Read-committed-读已提交-：可避免脏读的发生。"><span class="nav-number">3.0.0.0.3.</span> <span class="nav-text">Read committed (读已提交)：可避免脏读的发生。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Read-uncommitted-读未提交-：最低级别，任何情况都无法保证。"><span class="nav-number">3.0.0.0.4.</span> <span class="nav-text">Read uncommitted (读未提交)：最低级别，任何情况都无法保证。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-性能区别"><span class="nav-number">1.</span> <span class="nav-text">1.性能区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-代码的可读性和可维护性"><span class="nav-number">2.</span> <span class="nav-text">2.代码的可读性和可维护性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安全性问题"><span class="nav-number">3.</span> <span class="nav-text">3.安全性问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-继承关系"><span class="nav-number">4.</span> <span class="nav-text">4.继承关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、批处理时的区别："><span class="nav-number">5.</span> <span class="nav-text">5、批处理时的区别：</span></a></li></ol></div>
             
 
           </div>
