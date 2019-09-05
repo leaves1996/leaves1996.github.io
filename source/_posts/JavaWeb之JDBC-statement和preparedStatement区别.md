@@ -1,5 +1,5 @@
 ---
-title: statement和preparedStatement区别
+title: Statement 和 PreparedStatement 的区别
 copyright: true
 comments: true
 abstract: 欲读此文，请输入口令！！！
