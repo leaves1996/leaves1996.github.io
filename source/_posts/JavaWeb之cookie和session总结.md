@@ -109,6 +109,7 @@ sticky:
 &emsp;&emsp;因此，在需要保存用户数据时，服务器程序可以把用户数据写到用户浏览器独占的Session中，当用户使用浏览器访问其它程序时，其它程序可以从用户的Session中取出该用户的数据，为用户服务。但是要注意Session数据不宜过多
 
 2. 安全性
+
  - Cookie是以明文的方式存放在客户端，安全性相对较弱，可以使用加密算法加密
  - Session是存放在服务器的内存中的，所以安全性好
 
@@ -122,9 +123,11 @@ sticky:
 &emsp;&emsp;另外，关机、关闭Tomcat或者reload应用会造成Session的生命周期结束，但是对Cookie没有影响
 
 5. 访问范围
+
  - Session为一个用户浏览器独享
  - Cookie为多个用户浏览器共享
  - 其实Session和Cookie是有着千丝万缕的联系的，Session本身也要使用Cookie才能实现。 
+
 &emsp;&emsp;最后一个使用原则：因为Session会占用服务器的内存，因此不能过多地使用Session，不要向Session中放过多、过大的对象。
 
 ## 2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？
