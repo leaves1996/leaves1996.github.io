@@ -67,7 +67,7 @@
 <meta property="og:site_name" content="知性人">
 <meta property="og:description" content="本文这里小编根据 cookie 和 session 的学习所做的一些个人总结。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-14T11:33:48.567Z">
+<meta property="og:updated_time" content="2019-09-14T11:36:18.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaWeb之cookie和session总结">
 <meta name="twitter:description" content="本文这里小编根据 cookie 和 session 的学习所做的一些个人总结。">
@@ -288,7 +288,7 @@
                 
               
 
-              <time title="创建时间：2019-09-14 17:03:26 / 修改时间：19:33:48" itemprop="dateCreated datePublished" datetime="2019-09-14T17:03:26+08:00">2019-09-14</time>
+              <time title="创建时间：2019-09-14 17:03:26 / 修改时间：19:36:18" itemprop="dateCreated datePublished" datetime="2019-09-14T17:03:26+08:00">2019-09-14</time>
             </span>
           
             
@@ -344,19 +344,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h1><h4 id="1、什么是会话技术？"><a href="#1、什么是会话技术？" class="headerlink" title="1、什么是会话技术？"></a>1、什么是会话技术？</h4><p>&emsp;&emsp;由于http协议是无状态的协议，也就是说当用户访问Web应用时，服务器无法区分该客户端是谁。就好像你在某宝结算购物车商品时，其服务器必须根据请求你的身份，找到你所结算的商品，这时用到的就是会话技术，在Web开发中，服务器跟踪用户信息的技术称为会话技术，简单的说就是帮助服务器记住客户端状态和区分客户端。</p>
+        <h1 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h1><p><strong>1、什么是会话技术？</strong></p>
+<p>&emsp;&emsp;由于http协议是无状态的协议，也就是说当用户访问Web应用时，服务器无法区分该客户端是谁。就好像你在某宝结算购物车商品时，其服务器必须根据请求你的身份，找到你所结算的商品，这时用到的就是会话技术，在Web开发中，服务器跟踪用户信息的技术称为会话技术，简单的说就是帮助服务器记住客户端状态和区分客户端。</p>
 <p>&emsp;&emsp;从打开浏览器访问某个站点直到浏览器关闭这一过程，就是一次会话。而会话记录就是起到记录这次会话中客户端的状态和数据的作用。</p>
-<h4 id="2、会话技术可分为两种："><a href="#2、会话技术可分为两种：" class="headerlink" title="2、会话技术可分为两种："></a>2、会话技术可分为两种：</h4><p>&emsp;&emsp; <code>Cookie</code> 和 <code>Session</code>。</p>
+<p><strong>2、会话技术可分为两种：</strong></p>
+<p>&emsp;&emsp; <code>Cookie</code> 和 <code>Session</code>。</p>
 <ul>
 <li><p>Cookie：将数据存储在客户端本地，减少服务端的存储的压力，安全性相对不强，客户端可以清除Cookie。</p>
 </li>
 <li><p>Session：将数据存储到服务端，安全性相对较强，但是会增加服务器压力。</p>
 </li>
 </ul>
-<h1 id="cookie：客户端会话技术"><a href="#cookie：客户端会话技术" class="headerlink" title="cookie：客户端会话技术"></a>cookie：客户端会话技术</h1><h4 id="1、cookie-的简单介绍"><a href="#1、cookie-的简单介绍" class="headerlink" title="1、cookie 的简单介绍"></a>1、cookie 的简单介绍</h4><p>&emsp;&emsp;Cookie是小段的文本信息。通过Cookie可以标识用户身份、记录用户名及密码、跟踪重复用户。</p>
+<h1 id="cookie：客户端会话技术"><a href="#cookie：客户端会话技术" class="headerlink" title="cookie：客户端会话技术"></a>cookie：客户端会话技术</h1><p><strong>1、cookie 的简单介绍</strong></p>
+<p>&emsp;&emsp;Cookie是小段的文本信息。通过Cookie可以标识用户身份、记录用户名及密码、跟踪重复用户。</p>
 <p>&emsp;&emsp;当客户端第一次访问服务器时，服务端会生成一个Cookie，通过Response响应返回给客户端，客户端将Cookie保存到本地某个指定目录中。当客户端再次访问服务端时，Cookie会跟着Request请求一起到服务器，服务器会先查找Cookie中记录的信息，返回相对应的信息给用户端。</p>
 <p>&emsp;&emsp;Cookie是以键值对（Key/Value）的形式存储在本地硬盘，用户可以手动删除Cookie信息或者服务端通过cookie.setMaxAge(int seconds)设置Cookie在客户端的持久化时间，当过了持久化时间后，浏览器将自动删除该Cookie信息（如果不设置持久化时间，浏览器关闭时则Cookie信息将销毁）。</p>
-<h4 id="2、cookie-的使用"><a href="#2、cookie-的使用" class="headerlink" title="2、cookie 的使用"></a>2、cookie 的使用</h4><ul>
+<p><strong>2、cookie 的使用</strong></p>
+<ul>
 <li>cookie 的创建<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie c = <span class="keyword">new</span> Cookie(key,value);</span><br></pre></td></tr></table></figure>
 
 </li>
@@ -376,10 +380,12 @@
 </li>
 </ul>
 <p>&emsp;&emsp;对于cookie的路径问题，这里小编推荐在添加cookie时设置该cookie的路径：<code>c.serPath(&quot;/&quot;)</code>,这样设置之后就不会出现cookie获取不到的问题了。</p>
-<h1 id="session-服务端会话技术"><a href="#session-服务端会话技术" class="headerlink" title="session 服务端会话技术"></a>session 服务端会话技术</h1><h4 id="1、session-的简单介绍"><a href="#1、session-的简单介绍" class="headerlink" title="1、session 的简单介绍"></a>1、session 的简单介绍</h4><p>&emsp;&emsp;Session对象是由服务器自动创建的与用户请求相关的对象。服务器为每个用户都生成一个Session对象，用于保存该用户的信息，跟踪用户的操作状态。简单的说，Session是一种把会话数据保存到服务器端的技术。</p>
+<h1 id="session-服务端会话技术"><a href="#session-服务端会话技术" class="headerlink" title="session 服务端会话技术"></a>session 服务端会话技术</h1><p><strong>1、session 的简单介绍</strong></p>
+<p>&emsp;&emsp;Session对象是由服务器自动创建的与用户请求相关的对象。服务器为每个用户都生成一个Session对象，用于保存该用户的信息，跟踪用户的操作状态。简单的说，Session是一种把会话数据保存到服务器端的技术。</p>
 <p>&emsp;&emsp;当浏览器第一次发送请求时，服务器自动生成了一个Session和一个Session ID用来唯一标识这个Session，并将其通过响应发送到浏览器。当浏览器第二次发送请求，会将前一次服务器响应中的Session ID放在请求中一并发送到服务器上，服务器从请求中提取出Session ID，并和保存的所有Session ID进行对比，找到这个用户对应的Session。</p>
 <p>&emsp;&emsp;一般情况下，服务器会在一定时间内（默认30分钟）保存这个 Session，过了时间限制，就会销毁这个Session。在销毁之前，我们可以将用户的一些数据以Key和Value的形式暂时存放在这个 Session中。</p>
-<h4 id="2、session-的使用"><a href="#2、session-的使用" class="headerlink" title="2、session 的使用"></a>2、session 的使用</h4><ul>
+<p><strong>2、session 的使用</strong></p>
+<ul>
 <li><p>session 的创建</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br></pre></td></tr></table></figure>
 </li>
@@ -700,7 +706,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#会话技术"><span class="nav-number">1.</span> <span class="nav-text">会话技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、什么是会话技术？"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1、什么是会话技术？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、会话技术可分为两种："><span class="nav-number">1.0.0.2.</span> <span class="nav-text">2、会话技术可分为两种：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie：客户端会话技术"><span class="nav-number">2.</span> <span class="nav-text">cookie：客户端会话技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、cookie-的简单介绍"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1、cookie 的简单介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、cookie-的使用"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">2、cookie 的使用</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session-服务端会话技术"><span class="nav-number">3.</span> <span class="nav-text">session 服务端会话技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、session-的简单介绍"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">1、session 的简单介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、session-的使用"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">2、session 的使用</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面试题"><span class="nav-number">4.</span> <span class="nav-text">面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、cookie-和-session-的区别"><span class="nav-number">4.1.</span> <span class="nav-text">1、cookie 和 session 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？"><span class="nav-number">4.2.</span> <span class="nav-text">2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#会话技术"><span class="nav-number">1.</span> <span class="nav-text">会话技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie：客户端会话技术"><span class="nav-number">2.</span> <span class="nav-text">cookie：客户端会话技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session-服务端会话技术"><span class="nav-number">3.</span> <span class="nav-text">session 服务端会话技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面试题"><span class="nav-number">4.</span> <span class="nav-text">面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、cookie-和-session-的区别"><span class="nav-number">4.1.</span> <span class="nav-text">1、cookie 和 session 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？"><span class="nav-number">4.2.</span> <span class="nav-text">2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？</span></a></li></ol></li></ol></div>
             
 
           </div>
