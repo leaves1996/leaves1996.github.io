@@ -1,5 +1,5 @@
 ---
-title: Statement 和 PreparedStatement 的区别
+title: JavaWeb 之 Statement 和 PreparedStatement 的区别
 copyright: true
 comments: true
 abstract: 欲读此文，请输入口令！！！
@@ -11,7 +11,7 @@ tags:
  - JDBC
  - statement
  - preparedStatement
-categories: Java基础
+categories: JavaWeb
 description: 本文小编就说说jdbc中statement和preparedStatement的区别。
 password:
 sticky:
