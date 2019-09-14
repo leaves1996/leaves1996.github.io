@@ -67,7 +67,7 @@
 <meta property="og:site_name" content="知性人">
 <meta property="og:description" content="本文这里小编根据 cookie 和 session 的学习所做的一些个人总结。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-14T11:30:27.813Z">
+<meta property="og:updated_time" content="2019-09-14T11:33:48.567Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaWeb之cookie和session总结">
 <meta name="twitter:description" content="本文这里小编根据 cookie 和 session 的学习所做的一些个人总结。">
@@ -288,7 +288,7 @@
                 
               
 
-              <time title="创建时间：2019-09-14 17:03:26 / 修改时间：19:30:27" itemprop="dateCreated datePublished" datetime="2019-09-14T17:03:26+08:00">2019-09-14</time>
+              <time title="创建时间：2019-09-14 17:03:26 / 修改时间：19:33:48" itemprop="dateCreated datePublished" datetime="2019-09-14T17:03:26+08:00">2019-09-14</time>
             </span>
           
             
@@ -319,7 +319,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">3.9k</span>
+              <span title="本文字数">4k</span>
             </span>
           
             <span class="post-meta-item">
@@ -409,10 +409,11 @@
 <ul>
 <li>Session为一个用户浏览器独享</li>
 <li>Cookie为多个用户浏览器共享</li>
-<li>其实Session和Cookie是有着千丝万缕的联系的，Session本身也要使用Cookie才能实现。<br>&emsp;&emsp;最后一个使用原则：因为Session会占用服务器的内存，因此不能过多地使用Session，不要向Session中放过多、过大的对象。</li>
+<li>其实Session和Cookie是有着千丝万缕的联系的，Session本身也要使用Cookie才能实现。 </li>
 </ul>
 </li>
 </ol>
+<p>&emsp;&emsp;最后一个使用原则：因为Session会占用服务器的内存，因此不能过多地使用Session，不要向Session中放过多、过大的对象。</p>
 <h2 id="2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？"><a href="#2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？" class="headerlink" title="2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？"></a>2、浏览器禁用Cookie之后，Session会有影响吗？如何使用Session？</h2><p>&emsp;&emsp;答：当浏览器禁用Cookie之后，Session会有影响。当Cookie禁用后，浏览器就不能在接收或保存第三方的返回cookie数据，换句话说就是cookie中没有SessionID，当发送请求的时候，请求中不能带有SessionID。</p>
 <p>&emsp;&emsp;解决方案：</p>
 <ul>
