@@ -19,13 +19,13 @@ sticky:
 
 # 会话技术
 
-#### 1、什么是会话技术？
+**1、什么是会话技术？**
 
 &emsp;&emsp;由于http协议是无状态的协议，也就是说当用户访问Web应用时，服务器无法区分该客户端是谁。就好像你在某宝结算购物车商品时，其服务器必须根据请求你的身份，找到你所结算的商品，这时用到的就是会话技术，在Web开发中，服务器跟踪用户信息的技术称为会话技术，简单的说就是帮助服务器记住客户端状态和区分客户端。
 
 &emsp;&emsp;从打开浏览器访问某个站点直到浏览器关闭这一过程，就是一次会话。而会话记录就是起到记录这次会话中客户端的状态和数据的作用。
 
-#### 2、会话技术可分为两种：
+**2、会话技术可分为两种：**
 
 &emsp;&emsp; `Cookie` 和 `Session`。
 
@@ -35,7 +35,7 @@ sticky:
 
 # cookie：客户端会话技术
 
-#### 1、cookie 的简单介绍
+**1、cookie 的简单介绍**
 
 &emsp;&emsp;Cookie是小段的文本信息。通过Cookie可以标识用户身份、记录用户名及密码、跟踪重复用户。
 
@@ -43,7 +43,7 @@ sticky:
 
 &emsp;&emsp;Cookie是以键值对（Key/Value）的形式存储在本地硬盘，用户可以手动删除Cookie信息或者服务端通过cookie.setMaxAge(int seconds)设置Cookie在客户端的持久化时间，当过了持久化时间后，浏览器将自动删除该Cookie信息（如果不设置持久化时间，浏览器关闭时则Cookie信息将销毁）。
 
-#### 2、cookie 的使用
+**2、cookie 的使用**
  - cookie 的创建
  ```java
  Cookie c = new Cookie(key,value);
@@ -70,7 +70,7 @@ sticky:
 
 # session 服务端会话技术
 
-#### 1、session 的简单介绍
+**1、session 的简单介绍**
 
 &emsp;&emsp;Session对象是由服务器自动创建的与用户请求相关的对象。服务器为每个用户都生成一个Session对象，用于保存该用户的信息，跟踪用户的操作状态。简单的说，Session是一种把会话数据保存到服务器端的技术。
 
@@ -78,7 +78,7 @@ sticky:
 
 &emsp;&emsp;一般情况下，服务器会在一定时间内（默认30分钟）保存这个 Session，过了时间限制，就会销毁这个Session。在销毁之前，我们可以将用户的一些数据以Key和Value的形式暂时存放在这个 Session中。
 
-#### 2、session 的使用
+**2、session 的使用**
  - session 的创建
  ```java
  HttpSession session = request.getSession();
