@@ -69,7 +69,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/08/16/1-2节-基础数据类型和包装类/Integer.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/16/1-2节-基础数据类型和包装类/float.png">
-<meta property="og:updated_time" content="2019-08-16T11:22:48.966Z">
+<meta property="og:updated_time" content="2019-09-27T13:55:52.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第 1-2 节：基础数据类型和包装类">
 <meta name="twitter:description" content="本节主要介绍我们Java语言中的四类八种基本类型数据以及相对应的包装类。">
@@ -291,11 +291,21 @@
                 
               
 
-              <time title="创建时间：2019-08-16 09:48:40 / 修改时间：19:22:48" itemprop="dateCreated datePublished" datetime="2019-08-16T09:48:40+08:00">2019-08-16</time>
+              <time title="创建时间：2019-08-16 09:48:40" itemprop="dateCreated datePublished" datetime="2019-08-16T09:48:40+08:00">2019-08-16</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-27 21:55:52" itemprop="dateModified" datetime="2019-09-27T21:55:52+08:00">2019-09-27</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -329,7 +339,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">7.4k</span>
+              <span title="本文字数">7.9k</span>
             </span>
           
             <span class="post-meta-item">
@@ -449,7 +459,7 @@
 <p>&emsp;&emsp;包装类可以定义泛型，而基础类型不行。</p>
 <p>&emsp;&emsp;比如使用 Integer 定义泛型，代码：<code>List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</code></p>
 <p>如果使用 int 定义就会报错，代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List list = <span class="keyword">new</span> ArrayList&lt;&gt;();  <span class="comment">// 编译器代码报错</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;<span class="keyword">int</span>&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();  <span class="comment">// 编译器代码报错</span></span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>序列化</li>
@@ -493,7 +503,7 @@
 </li>
 <li><p>Float 和 Double 不会有缓存，其他包装类都有缓存。</p>
 </li>
-<li><p>Integer 是唯一一个可以修改缓存范围的包装类，在 VM optons 加入参数：</p>
+<li><p>Integer 是唯一一个可以修改缓存范围的包装类，在 IDEA 界面的右上角的绿色小锤进行编辑： VM optons 加入参数：</p>
 </li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:AutoBoxCacheMax=666 即修改缓存最大值为 666 。</span><br></pre></td></tr></table></figure>
@@ -504,108 +514,68 @@
 <p>执行结果如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">值为-128 =&gt; true</span><br><span class="line">值为666 =&gt; true</span><br><span class="line">值为667 =&gt; false</span><br><span class="line">由此可见将 Integer 最大缓存修改为 666 之后，667 不会被缓存，而 -128~666 之间的数都被缓存了。</span><br></pre></td></tr></table></figure>
 
-<h1 id="相关面试题"><a href="#相关面试题" class="headerlink" title="相关面试题"></a>相关面试题</h1><ol>
-<li>以下 Integer 代码输出的结果是？<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer age = <span class="number">10</span>;</span><br><span class="line">Integer age2 = <span class="number">10</span>;</span><br><span class="line">Integer age3 = <span class="number">133</span>;</span><br><span class="line">Integer age4 = <span class="number">133</span>;</span><br><span class="line">System.out.println((age == age2) + <span class="string">","</span> + (age3 == age4));</span><br></pre></td></tr></table></figure>
+<h1 id="相关面试题"><a href="#相关面试题" class="headerlink" title="相关面试题"></a>相关面试题</h1><h2 id="1-以下-Integer-代码输出的结果是？"><a href="#1-以下-Integer-代码输出的结果是？" class="headerlink" title="1. 以下 Integer 代码输出的结果是？"></a>1. 以下 Integer 代码输出的结果是？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Integer age = <span class="number">10</span>;</span><br><span class="line">Integer age2 = <span class="number">10</span>;</span><br><span class="line">Integer age3 = <span class="number">133</span>;</span><br><span class="line">Integer age4 = <span class="number">133</span>;</span><br><span class="line">System.out.println((age == age2) + <span class="string">","</span> + (age3 == age4));</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <p>答：true,false</p>
-<ol start="2">
-<li>以下 Double 代码输出的结果是？<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Double num = <span class="number">10</span>d;</span><br><span class="line">Double num2 = <span class="number">10</span>d;</span><br><span class="line">Double num3 = <span class="number">133</span>d;</span><br><span class="line">Double num4 = <span class="number">133</span>d;</span><br><span class="line">System.out.println((num == num2) + <span class="string">","</span> + (num3 == num4));</span><br></pre></td></tr></table></figure>
+<h2 id="2-以下-Double-代码输出的结果是？"><a href="#2-以下-Double-代码输出的结果是？" class="headerlink" title="2. 以下 Double 代码输出的结果是？"></a>2. 以下 Double 代码输出的结果是？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Double num = <span class="number">10</span>d;</span><br><span class="line">Double num2 = <span class="number">10</span>d;</span><br><span class="line">Double num3 = <span class="number">133</span>d;</span><br><span class="line">Double num4 = <span class="number">133</span>d;</span><br><span class="line">System.out.println((num == num2) + <span class="string">","</span> + (num3 == num4));</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <p>答：false,false</p>
-<ol start="3">
-<li>以下程序输出结果是？<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">Integer j = <span class="keyword">new</span> Integer(<span class="number">100</span>);</span><br><span class="line">System.out.println(i == j);</span><br><span class="line">System.out.println(j.equals(i));</span><br></pre></td></tr></table></figure>
+<h2 id="3-以下程序输出结果是？"><a href="#3-以下程序输出结果是？" class="headerlink" title="3. 以下程序输出结果是？"></a>3. 以下程序输出结果是？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">Integer j = <span class="keyword">new</span> Integer(<span class="number">100</span>);</span><br><span class="line">System.out.println(i == j);</span><br><span class="line">System.out.println(j.equals(i));</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <p>A：true,true<br>B：true,false<br>C：false,true<br>D：false,false</p>
 <p>答：A</p>
-<p>&emsp;&emsp;题目分析：有人认为这和 Integer 高速缓存有关系，但你发现把值改为 10000 结果也是 true,true，这是因为 Integer 和 int 比较时，会自动拆箱为 int 相当于两个 int 比较，值一定是 true,true。</p>
-<ol start="4">
-<li>以下程序执行的结果是？<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> iMax = Integer.MAX_VALUE;</span><br><span class="line">System.out.println(iMax + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;题目分析：有人认为这和 Integer 高速缓存有关系，但你发现把值改为 1000 结果也是 true,true，这是因为 Integer 和 int 比较时，会自动拆箱为 int 相当于两个 int 比较，值一定是 true,true。<br>&emsp;&emsp;部分源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> value;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">intValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//重写Object的equals方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Integer) &#123;</span><br><span class="line">        <span class="keyword">return</span> value == ((Integer)obj).intValue();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
+<h2 id="4-以下程序执行的结果是？"><a href="#4-以下程序执行的结果是？" class="headerlink" title="4. 以下程序执行的结果是？"></a>4. 以下程序执行的结果是？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> iMax = Integer.MAX_VALUE;</span><br><span class="line">System.out.println(iMax + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
 <p>A：2147483648<br>B：-2147483648<br>C：程序报错<br>D：以上都不是</p>
 <p>答：B</p>
 <p>&emsp;&emsp;题目解析：这是因为整数在内存中使用的是补码的形式表示，最高位是符号位 0 表示正数，1 表示负数，当执行 +1 时，最高位就变成了 1，结果就成了 -2147483648。</p>
-<ol start="5">
-<li>以下程序执行的结果是？<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;Short&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">short</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    set.add(i);</span><br><span class="line">    set.remove(i - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(set.size());</span><br></pre></td></tr></table></figure>
+<h2 id="5-以下程序执行的结果是？"><a href="#5-以下程序执行的结果是？" class="headerlink" title="5. 以下程序执行的结果是？"></a>5. 以下程序执行的结果是？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;Short&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">short</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    set.add(i);</span><br><span class="line">    set.remove(i - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(set.size());</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <p>A：1<br>B：0<br>C：5<br>D：以上都不是</p>
 <p>答：5</p>
 <p>&emsp;&emsp;题目解析：Short 类型 -1 之后转换成了 Int 类型，remove() 的时候在集合中找不到 Int 类型的数据，所以就没有删除任何元素，执行的结果就是 5。</p>
-<ol start="6">
-<li>short s=2;s=s+1; 会报错吗？short s=2;s+=1; 会报错吗？</li>
-</ol>
-<p>&emsp;&emsp;答：s=s+1 会报错，s+=1 不会报错，因为 s=s+1 会导致 short 类型升级为 int 类型，所以会报错，而 s+=1 还是原来的 short 类型，所以不会报错。</p>
-<ol start="7">
-<li>float f=3.4; 会报错吗？为什么？</li>
-</ol>
-<p>&emsp;&emsp;答：会报错，因为值 3.4 是 double 类型，float 类型级别小于 double 类型，所以会报错。如下图所示：<br><img src="float.png" alt="float.png"></p>
-<ol start="8">
-<li>为什么需要包装类？</li>
-</ol>
-<p>&emsp;&emsp;答：需要包装类的原因有两个。</p>
-<p> ① Java 的设计思想是万物既对象，包装类体现了面向对象的设计理念；<br> ② 包装类包含了很多属性和方法，比基础数据类型功能多，比如提供的获取哈希值（hashCode）或获取类（getClass）的方法等。</p>
-<ol start="9">
-<li>基础类 int 和包装类 Integer，在 -128~127 之间都会复用已有的缓存对象，这种说法正确吗？</li>
-</ol>
-<p>&emsp;&emsp;答：不正确，只有包装类高频区域数据才有缓存。</p>
-<ol start="10">
-<li>包装类 Double 和 Integer 一样都有高频区域数据缓存，这种说法正确吗？</li>
-</ol>
-<p>&emsp;&emsp;答：不正确，基础数据类型的包装类只有 Double 和 Float 没有高频区域的缓存。</p>
-<ol start="11">
-<li>包装类的值比较要使用什么方法？</li>
-</ol>
-<p>&emsp;&emsp;答：包装类因为有高频区域数据缓存，所以推荐使用 equals() 方法进行值比较。</p>
-<ol start="12">
-<li>包装类有哪些功能？</li>
-</ol>
-<p>&emsp;&emsp;答：包装类提供的功能有以下几个。</p>
+<h2 id="6-short-s-2-s-s-1-会报错吗？short-s-2-s-1-会报错吗？"><a href="#6-short-s-2-s-s-1-会报错吗？short-s-2-s-1-会报错吗？" class="headerlink" title="6. short s=2;s=s+1; 会报错吗？short s=2;s+=1; 会报错吗？"></a>6. short s=2;s=s+1; 会报错吗？short s=2;s+=1; 会报错吗？</h2><p>&emsp;&emsp;答：s=s+1 会报错，s+=1 不会报错，因为 s=s+1 会导致 short 类型升级为 int 类型，所以会报错，而 s+=1 还是原来的 short 类型，所以不会报错。<br>如何判断数据类型：一般情况下引用类型的，我们可以使用 <code>instanceof</code> 关键字，但是基本类型的却不可以判断，那么我们可以根据下面的方法进行判断：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取变量类型方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getType</span><span class="params">(Object o)</span></span>&#123;</span><br><span class="line">    <span class="comment">//使用Object类型的getClass()方法</span></span><br><span class="line">    <span class="keyword">return</span> o.getClass().toString(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-float-f-3-4-会报错吗？为什么？"><a href="#7-float-f-3-4-会报错吗？为什么？" class="headerlink" title="7. float f=3.4; 会报错吗？为什么？"></a>7. float f=3.4; 会报错吗？为什么？</h2><p>&emsp;&emsp;答：会报错，因为值 3.4 是 double 类型，float 类型级别小于 double 类型，所以会报错。如下图所示：<br><img src="float.png" alt="float.png"></p>
+<h2 id="8-为什么需要包装类？"><a href="#8-为什么需要包装类？" class="headerlink" title="8. 为什么需要包装类？"></a>8. 为什么需要包装类？</h2><p>&emsp;&emsp;答：需要包装类的原因有两个。</p>
+<ul>
+<li>① Java 的设计思想是万物既对象，包装类体现了面向对象的设计理念；</li>
+<li>② 包装类包含了很多属性和方法，比基础数据类型功能多，比如提供的获取哈希值（hashCode）或获取类（getClass）的方法等。</li>
+</ul>
+<h2 id="9-基础类-int-和包装类-Integer，在-128-127-之间都会复用已有的缓存对象，这种说法正确吗？"><a href="#9-基础类-int-和包装类-Integer，在-128-127-之间都会复用已有的缓存对象，这种说法正确吗？" class="headerlink" title="9. 基础类 int 和包装类 Integer，在 -128~127 之间都会复用已有的缓存对象，这种说法正确吗？"></a>9. 基础类 int 和包装类 Integer，在 -128~127 之间都会复用已有的缓存对象，这种说法正确吗？</h2><p>&emsp;&emsp;答：不正确，只有包装类高频区域数据才有缓存。</p>
+<h2 id="10-包装类-Double-和-Integer-一样都有高频区域数据缓存，这种说法正确吗？"><a href="#10-包装类-Double-和-Integer-一样都有高频区域数据缓存，这种说法正确吗？" class="headerlink" title="10. 包装类 Double 和 Integer 一样都有高频区域数据缓存，这种说法正确吗？"></a>10. 包装类 Double 和 Integer 一样都有高频区域数据缓存，这种说法正确吗？</h2><p>&emsp;&emsp;答：不正确，基础数据类型的包装类只有 Double 和 Float 没有高频区域的缓存。</p>
+<h2 id="11-包装类的值比较要使用什么方法？"><a href="#11-包装类的值比较要使用什么方法？" class="headerlink" title="11. 包装类的值比较要使用什么方法？"></a>11. 包装类的值比较要使用什么方法？</h2><p>&emsp;&emsp;答：包装类因为有高频区域数据缓存，所以推荐使用 equals() 方法进行值比较。</p>
+<h2 id="12-包装类有哪些功能？"><a href="#12-包装类有哪些功能？" class="headerlink" title="12. 包装类有哪些功能？"></a>12. 包装类有哪些功能？</h2><p>&emsp;&emsp;答：包装类提供的功能有以下几个。</p>
 <ul>
 <li>功能丰富：包装类包含了有 hashCode、getClass 、max、min 等方法；</li>
-<li>可定义泛型类型参数：例如 List<integer> list = new ArrayList&lt;&gt;();</integer></li>
+<li>可定义泛型类型参数：例如 <code>List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</code></li>
 <li>序列化：包装类实现了 Serializable 接口，所以包装类天然支持序列化和反序列化；</li>
 <li>类型转换：包装类提供了方便的类型转换方法，比如 Integer 的 parseInt() 方法；</li>
 <li>高频区域数据缓存：高频区域可使用已有的缓存对象。</li>
 <li>详见正文“包装类型”部分内容。</li>
 </ul>
-<ol start="13">
-<li>泛型可以为基础类型吗？为什么？</li>
-</ol>
-<p>&emsp;&emsp;答：泛型不能使用基础数据类型。泛型在 JVM（Java虚拟机）编译的时候会类型檫除，比如代码 List<integer> list 在 JVM 编译的时候会转换为 List list ，因为泛型是在 JDK 5 时提供的，而 JVM 的类型檫除是为了兼容以前代码的一个折中方案，类型檫除之后就变成了 Object，而 Object 不能存储基础数据类型，但可以使用基础数据类型对应的包装类，所以像 List<int> list 这样的代码是不被允许的，编译器阶段会检查报错，而 List<integer> list 是被允许的。</integer></int></integer></p>
-<ol start="14">
-<li>选择包装类还是基础类的原则有哪些？</li>
-</ol>
-<p>&emsp;&emsp;答：我们知道正确的使用包装类，可以提供程序的执行效率，可以使用已有的缓存，一般情况下选择基本数据类型还是包装类原则有以下几个。</p>
-<p> ① 所有 POJO 类属性必须使用包装类；<br> ② RPC 方法返回值和参数必须使用包装类；<br> ③ 所有局部变量推荐使用基础数据类型。</p>
-<ol start="15">
-<li>基础数据类型在 JVM 中一定存储在栈中吗？为什么？</li>
-</ol>
-<p>&emsp;&emsp;答：基础数据类型不一定存储在栈中，因为基础类型的存储位置取决于声明的作用域，来看具体的解释。</p>
+<h2 id="13-泛型可以为基础类型吗？为什么？"><a href="#13-泛型可以为基础类型吗？为什么？" class="headerlink" title="13. 泛型可以为基础类型吗？为什么？"></a>13. 泛型可以为基础类型吗？为什么？</h2><p>&emsp;&emsp;答：泛型不能使用基础数据类型。泛型在 JVM（Java虚拟机）编译的时候会类型檫除，比如代码 <code>List&lt;Integer&gt; list</code> 在 JVM 编译的时候会转换为 <code>List list</code> ，因为泛型是在 JDK 5 时提供的，而 JVM 的类型檫除是为了兼容以前代码的一个折中方案，类型檫除之后就变成了 Object，而 Object 不能存储基础数据类型，但可以使用基础数据类型对应的包装类，所以像 <code>List&lt;int&gt; list</code> 这样的代码是不被允许的，编译器阶段会检查报错，而 <code>List&lt;Integer&gt; list</code> 是被允许的。</p>
+<h2 id="14-选择包装类还是基础类的原则有哪些？"><a href="#14-选择包装类还是基础类的原则有哪些？" class="headerlink" title="14. 选择包装类还是基础类的原则有哪些？"></a>14. 选择包装类还是基础类的原则有哪些？</h2><p>&emsp;&emsp;答：我们知道正确的使用包装类，可以提供程序的执行效率，可以使用已有的缓存，一般情况下选择基本数据类型还是包装类原则有以下几个。</p>
+<ul>
+<li>① 所有 POJO 类属性必须使用包装类；</li>
+<li>② RPC 方法返回值和参数必须使用包装类；</li>
+<li>③ 所有局部变量推荐使用基础数据类型。</li>
+</ul>
+<h2 id="15-基础数据类型在-JVM-中一定存储在栈中吗？为什么？"><a href="#15-基础数据类型在-JVM-中一定存储在栈中吗？为什么？" class="headerlink" title="15. 基础数据类型在 JVM 中一定存储在栈中吗？为什么？"></a>15. 基础数据类型在 JVM 中一定存储在栈中吗？为什么？</h2><p>&emsp;&emsp;答：基础数据类型不一定存储在栈中，因为基础类型的存储位置取决于声明的作用域，来看具体的解释。</p>
 <ul>
 <li>当基础数据类型为局部变量的时候，比如在方法中声明的变量，则存放在方法栈中的，当方法结束系统会释放方法栈，在该方法中的变量也会随着栈的销毁而结束，这也是局部变量只能在方法中使用的原因；</li>
 <li>当基础数据类型为全局变量的时候，比如类中的声明的变量，则存储在堆上，因为全局变量不会随着某个方法的执行结束而销毁。</li>
 </ul>
-<ol start="16">
-<li>以下程序执行的结果是？</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Integer i1 = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">Integer i2 = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">Integer i3 = Integer.valueOf(<span class="number">10</span>);</span><br><span class="line">Integer i4 = Integer.valueOf(<span class="number">10</span>);</span><br><span class="line">System.out.println(i1 == i2);</span><br><span class="line">System.out.println(i2 == i3);</span><br><span class="line">System.out.println(i3 == i4);</span><br></pre></td></tr></table></figure>
+<h2 id="16-以下程序执行的结果是？"><a href="#16-以下程序执行的结果是？" class="headerlink" title="16. 以下程序执行的结果是？"></a>16. 以下程序执行的结果是？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Integer i1 = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">Integer i2 = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br><span class="line">Integer i3 = Integer.valueOf(<span class="number">10</span>);</span><br><span class="line">Integer i4 = Integer.valueOf(<span class="number">10</span>);</span><br><span class="line">System.out.println(i1 == i2);</span><br><span class="line">System.out.println(i2 == i3);</span><br><span class="line">System.out.println(i3 == i4);</span><br></pre></td></tr></table></figure>
 
 <p>A：false,false,false<br>B：false,false,true<br>C：false,true,true<br>D：true,false,false</p>
 <p>答：B</p>
 <p>&emsp;&emsp;题目解析：new Integer(10) 每次都会创建一个新对象，Integer.valueOf(10) 则会使用缓存池中的对象。</p>
-<ol start="17">
-<li>3*0.1==0.3 返回值是多少？</li>
-</ol>
-<p>&emsp;&emsp;答：返回值为：false。</p>
+<h2 id="17-3-0-1-0-3-返回值是多少？"><a href="#17-3-0-1-0-3-返回值是多少？" class="headerlink" title="17. 3*0.1==0.3 返回值是多少？"></a>17. 3*0.1==0.3 返回值是多少？</h2><p>&emsp;&emsp;答：返回值为：false。</p>
 <p>&emsp;&emsp;题目解析：因为有些浮点数不能完全精确的表示出来，如下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="number">3</span> * <span class="number">0.1</span>);</span><br><span class="line"><span class="comment">//返回的结果是：0.30000000000000004。</span></span><br></pre></td></tr></table></figure>
     </div>
@@ -880,7 +850,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本数据类型"><span class="nav-number">1.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#包装类型"><span class="nav-number">2.</span> <span class="nav-text">包装类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#包装类的注意事项"><span class="nav-number">3.</span> <span class="nav-text">包装类的注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关面试题"><span class="nav-number">4.</span> <span class="nav-text">相关面试题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本数据类型"><span class="nav-number">1.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#包装类型"><span class="nav-number">2.</span> <span class="nav-text">包装类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#包装类的注意事项"><span class="nav-number">3.</span> <span class="nav-text">包装类的注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关面试题"><span class="nav-number">4.</span> <span class="nav-text">相关面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-以下-Integer-代码输出的结果是？"><span class="nav-number">4.1.</span> <span class="nav-text">1. 以下 Integer 代码输出的结果是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-以下-Double-代码输出的结果是？"><span class="nav-number">4.2.</span> <span class="nav-text">2. 以下 Double 代码输出的结果是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-以下程序输出结果是？"><span class="nav-number">4.3.</span> <span class="nav-text">3. 以下程序输出结果是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-以下程序执行的结果是？"><span class="nav-number">4.4.</span> <span class="nav-text">4. 以下程序执行的结果是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-以下程序执行的结果是？"><span class="nav-number">4.5.</span> <span class="nav-text">5. 以下程序执行的结果是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-short-s-2-s-s-1-会报错吗？short-s-2-s-1-会报错吗？"><span class="nav-number">4.6.</span> <span class="nav-text">6. short s=2;s=s+1; 会报错吗？short s=2;s+=1; 会报错吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-float-f-3-4-会报错吗？为什么？"><span class="nav-number">4.7.</span> <span class="nav-text">7. float f=3.4; 会报错吗？为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-为什么需要包装类？"><span class="nav-number">4.8.</span> <span class="nav-text">8. 为什么需要包装类？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-基础类-int-和包装类-Integer，在-128-127-之间都会复用已有的缓存对象，这种说法正确吗？"><span class="nav-number">4.9.</span> <span class="nav-text">9. 基础类 int 和包装类 Integer，在 -128~127 之间都会复用已有的缓存对象，这种说法正确吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-包装类-Double-和-Integer-一样都有高频区域数据缓存，这种说法正确吗？"><span class="nav-number">4.10.</span> <span class="nav-text">10. 包装类 Double 和 Integer 一样都有高频区域数据缓存，这种说法正确吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-包装类的值比较要使用什么方法？"><span class="nav-number">4.11.</span> <span class="nav-text">11. 包装类的值比较要使用什么方法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-包装类有哪些功能？"><span class="nav-number">4.12.</span> <span class="nav-text">12. 包装类有哪些功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-泛型可以为基础类型吗？为什么？"><span class="nav-number">4.13.</span> <span class="nav-text">13. 泛型可以为基础类型吗？为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-选择包装类还是基础类的原则有哪些？"><span class="nav-number">4.14.</span> <span class="nav-text">14. 选择包装类还是基础类的原则有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-基础数据类型在-JVM-中一定存储在栈中吗？为什么？"><span class="nav-number">4.15.</span> <span class="nav-text">15. 基础数据类型在 JVM 中一定存储在栈中吗？为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-以下程序执行的结果是？"><span class="nav-number">4.16.</span> <span class="nav-text">16. 以下程序执行的结果是？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-3-0-1-0-3-返回值是多少？"><span class="nav-number">4.17.</span> <span class="nav-text">17. 3*0.1==0.3 返回值是多少？</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -907,12 +877,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">220k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:19</span>
+    <span title="站点阅读时长">3:20</span>
 </div>
 
         
