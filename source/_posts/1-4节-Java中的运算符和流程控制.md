@@ -18,7 +18,7 @@ sticky:
 
 # 算术运算符
 
- * Java 中的算法运算符，包括以下几种：
+ - Java 中的算法运算符，包括以下几种：
 
 |算术运算符|	名称|	举例|
 |:----:|:----:|:----:|
@@ -32,7 +32,7 @@ sticky:
 
 &emsp;&emsp;我们本文要重点讲的是 “++” 和 “--”，其他的算术运算符相对比较简单直观，本文就不花精力去讲解了，之所以要把 “++” 和 “--” 单独拿出来讲，是因为在使用他们的时候有很多坑需要开发者注意，最重要的是 “++” 和 “--” 也是面试中高频出现的面试题。
 
- * 先来看 “++” 的基本使用：
+ - 先来看 “++” 的基本使用：
  ```java
  int i = 1;
  int i2 = ++i; // ++i 相当于 i = 1+i;
@@ -40,12 +40,12 @@ sticky:
  System.out.println(i2); // 2
  ```
 
- * ++i 和 i++ 的区别
+ - ++i 和 i++ 的区别
 
-  * ++i 先自加再赋值
-  * i++ 先赋值再自加
+  - ++i 先自加再赋值
+  - i++ 先赋值再自加
 
- * 比如：
+ - 比如：
  ```java
  int i = 0;
  int i2 = i++;
@@ -54,16 +54,16 @@ sticky:
  System.out.println("i2=" + i2);
  System.out.println("j2=" + j2);
  ```
- * 输出的结果：
+ - 输出的结果：
  ```java
  i2=0
  j2=1
  ```
 &emsp;&emsp;代码解析：i++ 是先给 i2 赋值再自身 +1 ，所以 i2 等于0，而 ++j 是先自加等于 1 之后，再赋值给 j2，所以 j2 等于 1。
 
- * 注意事项
+ - 注意事项
 
-  * ++/-- 是非线程安全的，也就是说 ++/-- 操作在多线程下可能会引发混乱，例如下面代码：
+  - ++/-- 是非线程安全的，也就是说 ++/-- 操作在多线程下可能会引发混乱，例如下面代码：
   ```java
   new Thread() {
     @Override
@@ -84,7 +84,12 @@ sticky:
   }.start();
   ```
  * 执行的结果，如下图：
- ![测试.png](测试.png)
+ ![thread.png](thread.png)
+ - 我们再看看其他两次执行到最后的结果：
+ 图一：
+ ![thread-1.pang](thread-1.png)
+ 图二：
+ ![thread-2.pang](thread-2.png)
 
  如上图所示，每台机器的执行可能略有差距，但大多数情况下并不能给我们想要的真实值 200000。
 
@@ -115,7 +120,7 @@ sticky:
  String s = 3 > 1 ? "三大于一" : "三小于一";
  System.out.println(s);
  ```
- 执行结果：三大于一。
+ 执行结果：`三大于一`。
 
 # 流程控制
 
@@ -281,7 +286,7 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
 
 # 相关面试题
 
- 1. Java 中 i++ 和 ++i 有什么区别？
+### 1. Java 中 i++ 和 ++i 有什么区别？
 
 &emsp;&emsp;答：i 先赋值再运算；i 先运算在赋值。
 
@@ -297,7 +302,7 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
 
  输出结果：i2=0，j2=1
 
- 2. 以下代码 i 的值是多少？
+### 2. 以下代码 i 的值是多少？
  ```java
  int i = 0;
  i = i++;
@@ -308,7 +313,7 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
 
 &emsp;&emsp;题目解析：因为 Java 虚拟机在执行 i++ 时，把这个值有赋值给了 i，而 i++ 是先赋值再相加，所以这个时候 i 接收到的结果自然是 0 了。
 
- 3. 以下代码 i2 和 i3 的值分别为多少？
+### 3. 以下代码 i2 和 i3 的值分别为多少？
  ```java
  int i = 0;
  int i2 = i++;
@@ -316,13 +321,13 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
  ```
 &emsp;&emsp;答：i2=0，i3=2
 
- 4. 以下代码能不能正常执行？
+### 4. 以下代码能不能正常执行？
  ```java
- if (true) System.out.println("laowang");
+ if (true) System.out.println("yexiaomo");
  ```
 &emsp;&emsp;答：可以正常执行，其中判断条件的括号不能省略，大括号是可以省略的（作者并不建议为了省代码的而牺牲代码的可读性）。
 
- 5. 以下 switch 执行的结果是什么？
+### 5. 以下 switch 执行的结果是什么？
  ```java
  int num = 1;
  switch (num) {
@@ -340,12 +345,12 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
  ```
 &emsp;&emsp;答：123default
 
- 6. switch 能否用于 byte 类型的判断上？能否用于 long 类型的判断上？
+### 6. switch 能否用于 byte 类型的判断上？能否用于 long 类型的判断上？
 
 &emsp;&emsp;答：switch 支持 byte 类型的判断，不支持 long 类型的判断。
 &emsp;&emsp;题目解析：switch 支持的全部类型（JDK 8）：char、byte、short、Charachter、Byte、Short、Integer、String、enum。
 
- 7. while 必须配合 break 一起使用的说法正确吗？
+### 7. while 必须配合 break 一起使用的说法正确吗？
 
 &emsp;&emsp;答：错误，while 可以单独使用。
 
@@ -357,7 +362,7 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
  }
  ```
 
- 8. 以下代码可以正常运行吗？为什么？
+### 8. 以下代码可以正常运行吗？为什么？
  ```java
  int i = 0;
  while (i < 3) {
@@ -369,7 +374,7 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
  ```
 &emsp;&emsp;答：可以正常运行，这里的 return 和 break 的效果是一致的，while 可以配合 return 或 break 一起使用。
 
- 9. 以下的程序执行结果什么？
+### 9. 以下的程序执行结果什么？
  ```java
  int i = 0;
  do {
@@ -378,14 +383,14 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
  ```
 &emsp;&emsp;答：编译器报错，do/while 之后必须使用分号 ; 结尾。
 
- 10. 以下程序输出的结果是？
+### 10. 以下程序输出的结果是？
  ```java
- String s = new String("laowang");
- String s2 = new String("laowang");
+ String s = new String("yexiaomo");
+ String s2 = new String("yexiaomo");
  System.out.println(s == s2);
  switch (s) {
-    case "laowang":
-        System.out.println("laowang");
+    case "yexiaomo":
+        System.out.println("yexiaomo");
         break;
     default:
         System.out.println("default");
@@ -394,12 +399,12 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
  ```
  A：true,default
  B：false,default
- C：false,laowang
- D：true,laowang
+ C：false,yexiaomo
+ D：true,yexiaomo
 
 &emsp;&emsp;答：C
 
- 11. 以下代码循环执行了几次？
+### 11. 以下代码循环执行了几次？
  ```java
  for (float i = 0; i != 10; i += 0.1) {
     System.out.println("hi");
@@ -407,7 +412,7 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
  ```
 &emsp;&emsp;答：无数次，循环永远不会停下来。由于舍入误差，因为 0.1 无法精确的用二级制表示，所以上面代码到 0.9000001 之后，会直接跳到 1.0000001，不会等于 1，所以循环就永远不会停下来。
 
- 12. 以下代码输出的结果是？
+### 12. 以下代码输出的结果是？
  ```java
  int num = -4;
  System.out.println(num % 2 == 1 || num % 2 == -1);
@@ -421,7 +426,7 @@ switch(......){ case 1: ...... break; ...... default: ...... break; }
 
 &emsp;&emsp;题目解析：-4 % 2 = 0 既不等于 1 也不等于 -1，所以结果为 false。
 
- 13. 以下代码输出的结果是？
+### 13. 以下代码输出的结果是？
  ```java
  int num = 4;
  num = ((num & 1) == 1);
